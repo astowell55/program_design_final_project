@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-astowell55
-=======
 astowell55.
 tino455131
 Hey
->>>>>>> beabce70f2ccbb9051ae7ef70bfce090de9506ba
