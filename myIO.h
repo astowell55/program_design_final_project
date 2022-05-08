@@ -3,5 +3,6 @@
 
 #include "myDS.h"
 
+//inorder traverse the tree and print out the value of every node 
 void Inorder_traverse(node *root);
 #endif
