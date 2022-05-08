@@ -1,21 +1,25 @@
 #ifndef MYDS_H
 #define MYDS_H
 #define MAX_SONG_NAME 100
+//the struct store all the infomation of song
 struct item{
     int index;
     char song_name[MAX_SONG_NAME];
 
 };
 typedef struct item item;
+//the node and the root of tree
 struct node{
     item *data;
     struct node *left_child;
     struct node *right_child;
 }*root;
 typedef struct node node;
+//compare input index and build the binary search tree
 void build_tree(node **root, item *data);
+
 item song[100];
-\
+
 #endif
 //
 //                       _oo0oo_
