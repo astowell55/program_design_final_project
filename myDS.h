@@ -14,6 +14,7 @@ struct node{
 }*root;
 typedef struct node node;
 void build_tree(node **root, item *data);
+item song[100];
 \
 #endif
 //

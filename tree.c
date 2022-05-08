@@ -6,6 +6,8 @@
 int main(){
     int data_num;
     scanf(" %d",&data_num);
+    read_SongFile();
+    write_SongFile();
     while(data_num--){
         item *temp = (item *)malloc(sizeof(temp));
         scanf(" %d ",&temp->index);
