@@ -1,6 +1,6 @@
 #ifndef MYDS_H
 #define MYDS_H
-#define MAX_SONG_NAME 50
+#define MAX_SONG_NAME 100
 struct item{
     int index;
     char song_name[MAX_SONG_NAME];
@@ -14,7 +14,7 @@ struct node{
 }*root;
 typedef struct node node;
 void build_tree(node **root, item *data);
-void Inorder_traverse(node *root);
+\
 #endif
 //
 //                       _oo0oo_

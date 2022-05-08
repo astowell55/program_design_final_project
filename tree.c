@@ -7,9 +7,9 @@ int main(){
     int data_num;
     scanf(" %d",&data_num);
     while(data_num--){
-        item *temp = malloc(sizeof(temp));
+        item *temp = (item *)malloc(sizeof(temp));
         scanf(" %d ",&temp->index);
-        fgets(temp->song_name,MAX_SONG_NAME,stdin);  
+        fgets(temp->song_name,MAX_SONG_NAME,stdin);
         build_tree(&root,temp);
     }
     Inorder_traverse(root);
