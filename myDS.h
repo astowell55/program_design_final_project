@@ -18,8 +18,6 @@ typedef struct node node;
 //compare input index and build the binary search tree
 void build_tree(node **root, item *data);
 
-item song[100];
-
 #endif
 //
 //                       _oo0oo_

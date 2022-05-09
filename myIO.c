@@ -3,14 +3,27 @@
 #include <string.h>
 #include "myDS.h"
 #include "myIO.h"
-
-void Inorder_traverse(node *root){
-    if(root == NULL){
+static FILE *outputSongFile;
+void Inorder_traverse(node *root, int output_choose)
+{
+    if (root == NULL)
+    {
         return;
-    } 
-    Inorder_traverse(root->left_child);
-    printf("%d %s",root->data->index,root->data->song_name);
-    Inorder_traverse(root->right_child);
+    }
+    if (output_choose == 1)
+    {
+        Inorder_traverse(root->left_child, output_choose);
+        fprintf(outputSongFile, "%d ", root->data->index);
+        fprintf(outputSongFile, "%s", root->data->song_name);
+        fprintf(outputSongFile, "\n");
+        Inorder_traverse(root->right_child, output_choose);
+    }
+    else if (output_choose == 2)
+    {
+        Inorder_traverse(root->left_child, output_choose);
+        printf("%d %s\n", root->data->index, root->data->song_name);
+        Inorder_traverse(root->right_child, output_choose);
+    }
 }
 
 int read_SongFile()
@@ -33,37 +46,32 @@ int read_SongFile()
         printf("File could not be opened.\n");
     }
 
-    int i = 0;
     while (fgets(buf, 255, songFile) != NULL)
     {
         if ((strlen(buf) > 0) && (buf[strlen(buf) - 1] == '\n'))
             buf[strlen(buf) - 1] = '\0';
 
+        item *song = (item *)malloc(sizeof(song));
         tmp = strtok(buf, ",");
-        song[i].index = atoi(tmp);
+        song->index = atoi(tmp);
 
         tmp = strtok(NULL, ",");
-        strcpy(song[i].song_name, tmp);
+        strcpy(song->song_name, tmp);
 
-        // song.index = atoi(buf);
-        printf("index i= %d  ID: %i, %s\n", i, song[i].index, song[i].song_name);
-        i++;
+        build_tree(&root, song);
     }
     fclose(songFile);
     return 0;
 }
 
-int write_SongFile()
+int write_SongFile(node *root)
 {
-    FILE *songFile;
-    songFile = fopen("output.csv", "w");
-    
-    for (int i = 0; i < 100  ; i++)
+    outputSongFile = fopen("output.csv", "w");
+    if (root == NULL)
     {
-        fprintf(songFile, "%d,", song[i].index);
-        fprintf(songFile, "%s", song[i].song_name);
-        fprintf(songFile, "\n"); 
+        return 0;
     }
-    fclose(songFile);
+    Inorder_traverse(root, 1);
+    fclose(outputSongFile);
     return 0;
 }

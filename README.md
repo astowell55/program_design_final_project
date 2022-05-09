@@ -36,4 +36,7 @@ make clean
     * CHANGE: Create build_tree and Inorder_traverse function
 * 0.0.2
     * CHANGE: Create read_songFile and write_songFile function
+* 0.0.3
+    * CHANGE: Optimize read_songFile and write_songFile function
+
 
