@@ -4,31 +4,56 @@
 #include "myDS.h"
 #include "myIO.h"
 static FILE *outputSongFile;
-void read_song_name(char buffer[MAX_SONG_NAME+1]){
+void read_song_name(char buffer[MAX_SONG_NAME + 1])
+{
     char c;
     int length = 0;
-    while((c = getchar())!= '\n' && c != EOF){
-        if(length < MAX_SONG_NAME){
-           buffer[length++] = c;
+    while ((c = getchar()) != '\n' && c != EOF)
+    {
+        if (length < MAX_SONG_NAME)
+        {
+            buffer[length++] = c;
         }
     }
     buffer[length] = '\0';
-    if(strlen(buffer) == MAX_SONG_NAME){
-        buffer[length - 1] ='*';
+    if (strlen(buffer) == MAX_SONG_NAME)
+    {
+        buffer[length - 1] = '*';
     }
     return;
-
 }
-void read_line(item * data){
+void read_line(item *data)
+{
     char c;
-    char buf[MAX_SONG_NAME+ 1];
-    scanf(" %d ",&data->index);
+    char buf[MAX_SONG_NAME + 1];
+    scanf(" %d ", &data->index);
     read_song_name(buf);
-    data->song_name = (char*)malloc(sizeof(buf));
-    strncpy(data->song_name,buf,MAX_SONG_NAME);
+    data->song_name = (char *)malloc(sizeof(buf));
+    strncpy(data->song_name, buf, MAX_SONG_NAME);
     return;
-
 }
+void Preorder_traverse(node *root, int output_choose)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    if (output_choose == 1)
+    {
+        fprintf(outputSongFile, "%d ", root->data->index);
+        fprintf(outputSongFile, "%s", root->data->song_name);
+        fprintf(outputSongFile, "\n");
+        Preorder_traverse(root->left_child, output_choose);
+        Preorder_traverse(root->right_child, output_choose);
+    }
+    else if (output_choose == 2)
+    {
+        printf("%d %s\n", root->data->index, root->data->song_name);
+        Preorder_traverse(root->left_child, output_choose);
+        Preorder_traverse(root->right_child, output_choose);
+    }
+}
+
 void Inorder_traverse(node *root, int output_choose)
 {
     if (root == NULL)
@@ -48,6 +73,30 @@ void Inorder_traverse(node *root, int output_choose)
         Inorder_traverse(root->left_child, output_choose);
         printf("%d %s\n", root->data->index, root->data->song_name);
         Inorder_traverse(root->right_child, output_choose);
+    }
+}
+
+void Postorder_traverse(node *root, int output_choose)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    if (output_choose == 1)
+    {
+        Postorder_traverse(root->left_child, output_choose);
+        Postorder_traverse(root->right_child, output_choose);
+        fprintf(outputSongFile, "%d ", root->data->index);
+        fprintf(outputSongFile, "%s", root->data->song_name);
+        fprintf(outputSongFile, "\n");
+    }
+    else if (output_choose == 2)
+    {
+        Postorder_traverse(root->left_child, output_choose);
+        Postorder_traverse(root->right_child, output_choose);
+        fprintf(outputSongFile, "%d ", root->data->index);
+        fprintf(outputSongFile, "%s", root->data->song_name);
+        fprintf(outputSongFile, "\n");
     }
 }
 
@@ -100,4 +149,21 @@ int write_SongFile(node *root)
     Inorder_traverse(root, 1);
     fclose(outputSongFile);
     return 0;
+}
+
+void search(int target)
+{
+    node *curr = root;
+    while (curr != NULL && target != curr->data->index)
+    {
+        if (target < curr->data->index)
+        {
+            curr = curr->left_child;
+        }
+        else
+        {
+            curr = curr->right_child;
+        }
+    }
+    return curr;
 }
