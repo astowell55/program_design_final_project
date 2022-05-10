@@ -4,6 +4,31 @@
 #include "myDS.h"
 #include "myIO.h"
 static FILE *outputSongFile;
+void read_song_name(char buffer[MAX_SONG_NAME+1]){
+    char c;
+    int length = 0;
+    while((c = getchar())!= '\n' && c != EOF){
+        if(length < MAX_SONG_NAME){
+           buffer[length++] = c;
+        }
+    }
+    buffer[length] = '\0';
+    if(strlen(buffer) == MAX_SONG_NAME){
+        buffer[length - 1] ='*';
+    }
+    return;
+
+}
+void read_line(item * data){
+    char c;
+    char buf[MAX_SONG_NAME+ 1];
+    scanf(" %d ",&data->index);
+    read_song_name(buf);
+    data->song_name = (char*)malloc(sizeof(buf));
+    strncpy(data->song_name,buf,MAX_SONG_NAME);
+    return;
+
+}
 void Inorder_traverse(node *root, int output_choose)
 {
     if (root == NULL)

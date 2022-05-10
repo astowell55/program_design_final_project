@@ -4,7 +4,7 @@
 //the struct store all the infomation of song
 struct item{
     int index;
-    char song_name[MAX_SONG_NAME];
+    char *song_name;
 
 };
 typedef struct item item;

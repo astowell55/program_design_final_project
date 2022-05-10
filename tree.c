@@ -18,8 +18,7 @@ int main()
         while (data_num--)
         {
             item *temp = (item *)malloc(sizeof(temp));
-            scanf(" %d ", &temp->index);
-            fgets(temp->song_name, MAX_SONG_NAME, stdin);
+            read_line(temp);
             build_tree(&root, temp);
         }
     }

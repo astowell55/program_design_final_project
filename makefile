@@ -1,7 +1,7 @@
 tree: tree.o myDS.o myIO.o
 	gcc -o tree tree.o myDS.o  myIO.o
 
-tree.o: tree.c myDS.h
+tree.o: tree.c myIO.h myDS.h 
 	gcc -c tree.c
 
 myIO.o: myIO.c myIO.h myDS.h	
