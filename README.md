@@ -40,4 +40,5 @@ make clean
     * CHANGE: Optimize read_songFile and write_songFile function
 * 0.0.4
     * CHANGE: Update the read_line and read _song name function for reading limit number of letter
-
+*0.0.5
+    * CHANGE: Create traverse and search
