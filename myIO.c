@@ -150,7 +150,7 @@ int write_SongFile(node *root)
     return 0;
 }
 
-void search(int target)
+node *search(int target)
 {
     node *curr = root;
     while (curr != NULL && target != curr->data->index)

@@ -14,7 +14,7 @@ int read_SongFile();
 int write_SongFile(node *root);
 
 //search index
-void search(int target);
+node *search(int target);
 //search song_name
 
 #endif
