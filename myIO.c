@@ -18,7 +18,10 @@ void read_song_name(char buffer[MAX_SONG_NAME + 1])
     buffer[length] = '\0';
     if (strlen(buffer) == MAX_SONG_NAME)
     {
-        buffer[length - 1] = '*';
+
+        buffer[length - 1] = '.';
+        buffer[length - 2] = '.';
+        buffer[length - 3] = '.';
     }
     return;
 }
@@ -94,9 +97,7 @@ void Postorder_traverse(node *root, int output_choose)
     {
         Postorder_traverse(root->left_child, output_choose);
         Postorder_traverse(root->right_child, output_choose);
-        fprintf(outputSongFile, "%d ", root->data->index);
-        fprintf(outputSongFile, "%s", root->data->song_name);
-        fprintf(outputSongFile, "\n");
+        printf("%d %s\n", root->data->index, root->data->song_name);
     }
 }
 
@@ -105,7 +106,7 @@ int read_SongFile()
     FILE *songFile;
 
     /* allocation of the buffer for every line in the File */
-    char *buf = malloc(MAX_SONG_NAME);
+    char *buf = malloc(MAX_SONG_NAME+10);
     char *tmp;
 
     /* if the space could not be allocaed, return an error */
@@ -130,6 +131,7 @@ int read_SongFile()
         song->index = atoi(tmp);
 
         tmp = strtok(NULL, ",");
+        song->song_name = (char*)malloc(sizeof(tmp));
         strcpy(song->song_name, tmp);
 
         build_tree(&root, song);

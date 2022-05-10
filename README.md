@@ -42,3 +42,7 @@ make clean
     * CHANGE: Update the read_line and read _song name function for reading limit number of letter
 * 0.0.5
     * CHANGE: Create delete_index function
+    * CHANGE: Create traverse and search
+## target 每周目標
+### 第二周
+ 
