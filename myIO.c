@@ -56,7 +56,7 @@ int read_SongFile()
     FILE *songFile;
 
     /* allocation of the buffer for every line in the File */
-    char *buf = malloc(MAX_SONG_NAME);
+    char *buf = malloc(MAX_SONG_NAME+10);
     char *tmp;
 
     /* if the space could not be allocaed, return an error */
@@ -81,6 +81,7 @@ int read_SongFile()
         song->index = atoi(tmp);
 
         tmp = strtok(NULL, ",");
+        song->song_name = (char*)malloc(sizeof(tmp));
         strcpy(song->song_name, tmp);
 
         build_tree(&root, song);
