@@ -12,4 +12,9 @@ void Postorder_traverse(node *root, int output_choose);
 void read_line(item * data);
 int read_SongFile();
 int write_SongFile(node *root);
+
+//search index
+void search(int target);
+//search song_name
+
 #endif
