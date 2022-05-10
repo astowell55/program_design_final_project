@@ -29,6 +29,28 @@ void read_line(item * data){
     return;
 
 }
+void Preorder_traverse(node *root, int output_choose)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    if (output_choose == 1)
+    {
+        fprintf(outputSongFile, "%d ", root->data->index);
+        fprintf(outputSongFile, "%s", root->data->song_name);
+        fprintf(outputSongFile, "\n");
+        Preorder_traverse(root->left_child, output_choose);
+        Preorder_traverse(root->right_child, output_choose);
+    }
+    else if (output_choose == 2)
+    {
+        printf("%d %s\n", root->data->index, root->data->song_name);
+        Preorder_traverse(root->left_child, output_choose);
+        Preorder_traverse(root->right_child, output_choose);
+    }
+}
+
 void Inorder_traverse(node *root, int output_choose)
 {
     if (root == NULL)
@@ -48,6 +70,30 @@ void Inorder_traverse(node *root, int output_choose)
         Inorder_traverse(root->left_child, output_choose);
         printf("%d %s\n", root->data->index, root->data->song_name);
         Inorder_traverse(root->right_child, output_choose);
+    }
+}
+
+void Postorder_traverse(node *root, int output_choose)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    if (output_choose == 1)
+    {
+        Postorder_traverse(root->left_child, output_choose);
+        Postorder_traverse(root->right_child, output_choose);
+        fprintf(outputSongFile, "%d ", root->data->index);
+        fprintf(outputSongFile, "%s", root->data->song_name);
+        fprintf(outputSongFile, "\n");
+    }
+    else if (output_choose == 2)
+    {
+        Postorder_traverse(root->left_child, output_choose);
+        Postorder_traverse(root->right_child, output_choose);
+        fprintf(outputSongFile, "%d ", root->data->index);
+        fprintf(outputSongFile, "%s", root->data->song_name);
+        fprintf(outputSongFile, "\n");
     }
 }
 
