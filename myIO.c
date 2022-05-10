@@ -18,7 +18,10 @@ void read_song_name(char buffer[MAX_SONG_NAME + 1])
     buffer[length] = '\0';
     if (strlen(buffer) == MAX_SONG_NAME)
     {
-        buffer[length - 1] = '*';
+
+        buffer[length - 1] = '.';
+        buffer[length - 2] = '.';
+        buffer[length - 3] = '.';
     }
     return;
 }
