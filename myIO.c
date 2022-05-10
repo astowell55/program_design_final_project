@@ -94,9 +94,7 @@ void Postorder_traverse(node *root, int output_choose)
     {
         Postorder_traverse(root->left_child, output_choose);
         Postorder_traverse(root->right_child, output_choose);
-        fprintf(outputSongFile, "%d ", root->data->index);
-        fprintf(outputSongFile, "%s", root->data->song_name);
-        fprintf(outputSongFile, "\n");
+        printf("%d %s\n", root->data->index, root->data->song_name);
     }
 }
 
@@ -150,7 +148,7 @@ int write_SongFile(node *root)
     return 0;
 }
 
-void search(int target)
+node *search(int target)
 {
     node *curr = root;
     while (curr != NULL && target != curr->data->index)
