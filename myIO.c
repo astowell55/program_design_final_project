@@ -134,7 +134,7 @@ int read_SongFile()
         song->song_name = (char*)malloc(sizeof(tmp));
         strcpy(song->song_name, tmp);
 
-        build_tree(&root, song);
+        build_tree(&root, song, root ,0);
     }
     fclose(songFile);
     return 0;

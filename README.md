@@ -45,6 +45,7 @@ abcd already exist
     * CHANGE: Create traverse and search
 * 0.0.6
     * CHANGE: Optimize and update build_tree function compare node with string
+    * CHANGE: Update build_tree to link pareant node;
 ## target 每周目標
+
 ### 第二周
- 

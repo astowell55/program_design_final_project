@@ -21,8 +21,9 @@ int main()
             
             item *temp = (item *)malloc(sizeof(temp));
             read_line(temp);
-            error = build_tree(&root, temp);
+            build_tree(&root, temp, root, &error);
             if(error) data_num++;
+            error = 0;
         }
     }
     else

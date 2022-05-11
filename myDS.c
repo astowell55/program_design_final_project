@@ -3,20 +3,24 @@
 #include <string.h>
 #include "myDS.h"
 #include "myIO.h"
-int build_tree(node **root,item *data){
+void build_tree(node **root,item *data,node *cur,int *error){
     if((*root) == NULL){
         node *new_node = (node*)malloc(sizeof(node));
         new_node->data = data;
         new_node->left_child = NULL;
         new_node->right_child = NULL;
+        new_node->parent = cur;
         (*root) = new_node;
-        return 0;
+        return;
     }else{
-        if(strcmp(((*root)->data->song_name) ,(data->song_name)) > 0) build_tree(&((*root)->left_child),data);
-        else if(strcmp(((*root)->data->song_name) ,(data->song_name)) < 0) build_tree(&((*root)->right_child),data);
-        else{
+        if(strcmp(((*root)->data->song_name) ,(data->song_name)) > 0){
+            build_tree(&((*root)->left_child),data,(*root),error);
+        }else if(strcmp(((*root)->data->song_name) ,(data->song_name)) < 0) {
+            build_tree(&((*root)->right_child),data,(*root),error);
+        }else{
             printf("%s already exist\n",data->song_name);
-            return 1;
+            *error = 1;
+            return;
         }
 
     }
