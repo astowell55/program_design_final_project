@@ -12,21 +12,23 @@ make
 make clean
 ```
 ## Usage example 使用示範
-首先輸入有n首歌，再輸入歌曲的index跟歌曲的name，接著輸出中序走訪的結果，範例如下:
+首先輸入有n首歌，再輸入歌曲的index跟歌曲的name，如果取名有重複則輸出"歌曲名稱 already exist"接著輸出中序走訪的結果(歌曲依照strcmp排序)，範例如下:
 ### 輸入:
 ```
 4
-1,helloasddddddddddddddddddddddddddddddddddddjoiajidjiajsddddddddddddddddddddddddddddddddddddoiajsdijasijdajdsi
-5,ddd
-6,3333
-2,11212
+1 helloasddddddddddddddddddddddddddddddddddddjoiajidjiajsddddddddddddddddddddddddddddddddddddoiajsdijasijdajdsi
+5 ddd
+6 abcd
+6 abcd
+6 yyds
 ```
 ### 輸出:
 ```
-1 ,helloasddddddddddddddddddddddddddddddddddddjoiajidjiajsddddddddddddddddddddddddddddddddddddoiajs...
-2 ,11212
-5 ,ddd
-6 ,3333
+abcd already exist
+6 abcd
+5 ddd
+1 helloasddddddddddddddddddddddddddddddddddddjoiajidjiajsddddddddddddddddddddddddddddddddddddoiajsd...
+6 yyds
 ```
 ## Release History 版本歷史
 
@@ -41,6 +43,8 @@ make clean
 * 0.0.5
     * CHANGE: Create delete_index function
     * CHANGE: Create traverse and search
+* 0.0.6
+    * CHANGE: Optimize and update build_tree function compare node with string
 ## target 每周目標
 ### 第二周
  
