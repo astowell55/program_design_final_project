@@ -15,20 +15,18 @@ make clean
 首先輸入有n首歌，再輸入歌曲的index跟歌曲的name，接著輸出中序走訪的結果，範例如下:
 ### 輸入:
 ```
-5 
-3 Morning Star 
-5 benefits 
-1 Prayer X
-4 Love the BEAT
-2 Faith 
+4
+1,helloasddddddddddddddddddddddddddddddddddddjoiajidjiajsddddddddddddddddddddddddddddddddddddoiajsdijasijdajdsi
+5,ddd
+6,3333
+2,11212
 ```
 ### 輸出:
 ```
-1 Prayer X
-2 Faith
-3 Morning Star
-4 Love the BEAT
-5 benefits
+1 ,helloasddddddddddddddddddddddddddddddddddddjoiajidjiajsddddddddddddddddddddddddddddddddddddoiajs...
+2 ,11212
+5 ,ddd
+6 ,3333
 ```
 ## Release History 版本歷史
 

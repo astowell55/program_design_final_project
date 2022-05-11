@@ -16,7 +16,7 @@ struct node{
 }*root;
 typedef struct node node;
 //compare input index and build the binary search tree
-void build_tree(node **root, item *data);
+int build_tree(node **root, item *data);
 
 #endif
 //

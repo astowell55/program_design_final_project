@@ -1,18 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "myDS.h"
 #include "myIO.h"
-void build_tree(node **root,item *data){
-    node *new_node = (node*)malloc(sizeof(node));
-    new_node->data = data;
-    new_node->left_child = NULL;
-    new_node->right_child = NULL;
+int build_tree(node **root,item *data){
     if((*root) == NULL){
+        node *new_node = (node*)malloc(sizeof(node));
+        new_node->data = data;
+        new_node->left_child = NULL;
+        new_node->right_child = NULL;
         (*root) = new_node;
-        return;
+        return 0;
     }else{
-        if(((*root)->data->index) > (data->index)) build_tree(&((*root)->left_child),data);
-        else build_tree(&((*root)->right_child),data);
+        if(strcmp(((*root)->data->song_name) ,(data->song_name)) > 0) build_tree(&((*root)->left_child),data);
+        else if(strcmp(((*root)->data->song_name) ,(data->song_name)) < 0) build_tree(&((*root)->right_child),data);
+        else{
+            printf("%s already exist\n",data->song_name);
+            return 1;
+        }
 
     }
 }

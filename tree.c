@@ -6,6 +6,7 @@
 int main()
 {
     int data_num, input_Choose, output_Choose;
+    int error = 0;
     printf("[1] Input a csv file. [2] Input the data on terminal. :");
     scanf("%d", &input_Choose);
     if (input_Choose == 1)
@@ -16,10 +17,12 @@ int main()
     {
         scanf(" %d", &data_num);
         while (data_num--)
-        {
+        {   
+            
             item *temp = (item *)malloc(sizeof(temp));
             read_line(temp);
-            build_tree(&root, temp);
+            error = build_tree(&root, temp);
+            if(error) data_num++;
         }
     }
     else
