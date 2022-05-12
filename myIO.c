@@ -155,9 +155,9 @@ int write_SongFile(node *root)
 node *search(int target)
 {
     node *curr = root;
-    while (curr != NULL && target != curr->data->index)
+    while (curr != NULL && strcmp(target,curr->data->song_name)!=1)
     {
-        if (target < curr->data->index)
+        if (strcmp(target,curr->data->song_name)>0)
         {
             curr = curr->left_child;
         }

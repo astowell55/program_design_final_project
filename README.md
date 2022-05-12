@@ -46,6 +46,8 @@ abcd already exist
 * 0.0.6
     * CHANGE: Optimize and update build_tree function compare node with string
     * CHANGE: Update build_tree to link pareant node;
+* 0.0.7
+    * CHANGE: Update search function from searching by index to by song_name
 ## target 每周目標
 
 ### 第二周
