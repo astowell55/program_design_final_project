@@ -152,12 +152,12 @@ int write_SongFile(node *root)
     return 0;
 }
 
-node *search(int target)
+node *search(node *target)
 {
     node *curr = root;
-    while (curr != NULL && strcmp(target,curr->data->song_name)!=1)
+    while (curr != NULL && strcmp(target->data->song_name,curr->data->song_name)!=1)
     {
-        if (strcmp(target,curr->data->song_name)>0)
+        if (strcmp(target->data->song_name,curr->data->song_name)>0)
         {
             curr = curr->left_child;
         }
