@@ -46,15 +46,13 @@ void Preorder_traverse(node *root, int output_choose)
         fprintf(outputSongFile, "%d ", root->data->index);
         fprintf(outputSongFile, "%s", root->data->song_name);
         fprintf(outputSongFile, "\n");
-        Preorder_traverse(root->left_child, output_choose);
-        Preorder_traverse(root->right_child, output_choose);
     }
     else if (output_choose == 2)
     {
         printf("%d %s\n", root->data->index, root->data->song_name);
-        Preorder_traverse(root->left_child, output_choose);
-        Preorder_traverse(root->right_child, output_choose);
     }
+    Preorder_traverse(root->left_child, output_choose);
+    Preorder_traverse(root->right_child, output_choose);
 }
 
 void Inorder_traverse(node *root, int output_choose)
@@ -69,14 +67,13 @@ void Inorder_traverse(node *root, int output_choose)
         fprintf(outputSongFile, "%d ", root->data->index);
         fprintf(outputSongFile, "%s", root->data->song_name);
         fprintf(outputSongFile, "\n");
-        Inorder_traverse(root->right_child, output_choose);
     }
     else if (output_choose == 2)
     {
         Inorder_traverse(root->left_child, output_choose);
         printf("%d %s\n", root->data->index, root->data->song_name);
-        Inorder_traverse(root->right_child, output_choose);
     }
+    Inorder_traverse(root->right_child, output_choose);
 }
 
 void Postorder_traverse(node *root, int output_choose)
@@ -106,7 +103,7 @@ int read_SongFile()
     FILE *songFile;
 
     /* allocation of the buffer for every line in the File */
-    char *buf = malloc(MAX_SONG_NAME+10);
+    char *buf = malloc(MAX_SONG_NAME + 10);
     char *tmp;
 
     /* if the space could not be allocaed, return an error */
@@ -131,10 +128,10 @@ int read_SongFile()
         song->index = atoi(tmp);
 
         tmp = strtok(NULL, ",");
-        song->song_name = (char*)malloc(sizeof(tmp));
+        song->song_name = (char *)malloc(sizeof(tmp));
         strcpy(song->song_name, tmp);
 
-        build_tree(&root, song, root ,0);
+        build_tree(&root, song, root, 0);
     }
     fclose(songFile);
     return 0;
@@ -152,12 +149,15 @@ int write_SongFile(node *root)
     return 0;
 }
 
-node *search(node *target)
+node *search(node *root, item *target)
 {
-    node *curr = root;
-    while (curr != NULL && strcmp(target->data->song_name,curr->data->song_name)!=0)
+    node *curr = (node *)malloc(sizeof(curr));
+    curr = root;
+
+    while (curr != NULL && strcmp(target->song_name, curr->data->song_name) != 0)
     {
-        if (strcmp(target->data->song_name,curr->data->song_name)>0)
+        
+        if (strcmp(curr->data->song_name, target->song_name) > 0)
         {
             curr = curr->left_child;
         }

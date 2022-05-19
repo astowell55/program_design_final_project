@@ -48,6 +48,9 @@ abcd already exist
     * CHANGE: Update build_tree to link pareant node;
 * 0.0.7
     * CHANGE: Update search function from searching by index to by song_name
+* 0.0.8
+    * Change: Rivese search function(has not moved to myAlogo yet)
+    * Change: Put traversal functions and search funtion into tree.c
 ## target 每周目標
 
 ### 第二周
