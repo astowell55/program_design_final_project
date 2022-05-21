@@ -46,15 +46,13 @@ void Preorder_traverse(node *root, int output_choose)
         fprintf(outputSongFile, "%d ", root->data->index);
         fprintf(outputSongFile, "%s", root->data->song_name);
         fprintf(outputSongFile, "\n");
-        Preorder_traverse(root->left_child, output_choose);
-        Preorder_traverse(root->right_child, output_choose);
     }
     else if (output_choose == 2)
     {
         printf("%d %s\n", root->data->index, root->data->song_name);
-        Preorder_traverse(root->left_child, output_choose);
-        Preorder_traverse(root->right_child, output_choose);
     }
+    Preorder_traverse(root->left_child, output_choose);
+    Preorder_traverse(root->right_child, output_choose);
 }
 
 void Inorder_traverse(node *root, int output_choose)
@@ -69,14 +67,13 @@ void Inorder_traverse(node *root, int output_choose)
         fprintf(outputSongFile, "%d ", root->data->index);
         fprintf(outputSongFile, "%s", root->data->song_name);
         fprintf(outputSongFile, "\n");
-        Inorder_traverse(root->right_child, output_choose);
     }
     else if (output_choose == 2)
     {
         Inorder_traverse(root->left_child, output_choose);
         printf("%d %s\n", root->data->index, root->data->song_name);
-        Inorder_traverse(root->right_child, output_choose);
     }
+    Inorder_traverse(root->right_child, output_choose);
 }
 
 void Postorder_traverse(node *root, int output_choose)
@@ -106,7 +103,8 @@ int read_SongFile()
     FILE *songFile;
 
     /* allocation of the buffer for every line in the File */
-    char *buf = malloc(256);
+
+    char *buf = malloc(MAX_SONG_NAME + 10);
     char *tmp;
 
     /* if the space could not be allocaed, return an error */
@@ -125,7 +123,7 @@ int read_SongFile()
     {
         if ((strlen(buf) > 0) && (buf[strlen(buf) - 1] == '\n'))
             buf[strlen(buf) - 1] = '\0';
-        
+
         item *song = (item *)malloc(sizeof(song));
         tmp = strtok(buf, ",");
         song->index = atoi(tmp);
@@ -159,12 +157,15 @@ int write_SongFile(node *root)
     return 0;
 }
 
-node *search(int target)
+node *search(node *root, item *target)
 {
-    node *curr = root;
-    while (curr != NULL && target != curr->data->index)
+    node *curr = (node *)malloc(sizeof(curr));
+    curr = root;
+
+    while (curr != NULL && strcmp(target->song_name, curr->data->song_name) != 0)
     {
-        if (target < curr->data->index)
+
+        if (strcmp(curr->data->song_name, target->song_name) > 0)
         {
             curr = curr->left_child;
         }
