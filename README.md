@@ -49,7 +49,7 @@ abcd already exist
 * 0.0.7
     * CHANGE: Update search function from searching by index to by song_name
 * 0.0.8
-    * Change: Rivese search function(has not moved to myAlgo yet)
+    * Change: Rivese search function(have not moved to myAlgo yet)
     * Change: Put traversal functions and search funtion into tree.c
 ## target 每周目標
 
