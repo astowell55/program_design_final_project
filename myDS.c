@@ -37,7 +37,7 @@ void build_tree(node **root, item *data, node *cur, int *error)
 
 void delete_index(node **root, item *data)
 {
-    node *target = search(data->index);
+    node *target = search(root, data);
 
     node *y;
     node *x;
