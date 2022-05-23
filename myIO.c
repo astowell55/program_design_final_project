@@ -103,6 +103,7 @@ int read_SongFile()
     FILE *songFile;
 
     /* allocation of the buffer for every line in the File */
+
     char *buf = malloc(MAX_SONG_NAME + 10);
     char *tmp;
 
@@ -128,10 +129,17 @@ int read_SongFile()
         song->index = atoi(tmp);
 
         tmp = strtok(NULL, ",");
-        song->song_name = (char *)malloc(sizeof(tmp));
+        if (strlen(tmp) >= MAX_SONG_NAME)
+        {
+            tmp[MAX_SONG_NAME] = '\0';
+            tmp[MAX_SONG_NAME - 1] = '.';
+            tmp[MAX_SONG_NAME - 2] = '.';
+            tmp[MAX_SONG_NAME - 3] = '.';
+        }
+        song->song_name = (char *)malloc(sizeof(strlen(tmp) + 1));
         strcpy(song->song_name, tmp);
-
-        build_tree(&root, song, root, 0);
+        int error = 0;
+        build_tree(&root, song, root, &error);
     }
     fclose(songFile);
     return 0;
@@ -156,7 +164,7 @@ node *search(node *root, item *target)
 
     while (curr != NULL && strcmp(target->song_name, curr->data->song_name) != 0)
     {
-        
+
         if (strcmp(curr->data->song_name, target->song_name) > 0)
         {
             curr = curr->left_child;
