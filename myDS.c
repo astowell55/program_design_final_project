@@ -35,10 +35,12 @@ void build_tree(node **root, item *data, node *cur, int *error)
     }
 }
 
-void delete_index(node **root, item *data)
+void delete_name(node **root, item *data)
 {
     node *target = search(root, data);
-
+    if(target==NULL){
+        printf("'%s' not found.\n",data->song_name);
+    }
     node *y;
     node *x;
 

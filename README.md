@@ -49,8 +49,10 @@ abcd already exist
 * 0.0.7
     * CHANGE: Update search function from searching by index to by song_name
 * 0.0.8
-    * Change: Rivese search function and move to myAlgo yet
+    * Change: Rivese search function and move to myAlgo
     * Change: Put traversal functions and search funtion into tree.c
+* 0.0.9
+    * Change: Update delete_name function(there are some overused malloc() and didn't free() it. wtf= =)
 ## target 每周目標
 
 ### 第二周

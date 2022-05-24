@@ -155,4 +155,27 @@ int write_SongFile(node *root)
     Inorder_traverse(root, 1);
     fclose(outputSongFile);
     return 0;
+<<<<<<< HEAD
+=======
+}
+
+node *search(node *root, item *target)
+{
+    node *curr;
+    curr = root;
+
+    while (curr != NULL && strcmp(target->song_name, curr->data->song_name) != 0)
+    {
+
+        if (strcmp(curr->data->song_name, target->song_name) > 0)
+        {
+            curr = curr->left_child;
+        }
+        else
+        {
+            curr = curr->right_child;
+        }
+    }
+    return curr;
+>>>>>>> 37a376bc11822e91722f701a387b8956ce6c195c
 }
