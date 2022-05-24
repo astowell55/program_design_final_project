@@ -13,7 +13,4 @@ void read_line(item *data);
 int read_SongFile();
 int write_SongFile(node *root);
 
-// search by song_name
-node *search(node *root, item *target);
-
 #endif

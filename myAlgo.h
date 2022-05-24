@@ -6,6 +6,7 @@
 #include "myDS.h"
 #include "myIO.h"
 
-
+// search by song_name
+node *search(node *root, item *target);
 
 #endif
