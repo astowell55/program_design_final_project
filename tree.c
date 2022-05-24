@@ -34,7 +34,7 @@ int main()
         return 0;
     }
 
-    printf("[1] Output the data in csv file. [2] Output the data on terminal. [3] Search by song name :");
+    printf("[1] Output the data in csv file. [2] Output the data on terminal. [3] Search by song name. [4] Delete a node by name:");
     scanf("%d", &output_Choose);
     if (output_Choose == 1)
     {
@@ -84,6 +84,17 @@ int main()
         {
             printf("No result\n");
         }
+        free(target);
+        free(result);
+    }
+    else if(output_Choose == 4){
+        char s[MAX_SONG_NAME+1];
+        scanf("%s",s);
+        item *target = (item *)malloc(sizeof(target));
+        target->song_name = s;
+        delete_name(root,target);
+        Inorder_traverse(root, 2);
+        free(target);
     }
     else
     {

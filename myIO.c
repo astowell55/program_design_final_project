@@ -159,7 +159,7 @@ int write_SongFile(node *root)
 
 node *search(node *root, item *target)
 {
-    node *curr = (node *)malloc(sizeof(curr));
+    node *curr;
     curr = root;
 
     while (curr != NULL && strcmp(target->song_name, curr->data->song_name) != 0)

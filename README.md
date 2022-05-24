@@ -51,6 +51,8 @@ abcd already exist
 * 0.0.8
     * Change: Rivese search function(have not moved to myAlgo yet)
     * Change: Put traversal functions and search funtion into tree.c
+* 0.0.9
+    * Change: Update delete_name function(there are some overused malloc() and didn't free() it. wtf= =)
 ## target 每周目標
 
 ### 第二周
