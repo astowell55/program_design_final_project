@@ -12,7 +12,7 @@ void Postorder_traverse(node *root, int output_choose);
 void read_line(item *data);
 int read_SongFile();
 int write_SongFile(node *root);
-
+void read_song_name(wchar_t *buffer);
 // search by song_name
 node *search(node *root, item *target);
 
