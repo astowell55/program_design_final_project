@@ -9,6 +9,9 @@ myIO.o: myIO.c myIO.h myDS.h
 
 myDS.o: myDS.c myDS.h
 	gcc -c myDS.c
+
+myAlgo.o: myAlgo.c myAlgo.h
+	gcc -c myAlgo.c
 	
 clean:
 	rm *.o
