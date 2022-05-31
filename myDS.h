@@ -3,8 +3,8 @@
 #define MAX_SONG_NAME 100
 //the struct store all the infomation of song
 struct item{
-    int index;
     char *song_name;
+    int index;
 };
 typedef struct item item;
 //the node and the root of tree
