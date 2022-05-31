@@ -145,7 +145,6 @@ void Postorder_traverse(node *root, int output_choose)
 //     return 0;
 // }
 
-<<<<<<< HEAD
 int write_SongFile(node *root)
 {
     outputSongFile = fopen("output.csv", "w");
@@ -156,36 +155,4 @@ int write_SongFile(node *root)
     Inorder_traverse(root, 1);
     fclose(outputSongFile);
     return 0;
-=======
-// int write_SongFile(node *root)
-// {
-//     outputSongFile = fopen("output.csv", "w");
-//     if (root == NULL)
-//     {
-//         return 0;
-//     }
-//     Inorder_traverse(root, 1);
-//     fclose(outputSongFile);
-//     return 0;
-// }
-
-node *search(node *root, item *target)
-{
-    node *curr;
-    curr = root;
-
-    while (curr != NULL && wcscmp(target->song_name, curr->data->song_name) != 0)
-    {
-
-        if (wcscmp(curr->data->song_name, target->song_name) > 0)
-        {
-            curr = curr->left_child;
-        }
-        else
-        {
-            curr = curr->right_child;
-        }
-    }
-    return curr;
->>>>>>> 6c31b7d58f9e629a69611e1a25463bfd41ba0548
 }
