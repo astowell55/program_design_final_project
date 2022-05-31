@@ -1,19 +1,13 @@
 #ifndef MYDS_H
 #define MYDS_H
 #define MAX_SONG_NAME 100
-<<<<<<< HEAD
-//the struct store all the infomation of song
-struct item{
-    char *song_name;
-    int index;
-=======
 #include <wchar.h>
 // the struct store all the infomation of song
 struct item
 {
     int index;
     wchar_t *song_name;
->>>>>>> 6c31b7d58f9e629a69611e1a25463bfd41ba0548
+
 };
 typedef struct item item;
 // the node and the root of tree
