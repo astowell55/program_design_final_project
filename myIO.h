@@ -14,8 +14,5 @@ int read_SongFile();
 int write_SongFile(node *root);
 
 void read_song_name(wchar_t *buffer);
-// search by song_name
-node *search(node *root, item *target);
-
 
 #endif

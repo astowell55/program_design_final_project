@@ -7,7 +7,7 @@
 
 int main()
 {
-    int data_num, input_Choose, output_Choose;
+    int data_num, input_Choose, output_Choose, search_Choose;
     int error = 0;
     printf("[1] Input a csv file. [2] Input the data on terminal. :");
     scanf("%d", &input_Choose);
@@ -65,35 +65,66 @@ int main()
     }
     else if (output_Choose == 3)
     {
-        getchar();
-        printf("Enter songname:");
-        wchar_t buf[MAX_SONG_NAME + 1];
-        read_song_name(buf);
-        item *target = (item *)malloc(sizeof(target));
-        target->song_name = (wchar_t *)malloc(sizeof(buf));
-        wcsncpy(target->song_name, buf, MAX_SONG_NAME);
-
-        node *result = (node *)malloc(sizeof(result));
-        result = search(root, target);
-
-        if (result != NULL)
+        printf("[1] Search by artist [2] Search by title :");
+        scanf("%d", &search_Choose);
+        if (search_Choose == 1)
         {
-            printf("%d %ls\n", result->data->index, result->data->song_name);
+            getchar();
+            printf("Enter the artist:");
+            wchar_t buf[MAX_SONG_NAME + 1];
+            read_song_name(buf);
+            item *target = (item *)malloc(sizeof(target));
+            target->artist = (wchar_t *)malloc(sizeof(buf));
+            wcsncpy(target->artist, buf, MAX_SONG_NAME);
+
+            node *result = (node *)malloc(sizeof(result));
+            result = search(root, target, 1);
+
+            if (result != NULL)
+            {
+                printf("%ls %ls\n", result->data->song_name, result->data->artist);
+            }
+            else
+            {
+                printf("No result\n");
+            }
+            free(target);
+            free(result);
         }
-        else
+        else if (search_Choose == 2)
         {
-            printf("No result\n");
+            getchar();
+            printf("Enter the title:");
+            wchar_t buf[MAX_SONG_NAME + 1];
+            read_song_name(buf);
+            item *target = (item *)malloc(sizeof(target));
+            target->song_name = (wchar_t *)malloc(sizeof(buf));
+            wcsncpy(target->song_name, buf, MAX_SONG_NAME);
+
+            node *result = (node *)malloc(sizeof(result));
+            result = search(root, target, 2);
+
+            if (result != NULL)
+            {
+                printf("%ls %ls\n", result->data->song_name, result->data->artist);
+            }
+            else
+            {
+                printf("No result\n");
+            }
+            free(target);
+            free(result);
         }
-        free(target);
-        free(result);
     }
     else if (output_Choose == 4)
     {
+        //printf("[1] Delete by artist [2] Delete by title :");
+        //scanf("%d", &search_Choose);
         wchar_t s[MAX_SONG_NAME + 1];
         wscanf(L"%ls", s);
         item *target = (item *)malloc(sizeof(target));
         target->song_name = s;
-        delete_name(&root, target);
+        delete_name(&root, target, search_Choose);
         Inorder_traverse(root, 2);
         free(target);
     }

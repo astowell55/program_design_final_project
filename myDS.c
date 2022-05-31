@@ -35,9 +35,9 @@ void build_tree(node **root, item *data, node *cur, int *error)
     }
 }
 
-void delete_name(node **root, item *data)
+void delete_name(node **root, item *data, int search_Choose)
 {
-    node *target = search(*root, data);
+    node *target = search(*root, data, search_Choose);
     if (target == NULL)
     {
         printf("'%ls' not found.\n", data->song_name);
