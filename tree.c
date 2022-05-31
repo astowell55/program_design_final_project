@@ -13,7 +13,7 @@ int main()
     scanf("%d", &input_Choose);
     if (input_Choose == 1)
     {
-        read_SongFile();
+        // read_SongFile();
     }
     else if (input_Choose == 2)
     {
@@ -38,7 +38,7 @@ int main()
     scanf("%d", &output_Choose);
     if (output_Choose == 1)
     {
-        write_SongFile(root);
+        // write_SongFile(root);
     }
     else if (output_Choose == 2)
     {
@@ -67,18 +67,18 @@ int main()
     {
         getchar();
         printf("Enter songname:");
-        char buf[MAX_SONG_NAME + 1];
+        wchar_t buf[MAX_SONG_NAME + 1];
         read_song_name(buf);
         item *target = (item *)malloc(sizeof(target));
-        target->song_name = (char *)malloc(sizeof(buf));
-        strncpy(target->song_name, buf, MAX_SONG_NAME);
+        target->song_name = (wchar_t *)malloc(sizeof(buf));
+        wcsncpy(target->song_name, buf, MAX_SONG_NAME);
 
         node *result = (node *)malloc(sizeof(result));
         result = search(root, target);
 
         if (result != NULL)
         {
-            printf("%d %s\n", result->data->index, result->data->song_name);
+            printf("%d %ls\n", result->data->index, result->data->song_name);
         }
         else
         {
@@ -87,12 +87,13 @@ int main()
         free(target);
         free(result);
     }
-    else if(output_Choose == 4){
-        char s[MAX_SONG_NAME+1];
-        scanf("%s",s);
+    else if (output_Choose == 4)
+    {
+        wchar_t s[MAX_SONG_NAME + 1];
+        wscanf(L"%ls", s);
         item *target = (item *)malloc(sizeof(target));
         target->song_name = s;
-        delete_name(root,target);
+        delete_name(&root, target);
         Inorder_traverse(root, 2);
         free(target);
     }

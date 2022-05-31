@@ -18,17 +18,17 @@ void build_tree(node **root, item *data, node *cur, int *error)
     }
     else
     {
-        if (strcmp(((*root)->data->song_name), (data->song_name)) > 0)
+        if (wcscmp(((*root)->data->song_name), (data->song_name)) > 0)
         {
             build_tree(&((*root)->left_child), data, (*root), error);
         }
-        else if (strcmp(((*root)->data->song_name), (data->song_name)) < 0)
+        else if (wcscmp(((*root)->data->song_name), (data->song_name)) < 0)
         {
             build_tree(&((*root)->right_child), data, (*root), error);
         }
         else
         {
-            printf("%s already exist\n", data->song_name);
+            printf("%ls already exist\n", data->song_name);
             *error = 1;
             return;
         }
@@ -37,9 +37,10 @@ void build_tree(node **root, item *data, node *cur, int *error)
 
 void delete_name(node **root, item *data)
 {
-    node *target = search(root, data);
-    if(target==NULL){
-        printf("'%s' not found.\n",data->song_name);
+    node *target = search(*root, data);
+    if (target == NULL)
+    {
+        printf("'%ls' not found.\n", data->song_name);
     }
     node *y;
     node *x;
