@@ -59,6 +59,8 @@ abcd already exist
     * Change: Add search_Choose for search by artist or title 
               (idk whether this version lost Chinese output in Unix and sorry for not freeing malloc, my bad. J)
     * Change: Add artist, length in struct item (index has not been deleted yet)
+* 0.1.2
+    * Change: modify tree.c
 ## target 每周目標
 
 ### 第二周
