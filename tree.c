@@ -5,12 +5,97 @@
 #include "myIO.h"
 #include "myAlgo.h"
 
+void Choose_a_songlist(char songlist[]){
+    //Operate
+    printf("[a]Add a song\n[d]Delete a song\n" \
+    "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \ 
+    "[<]Back to main page\nEnter your operater:\n");
+    char operater;
+    while(scanf("%c",&operater)!=EOF){
+        switch (operater)
+        {
+        case 'a':
+            break;
+        case 'a':
+            break;
+        case 'a':
+            break;
+        case 'a':
+            break;
+        case 'a':
+            break;
+        default:
+            break;
+        }
+    }
+}
+
 int main()
 {
     int data_num, input_Choose, output_Choose, search_Choose;
+    
     int error = 0;
-    printf("[1] Input a csv file. [2] Input the data on terminal. :");
-    scanf("%d", &input_Choose);
+    //printf("[1] Input a csv file. [2] Input the data on terminal. :");
+    printf("Welcome to use this project!\n");
+    //- preload songdata
+    //read_SongFile("songFile.csv");
+    //-preload songdata end
+
+    //- select oprerater
+    printf("[a]Add a songlist\n[d]Delete a songlist\n" \
+    "[c]Choose a songlist\n[o]Output all songlists\n[i]import a .csv songlist\nEnter your operater:\n");
+    char operater;
+    //printf("[1] Input a csv file. [2] Input the data on terminal. :");
+    char songlist[MAX_SONG_NAME+1];
+    //Operate
+    while(scanf("%c",&operater)!=EOF){
+        switch (operater)
+        {
+        case 'a':
+            //Build or Add songlist tree.
+            read_line(songlist);
+            if(/*songlist haven't built yet*/){
+                build_songlist();
+                printf("Add songlist : %s\n",songlist);
+            }else{
+                printf("Invalid operation\n");
+            }
+            break;
+        case 'd':
+            //Delete target songlist.
+            read_line(songlist);
+            if(/*the songlist has built*/){
+                delete_songlist(songlist);
+                printf("Delete songlist : %s\n",songlist);
+            }else{
+                printf("Invalid operation\n");
+            }
+            break;
+        case 'c':
+            //Enter the target songlist, going to another UI.
+            read_line(songlist);
+            if(/*the songlist haven't built yet*/){
+                Choose_a_songlist(songlist);
+                printf("Delete songlist : %s\n",songlist);
+            }else{
+                printf("Invalid operation\n");
+            }
+            
+            break;
+        case 'o':
+            //Output all songlist name.
+            output_songlist();
+            break;
+        default:
+            printf("Invalid operater\n");
+            printf("[a]Add a songlist\n[d]Delete a songlist\n[c]Choose a songlist\n" \
+    "[o]Output all songlists\n[i]import a .csv songlist\nEnter your operater:\n");
+            break;
+        }
+
+    }
+    
+    /*scanf("%d", &input_Choose);
     if (input_Choose == 1)
     {
         // read_SongFile();
@@ -32,7 +117,7 @@ int main()
     else
     {
         return 0;
-    }
+    }*/
 
     printf("[1] Output the data in csv file. [2] Output the data on terminal. [3] Search by song name. [4] Delete a node by name:");
     scanf("%d", &output_Choose);
