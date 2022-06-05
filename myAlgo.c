@@ -7,8 +7,7 @@
 
 node *search(node *root, item *target, int search_Choose)
 {
-    node *curr = (node *)malloc(sizeof(curr));
-    curr = root;
+    node *curr = root;
 
     if (search_Choose == 1)
     {
