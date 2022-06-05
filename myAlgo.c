@@ -7,15 +7,14 @@
 
 node *search(node *root, item *target, int search_Choose)
 {
-    node *curr = (node *)malloc(sizeof(curr));
-    curr = root;
+    node *curr = root;
 
     if (search_Choose == 1)
     {
-        while (curr != NULL && strcmp(target->artist, curr->data->artist) != 0)
+        while (curr != NULL && wcscmp(target->artist, curr->data->artist) != 0)
         {
 
-            if (strcmp(curr->data->artist, target->artist) > 0)
+            if (wcscmp(curr->data->artist, target->artist) > 0)
             {
                 curr = curr->left_child;
             }
@@ -28,10 +27,10 @@ node *search(node *root, item *target, int search_Choose)
     }
     else if (search_Choose == 2)
     {
-        while (curr != NULL && strcmp(target->song_name, curr->data->song_name) != 0)
+        while (curr != NULL && wcscmp(target->song_name, curr->data->song_name) != 0)
         {
 
-            if (strcmp(curr->data->song_name, target->song_name) > 0)
+            if (wcscmp(curr->data->song_name, target->song_name) > 0)
             {
                 curr = curr->left_child;
             }
