@@ -4,7 +4,7 @@
 #include "myDS.h"
 #include "myIO.h"
 #include "myAlgo.h"
-void build_tree(node **root, item *data, node *cur, int *error)
+void build_tree(node **root, song *data, node *cur, int *error)
 {
     if ((*root) == NULL)
     {
@@ -34,7 +34,7 @@ void build_tree(node **root, item *data, node *cur, int *error)
         }
     }
 }
-void build_song(node *cur_songlist,wchar_t song_name[]){
+void build_song(song *cur_songlist,wchar_t song_name[]){
     /*
         Add a song named song_name[] into cur_songlist.
         Also store the artist and time.
@@ -48,69 +48,69 @@ void build_songlist(node *songlist_tree,wchar_t songlist_name[]){
     */
 }
 
-void delete_name(node **root, item *data, int search_Choose)
-{
-    node *target = search(*root, data, search_Choose);
-    if (target == NULL)
-    {
-        printf("'%ls' not found.\n", data->song_name);
-    }
-    node *y;
-    node *x;
+// void delete_name(node **root, song *data, int search_Choose)
+// {
+//     node *target = search(*root, data, search_Choose);
+//     if (target == NULL)
+//     {
+//         printf("'%ls' not found.\n", data->song_name);
+//     }
+//     node *y;
+//     node *x;
 
-    if (target->left_child == NULL && target->right_child == NULL)
-    {
-        y = target;
-    }
-    else
-    {
-        if (target->right_child != NULL)
-        {
-            y = target->right_child;
-        }
-        else
-        {
-            y = target->left_child;
-        }
-    }
+//     if (target->left_child == NULL && target->right_child == NULL)
+//     {
+//         y = target;
+//     }
+//     else
+//     {
+//         if (target->right_child != NULL)
+//         {
+//             y = target->right_child;
+//         }
+//         else
+//         {
+//             y = target->left_child;
+//         }
+//     }
 
-    if (y->left_child != NULL)
-    {
-        x = y->left_child;
-    }
-    else
-    {
-        x = y->right_child;
-    }
+//     if (y->left_child != NULL)
+//     {
+//         x = y->left_child;
+//     }
+//     else
+//     {
+//         x = y->right_child;
+//     }
 
-    if (x != NULL)
-    {
-        x->parent = y->parent;
-    }
+//     if (x != NULL)
+//     {
+//         x->parent = y->parent;
+//     }
 
-    if (y->parent == NULL)
-    {
-        *root = x;
-    }
-    else if (y == y->parent->left_child)
-    {
-        y->parent->left_child = x;
-    }
-    else
-    {
-        y->parent->right_child = x;
-    }
+//     if (y->parent == NULL)
+//     {
+//         *root = x;
+//     }
+//     else if (y == y->parent->left_child)
+//     {
+//         y->parent->left_child = x;
+//     }
+//     else
+//     {
+//         y->parent->right_child = x;
+//     }
 
-    if (y != target)
-    {
-        target->data->index = y->data->index;
-        target->data->song_name = y->data->song_name;
-    }
+//     if (y != target)
+//     {
+//         target->data->index = y->data->index;
+//         target->data->song_name = y->data->song_name;
+//     }
 
-    free(y);
-    return;
-}
-void delete_song(node *cur_songlist,wchar_t song_name[]){
+//     free(y);
+//     return;
+// }
+void delete_song(song *cur_songlist,wchar_t song_name[]){
     /*
         search song_name in cur_songlist. if found, free it. 
     */
