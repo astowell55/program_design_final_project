@@ -24,7 +24,11 @@ struct node
 typedef struct node node;
 // compare input index and build the binary search tree
 void build_tree(node **root, item *data, node *cur, int *error);
+void build_song(node *cur_songlist,wchar_t song_name[]);
+void build_songlist(node *songlist_tree,wchar_t songlist_name[]);
 void delete_name(node **root, item *data, int search_Choose);
+void delete_song(node *cur_songlist,wchar_t song_name[]);
+void delete_songlist(node *songlist_tree,wchar_t songlist_name[]);
 #endif
 //
 //                       _oo0oo_
