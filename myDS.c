@@ -119,7 +119,5 @@ void delete_songlist(node *songlist_tree,wchar_t songlist_name[]){
     /*
         search songlist_name in songlist_tree. if found, free it and its all song.
     */
-   if(/*found*/){
-       
-   }
+   
 }

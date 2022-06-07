@@ -159,7 +159,7 @@ int write_SongFile(node *root)
     return 0;
 }
 
-void output_song(node *cur_songlist){
+void output_song(song *cur_songlist){
     // output all song name,artist,time in cur_songlist
     /*
         Maybe :
@@ -170,7 +170,7 @@ void output_song(node *cur_songlist){
 void output_songlist(node *songlist_tree){
     // output all songlist name in songlist_tree
 }
-void Export_songlist(node *cur_songlist){
+void Export_songlist(song *cur_songlist){
     //Export cur_songlist's song as .csv file.
 }
 void Import_songlist(node songlist_tree,wchar_t songlist_name[]){

@@ -5,8 +5,10 @@
 #include "myIO.h"
 #include "myAlgo.h"
 
-void Choose_a_songlist(const node *cur_songlist){
-    
+void Choose_a_songlist(const song *cur_songlist){
+    /*
+        In a songlist,it is the UI.
+    */
     //Operate
     wchar_t song_name[MAX_SONG_NAME+1];
     printf("[a]Add a song\n[d]Delete a song\n" \
@@ -74,7 +76,7 @@ int main()
     //- Preload songdata end
     
     node *songlist_tree;//the root of songlist tree.
-    node *target_songlist;//point to the songlist.
+    song *target_songlist;//point to the songlist.
     //select oprerater
     printf("[a]Add a songlist\n[d]Delete a songlist\n" \
     "[c]Choose a songlist\n[o]Output all songlists\n[i]import a .csv songlist\nEnter your operater:\n");
@@ -88,7 +90,7 @@ int main()
             //Build or Add songlist into tree.
             read_wstring(songlist_name);
             //find
-            node *target_songlist = search_songlist(songlist_tree,songlist_name);
+            target_songlist = search_songlist(songlist_tree,songlist_name);
             if(/*songlist haven't built yet*/){
                 build_songlist(songlist_tree,songlist_name);
                 printf("Add songlist : %s\n",songlist_name);
@@ -100,7 +102,7 @@ int main()
             //Delete target songlist.
             read_wstring(songlist_name);
             //find
-            node *target_songlist = search_songlist(songlist_tree,songlist_name);
+            target_songlist = search_songlist(songlist_tree,songlist_name);
             if(/*the songlist has built*/){
                 delete_songlist(target_songlist);
                 printf("Delete songlist : %s\n",songlist_name);
@@ -112,7 +114,7 @@ int main()
             //Enter the target songlist, going to another UI.
             read_wstring(songlist_name);
             //find
-            node *target_songlist = search_songlist(songlist_tree,songlist_name);
+            target_songlist = search_songlist(songlist_tree,songlist_name);
             if(/*the songlist haven't built yet*/){
                 Choose_a_songlist(target_songlist);
                 printf("Choose songlist : %s\n",songlist_name);

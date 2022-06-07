@@ -63,6 +63,8 @@ abcd already exist
     * Change: modify tree.c
 * 0.1.3
     * Change: Add function name and comment, modify all .c file.
+* 0.1.4
+    * Change: Replace struct "item" to "song".
 ## target 每周目標
 
 ### 第二周
