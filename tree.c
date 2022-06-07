@@ -125,6 +125,11 @@ int main()
             //Output all songlist name.
             output_songlist(songlist_tree);
             break;
+        case 'i':
+            //Import a songlist.
+            read_wstring(songlist_name);
+            Import_songlist(songlist_tree,songlist_name);
+            break;
         default:
             printf("Invalid operater\n");
             printf("[a]Add a songlist\n[d]Delete a songlist\n[c]Choose a songlist\n" \
