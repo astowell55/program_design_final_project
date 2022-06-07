@@ -11,6 +11,7 @@ void Choose_a_songlist(const song *cur_songlist){
     */
     //Operate
     wchar_t song_name[MAX_SONG_NAME+1];
+    song *target_song = NULL;
     printf("[a]Add a song\n[d]Delete a song\n" \
     "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \ 
     "[<]Back to main page\nEnter your operater:\n");
@@ -21,7 +22,8 @@ void Choose_a_songlist(const song *cur_songlist){
         case 'a':
             //Add song.
             read_wstring(song_name);
-            if(/*the song haven't added yet*/){
+            target_song = search_song(cur_songlist,song_name);
+            if(target_song==NULL){
                 build_song(cur_songlist,song_name);
                 printf("Add song : %s\n",song_name);
             }else{
@@ -31,7 +33,8 @@ void Choose_a_songlist(const song *cur_songlist){
         case 'd':
             //Delete song.
             read_wstring(song_name);
-            if(/*the song has added*/){
+            target_song = search_song(cur_songlist,song_name);
+            if(target_song!=NULL){
                 delete_song(cur_songlist,song_name);
                 printf("Delete song : %s\n",song_name);
             }else{
@@ -46,12 +49,12 @@ void Choose_a_songlist(const song *cur_songlist){
             //Export this songlist as .csv
             Export_songlist(cur_songlist);
             break;
-        case 's':
-            //Sort and output all song(?)
-            break;
-        case 'r':
-            //Random all song(?)
-            break;
+        // case 's':
+        //     //Sort and output all song(?)
+        //     break;
+        // case 'r':
+        //     //Random all song(?)
+        //     break;
         case '<':
             return;//Back
             break;
@@ -75,8 +78,8 @@ int main()
     //read_SongFile("songFile.csv");
     //- Preload songdata end
     
-    node *songlist_tree;//the root of songlist tree.
-    song *target_songlist;//point to the songlist.
+    node *songlist_tree=NULL;//the root of songlist tree.
+    song *target_songlist=NULL;//point to the songlist.
     //select oprerater
     printf("[a]Add a songlist\n[d]Delete a songlist\n" \
     "[c]Choose a songlist\n[o]Output all songlists\n[i]import a .csv songlist\nEnter your operater:\n");
@@ -91,7 +94,7 @@ int main()
             read_wstring(songlist_name);
             //find
             target_songlist = search_songlist(songlist_tree,songlist_name);
-            if(/*songlist haven't built yet*/){
+            if(target_songlist==NULL){
                 build_songlist(songlist_tree,songlist_name);
                 printf("Add songlist : %s\n",songlist_name);
             }else{
@@ -103,8 +106,8 @@ int main()
             read_wstring(songlist_name);
             //find
             target_songlist = search_songlist(songlist_tree,songlist_name);
-            if(/*the songlist has built*/){
-                delete_songlist(target_songlist);
+            if(target_songlist!=NULL){
+                delete_songlist(target_songlist,songlist_name);
                 printf("Delete songlist : %s\n",songlist_name);
             }else{
                 printf("Invalid operation\n");
@@ -112,10 +115,11 @@ int main()
             break;
         case 'c':
             //Enter the target songlist, going to another UI.
-            read_wstring(songlist_name);
+            
+            //read_wstring(songlist_name);
             //find
             target_songlist = search_songlist(songlist_tree,songlist_name);
-            if(/*the songlist haven't built yet*/){
+            if(target_songlist==NULL){
                 Choose_a_songlist(target_songlist);
                 printf("Choose songlist : %s\n",songlist_name);
             }else{
@@ -153,7 +157,7 @@ int main()
         while (data_num--)
         {
 
-            item *temp = (item *)malloc(sizeof(temp));
+            song *temp = (song *)malloc(sizeof(temp));
             read_line(temp);
             build_tree(&root, temp, root, &error);
             if (error)
@@ -205,7 +209,7 @@ int main()
             printf("Enter the artist:");
             wchar_t buf[MAX_SONG_NAME + 1];
             read_song_name(buf);
-            item *target = (item *)malloc(sizeof(target));
+            song *target = (song *)malloc(sizeof(target));
             target->artist = (wchar_t *)malloc(sizeof(buf));
             wcsncpy(target->artist, buf, MAX_SONG_NAME);
 
@@ -229,7 +233,7 @@ int main()
             printf("Enter the title:");
             wchar_t buf[MAX_SONG_NAME + 1];
             read_song_name(buf);
-            item *target = (item *)malloc(sizeof(target));
+            song *target = (song *)malloc(sizeof(target));
             target->song_name = (wchar_t *)malloc(sizeof(buf));
             wcsncpy(target->song_name, buf, MAX_SONG_NAME);
 
@@ -254,7 +258,7 @@ int main()
         //scanf("%d", &search_Choose);
         wchar_t s[MAX_SONG_NAME + 1];
         wscanf(L"%ls", s);
-        item *target = (item *)malloc(sizeof(target));
+        song *target = (song *)malloc(sizeof(target));
         target->song_name = s;
         delete_name(&root, target, search_Choose);
         Inorder_traverse(root, 2);

@@ -67,6 +67,9 @@ abcd already exist
     * Change: Replace struct "item" to "song".
 * 0.1.5
     * Change: modify all .h file.
+* 0.1.6
+    * Change: Replace the variable "item" to "song".
+    * Change: Comment Out old function.
 ## target 每周目標
 
 ### 第二周

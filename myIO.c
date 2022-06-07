@@ -27,16 +27,16 @@ void read_wstring(wchar_t buffer[MAX_SONG_NAME + 1])
     }
     return;
 }
-void read_line(item *data)
-{
-    wchar_t c;
-    wchar_t buf[MAX_SONG_NAME + 1];
-    scanf(" %d ", &data->index);
-    read_song_name(buf);
-    data->song_name = (wchar_t *)malloc(sizeof(buf));
-    wcsncpy(data->song_name, buf, MAX_SONG_NAME);
-    return;
-}
+// void read_line(song *data)
+// {
+//     wchar_t c;
+//     wchar_t buf[MAX_SONG_NAME + 1];
+//     scanf(" %d ", &data->index);
+//     read_song_name(buf);
+//     data->song_name = (wchar_t *)malloc(sizeof(buf));
+//     wcsncpy(data->song_name, buf, MAX_SONG_NAME);
+//     return;
+// }
 void Preorder_traverse(node *root, int output_choose)
 {
     if (root == NULL)
@@ -45,13 +45,13 @@ void Preorder_traverse(node *root, int output_choose)
     }
     if (output_choose == 1)
     {
-        fprintf(outputSongFile, "%d ", root->data->index);
+        //fprintf(outputSongFile, "%d ", root->data->index);
         fprintf(outputSongFile, "%ls", root->data->song_name);
         fprintf(outputSongFile, "\n");
     }
     else if (output_choose == 2)
     {
-        printf("%d %ls\n", root->data->index, root->data->song_name);
+        //printf("%d %ls\n", root->data->index, root->data->song_name);
     }
     Preorder_traverse(root->left_child, output_choose);
     Preorder_traverse(root->right_child, output_choose);
@@ -66,14 +66,14 @@ void Inorder_traverse(node *root, int output_choose)
     if (output_choose == 1)
     {
         Inorder_traverse(root->left_child, output_choose);
-        fprintf(outputSongFile, "%d ", root->data->index);
+        //fprintf(outputSongFile, "%d ", root->data->index);
         fprintf(outputSongFile, "%ls", root->data->song_name);
         fprintf(outputSongFile, "\n");
     }
     else if (output_choose == 2)
     {
         Inorder_traverse(root->left_child, output_choose);
-        printf("%d %ls\n", root->data->index, root->data->song_name);
+        //printf("%d %ls\n", root->data->index, root->data->song_name);
     }
     Inorder_traverse(root->right_child, output_choose);
 }
@@ -88,7 +88,7 @@ void Postorder_traverse(node *root, int output_choose)
     {
         Postorder_traverse(root->left_child, output_choose);
         Postorder_traverse(root->right_child, output_choose);
-        fprintf(outputSongFile, "%d ", root->data->index);
+        //fprintf(outputSongFile, "%d ", root->data->index);
         fprintf(outputSongFile, "%ls", root->data->song_name);
         fprintf(outputSongFile, "\n");
     }
@@ -96,7 +96,7 @@ void Postorder_traverse(node *root, int output_choose)
     {
         Postorder_traverse(root->left_child, output_choose);
         Postorder_traverse(root->right_child, output_choose);
-        printf("%d %ls\n", root->data->index, root->data->song_name);
+        //printf("%d %ls\n", root->data->index, root->data->song_name);
     }
 }
 
@@ -126,7 +126,7 @@ void Postorder_traverse(node *root, int output_choose)
 //         if ((wcslen(buf) > 0) && (buf[wcslen(buf) - 1] == '\n'))
 //             buf[wcslen(buf) - 1] = '\0';
 
-//         item *song = (item *)malloc(sizeof(song));
+//         song *song = (song *)malloc(sizeof(song));
 //         tmp = wcstok(buf, ",");
 //         song->index = atoi(tmp);
 

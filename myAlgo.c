@@ -5,7 +5,7 @@
 #include "myDS.h"
 #include "myIO.h"
 
-node *search(node *root, item *target, int search_Choose)
+node *search(node *root, song *target, int search_Choose)
 {
     node *curr = root;
 
@@ -49,7 +49,7 @@ node *search_songlist(node *songlist_tree,wchar_t songlist_name[]){
         if not, return NULL.
     */ 
 }
-node *search_song(song *cur_songlist,wchar_t song_name[]){
+song *search_song(song *cur_songlist,wchar_t song_name[]){
     /* 
         search song_name in cur_songlist.
         if found, return the pointer of the song.
