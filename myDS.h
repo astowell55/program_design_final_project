@@ -2,27 +2,33 @@
 #define MYDS_H
 #define MAX_SONG_NAME 100
 #include <wchar.h>
-// the struct store all the infomation of song
-struct item
+// the struct store all the information of song.
+struct song
 {
-    int index;
     wchar_t *song_name;
     wchar_t *artist;
     int length;
+    struct song *parent;
+    struct song *left_child;
+    struct song *right_child;
 };
-typedef struct item item;
-// the node and the root of tree
+typedef struct song song;
+// the node and the root of songlist_tree
 struct node
 {
-    item *data;
+    song *data;
     struct node *parent;
     struct node *left_child;
     struct node *right_child;
-} * root;
+}*root;
 typedef struct node node;
 // compare input index and build the binary search tree
 void build_tree(node **root, item *data, node *cur, int *error);
+void build_song(node *cur_songlist,wchar_t song_name[]);
+void build_songlist(node *songlist_tree,wchar_t songlist_name[]);
 void delete_name(node **root, item *data, int search_Choose);
+void delete_song(node *cur_songlist,wchar_t song_name[]);
+void delete_songlist(node *songlist_tree,wchar_t songlist_name[]);
 #endif
 //
 //                       _oo0oo_
