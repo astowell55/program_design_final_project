@@ -42,3 +42,17 @@ node *search(node *root, item *target, int search_Choose)
         return curr;
     }
 }
+node search_songlist(node songlist_tree,wchar_t songlist_name[]){
+    /* 
+        search songlist_name in songlist_tree.
+        if found, return the pointer of sonlist_name.
+        if not, return NULL.
+    */ 
+}
+node search_song(node cur_songlist,wchar_t song_name){
+    /* 
+        search song_name in cur_songlist.
+        if found, return the pointer of the song.
+        if not, return NULL.
+    */ 
+}

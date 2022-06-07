@@ -34,6 +34,19 @@ void build_tree(node **root, item *data, node *cur, int *error)
         }
     }
 }
+void build_song(node *cur_songlist,wchar_t song_name[]){
+    /*
+        Add a song named song_name[] into cur_songlist.
+        Also store the artist and time.
+        if there's no tree, build one.
+    */
+}
+void build_songlist(node *songlist_tree,wchar_t songlist_name[]){
+    /*
+        Add a pointer of songlist named songlist_name[] into songlist_tree.
+        if there's no tree, build one.
+    */
+}
 
 void delete_name(node **root, item *data, int search_Choose)
 {
@@ -96,4 +109,17 @@ void delete_name(node **root, item *data, int search_Choose)
 
     free(y);
     return;
+}
+void delete_song(node *cur_songlist,wchar_t song_name[]){
+    /*
+        search song_name in cur_songlist. if found, free it. 
+    */
+}
+void delete_songlist(node *songlist_tree,wchar_t songlist_name[]){
+    /*
+        search songlist_name in songlist_tree. if found, free it and its all song.
+    */
+   if(/*found*/){
+       
+   }
 }

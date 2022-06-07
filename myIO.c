@@ -4,7 +4,7 @@
 #include "myDS.h"
 #include "myIO.h"
 static FILE *outputSongFile;
-void read_song_name(wchar_t buffer[MAX_SONG_NAME + 1])
+void read_wstring(wchar_t buffer[MAX_SONG_NAME + 1])
 {
     wchar_t c;
     int length = 0;
@@ -13,6 +13,8 @@ void read_song_name(wchar_t buffer[MAX_SONG_NAME + 1])
         if (length < MAX_SONG_NAME)
         {
             buffer[length++] = c;
+        }else{
+            break;
         }
     }
     buffer[length] = '\0';
@@ -155,4 +157,16 @@ int write_SongFile(node *root)
     Inorder_traverse(root, 1);
     fclose(outputSongFile);
     return 0;
+}
+
+void output_song(node *cur_songlist){
+    // output all song name,artist,time in cur_songlist
+    /*
+        Maybe :
+        Inorder_traverse(cur_songlist,2);
+        I guess...
+    */
+}
+void output_songlist(node *songlist_tree){
+    // output all songlist name in songlist_tree
 }

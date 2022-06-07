@@ -61,6 +61,8 @@ abcd already exist
     * Change: Add artist, length in struct item (index has not been deleted yet)
 * 0.1.2
     * Change: modify tree.c
+* 0.1.3
+    * Change: Add function name and comment, modify all .c file.
 ## target 每周目標
 
 ### 第二周
