@@ -107,7 +107,7 @@ void Postorder_traverse(node *root, int output_choose)
 //     wchar_t *buf = malloc(MAX_SONG_NAME + 10);
 //     wchar_t *tmp;
 
-//     /* if the space could not be allocaed, return an error */
+//     /* if the space could not be allocated, return an error */
 //     if (buf == NULL)
 //     {
 //         printf("No memory\n");
