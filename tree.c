@@ -24,7 +24,7 @@ void Choose_a_songlist(const song *cur_songlist){
             read_wstring(song_name);
             target_song = search_song(cur_songlist,song_name);
             if(target_song==NULL){
-                build_song(cur_songlist,song_name);
+                build_song(&cur_songlist,song_name,NULL);
                 printf("Add song : %s\n",song_name);
             }else{
                 printf("Invalid operation\n");
@@ -75,7 +75,7 @@ int main()
     int error = 0;
     printf("Welcome to use this project!\n");
     //- Preload songdata
-    //read_SongFile("songFile.csv");
+    read_SongFile("songFile.csv");
     //- Preload songdata end
     
     node *songlist_tree=NULL;//the root of songlist tree.
@@ -95,7 +95,7 @@ int main()
             //find
             target_songlist = search_songlist(songlist_tree,songlist_name);
             if(target_songlist==NULL){
-                build_songlist(songlist_tree,songlist_name);
+                build_songlist(&songlist_tree,songlist_name,NULL);
                 printf("Add songlist : %s\n",songlist_name);
             }else{
                 printf("Invalid operation\n");
