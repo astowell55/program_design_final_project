@@ -70,6 +70,8 @@ abcd already exist
 * 0.1.6
     * Change: Replace the variable "item" to "song".
     * Change: Comment Out old function.
+* 0.1.7
+    * Change: complete search_song and search_songlist in myalgo
 ## target 每周目標
 
 ### 第二周

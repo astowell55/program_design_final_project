@@ -42,17 +42,47 @@ node *search(node *root, song *target, int search_Choose)
         return curr;
     }
 }
-node *search_songlist(node *songlist_tree,wchar_t songlist_name[]){
-    /* 
+node *search_songlist(node *songlist_tree, wchar_t songlist_name[])
+{
+    /*
         search songlist_name in songlist_tree.
         if found, return the pointer of sonlist_name.
         if not, return NULL.
-    */ 
+    */
+    node *curr = songlist_tree;
+    while (curr != NULL && wcscmp(songlist_name, curr->songlist_name) != 0)
+    {
+
+        if (wcscmp(songlist_name, curr->songlist_name) > 0)
+        {
+            curr = curr->left_child;
+        }
+        else
+        {
+            curr = curr->right_child;
+        }
+    }
+    return curr;
 }
-song *search_song(song *cur_songlist,wchar_t song_name[]){
-    /* 
+song *search_song(song *cur_songlist, wchar_t song_name[])
+{
+    /*
         search song_name in cur_songlist.
         if found, return the pointer of the song.
         if not, return NULL.
-    */ 
+    */
+    song *curr = cur_songlist;
+    while (curr != NULL && wcscmp(song_name, curr->song_name) != 0)
+    {
+
+        if (wcscmp(song_name, curr->song_name) > 0)
+        {
+            curr = curr->left_child;
+        }
+        else
+        {
+            curr = curr->right_child;
+        }
+    }
+    return curr;
 }
