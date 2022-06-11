@@ -77,6 +77,7 @@ abcd already exist
     * Change: add delete_all_song function in myDS.c.
 * 0.1.9
     * Change: complete build_songlist, half complete build_song in myDS.c
+    * Change: Update FILE I/O
 ## target 每周目標
 
 ### 第二周
