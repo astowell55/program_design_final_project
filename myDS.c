@@ -40,10 +40,10 @@ void build_song(song **cur_songlist,wchar_t song_name[],song *par){
         Also store the artist and time.
         if there's no tree, build one.
     */
-   
+
     if ((*cur_songlist) == NULL)
     {
-        song *target = search_song(*cur_songlist,song_name); 
+        song *target = search_song(*cur_songlist,song_name); //still wrong, it should be search_song(song_data,song_name);
         song *new_node = (song *)malloc(sizeof(song));
         wcscpy(new_node->song_name,song_name);
         wcscpy(new_node->artist,target->artist);
