@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>
 #include "myDS.h"
 #include "myIO.h"
 #include "myAlgo.h"
@@ -35,7 +36,7 @@ void Choose_a_songlist(const song *cur_songlist){
             read_wstring(song_name);
             target_song = search_song(cur_songlist,song_name);
             if(target_song!=NULL){
-                delete_song(cur_songlist,song_name);
+                delete_song(&cur_songlist,song_name);
                 printf("Delete song : %s\n",song_name);
             }else{
                 printf("Invalid operation\n");
@@ -73,9 +74,10 @@ int main()
     int data_num, input_Choose, output_Choose, search_Choose;
     
     int error = 0;
+    //setlocale(LC_ALL,"");
     printf("Welcome to use this project!\n");
     //- Preload songdata
-    read_SongFile("songFile.csv");
+    //read_SongFile("songFile.csv");
     //- Preload songdata end
     
     node *songlist_tree=NULL;//the root of songlist tree.
@@ -84,46 +86,47 @@ int main()
     printf("[a]Add a songlist\n[d]Delete a songlist\n" \
     "[c]Choose a songlist\n[o]Output all songlists\n[i]import a .csv songlist\nEnter your operater:\n");
     char operater;
-    wchar_t songlist_name[MAX_SONG_NAME+1];
+    wchar_t *songlist_name;
+
     //Operate
-    while(scanf("%c",&operater)!=EOF){
+    while(scanf(" %c\n",&operater)!=EOF){
         switch (operater)
         {
         case 'a':
             //Build or Add songlist into tree.
-            read_wstring(songlist_name);
+            songlist_name = read_wstring();
             //find
             target_songlist = search_songlist(songlist_tree,songlist_name);
             if(target_songlist==NULL){
                 build_songlist(&songlist_tree,songlist_name,NULL);
                 printf("Add songlist : %s\n",songlist_name);
             }else{
-                printf("Invalid operation\n");
+                printf("Invalid operation: EXIST SONGLIST\n");
             }
             break;
         case 'd':
             //Delete target songlist.
-            read_wstring(songlist_name);
+            songlist_name = read_wstring();
             //find
             target_songlist = search_songlist(songlist_tree,songlist_name);
             if(target_songlist!=NULL){
-                delete_songlist(target_songlist,songlist_name);
+                delete_songlist(&target_songlist,songlist_name);
                 printf("Delete songlist : %s\n",songlist_name);
             }else{
-                printf("Invalid operation\n");
+                printf("Invalid operation: NULL SONGLIST\n");
             }
             break;
         case 'c':
             //Enter the target songlist, going to another UI.
             
-            //read_wstring(songlist_name);
+            songlist_name = read_wstring();
             //find
             target_songlist = search_songlist(songlist_tree,songlist_name);
-            if(target_songlist==NULL){
+            if(target_songlist!=NULL){
                 Choose_a_songlist(target_songlist);
                 printf("Choose songlist : %s\n",songlist_name);
             }else{
-                printf("Invalid operation\n");
+                printf("Invalid operation: NULL SONGLIST\n");
             }
             
             break;

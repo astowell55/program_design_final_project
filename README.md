@@ -78,6 +78,10 @@ abcd already exist
 * 0.1.9
     * Change: complete build_songlist, half complete build_song in myDS.c
     * Change: Update FILE I/O
+* 0.1.10
+    * Change: modify delete_song and delete_songlist.
+    * Change: modify read_wstring.
+    * Change: modify tree.c .
 ## target 每周目標
 
 ### 第二周
