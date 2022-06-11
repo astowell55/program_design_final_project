@@ -7,7 +7,7 @@ struct song
 {
     wchar_t *song_name;
     wchar_t *artist;
-    int length;
+    wchar_t *length;
     struct song *parent;
     struct song *left_child;
     struct song *right_child;
