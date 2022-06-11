@@ -110,14 +110,149 @@ void build_songlist(node *songlist_tree,wchar_t songlist_name[]){
 //     free(y);
 //     return;
 // }
+static void delete_all_song(song *songlist_root){
+    /*
+        using recursive to free all song of a songlist.
+    */
+    if(songlist_root==NULL) return;
+    if(songlist_root->left_child!=NULL) delete_all_song(songlist_root->left_child);
+    if(songlist_root->right_child!=NULL) delete_all_song(songlist_root->right_child);
+    free(songlist_root);
+    return;
+}
 void delete_song(song *cur_songlist,wchar_t song_name[]){
     /*
-        search song_name in cur_songlist. if found, free it. 
+        search song_name in cur_songlist. 
+        if found, free it.
+        if not found, print error and return. 
     */
+   song *target = search_song(cur_songlist,song_name);
+   if (target == NULL)
+    {
+        printf("'%ls' not found.\n", song_name);
+    }
+    song *y;
+    song *x;
+
+    if (target->left_child == NULL && target->right_child == NULL)
+    {
+        y = target;
+    }
+    else
+    {
+        if (target->right_child != NULL)
+        {
+            y = target->right_child;
+        }
+        else
+        {
+            y = target->left_child;
+        }
+    }
+
+    if (y->left_child != NULL)
+    {
+        x = y->left_child;
+    }
+    else
+    {
+        x = y->right_child;
+    }
+
+    if (x != NULL)
+    {
+        x->parent = y->parent;
+    }
+
+    if (y->parent == NULL)
+    {
+        cur_songlist = x;
+    }
+    else if (y == y->parent->left_child)
+    {
+        y->parent->left_child = x;
+    }
+    else
+    {
+        y->parent->right_child = x;
+    }
+
+    if (y != target)
+    {
+        target->artist = y->artist;
+        target->song_name = y->song_name;
+        target->length = y->length;
+    }
+
+    free(y);
+    return;
+    
 }
 void delete_songlist(node *songlist_tree,wchar_t songlist_name[]){
     /*
-        search songlist_name in songlist_tree. if found, free it and its all song.
+        search songlist_name in songlist_tree. 
+        if found, free it and its all song.
+        if not found, print error and return.
     */
-   
+    node *target = search_songlist(songlist_tree,songlist_name);
+    if (target == NULL)
+    {
+        printf("'%ls' not found.\n", songlist_name);
+        return;
+    }
+    node *y;
+    node *x;
+
+    if (target->left_child == NULL && target->right_child == NULL)
+    {
+        y = target;
+    }
+    else
+    {
+        if (target->right_child != NULL)
+        {
+            y = target->right_child;
+        }
+        else
+        {
+            y = target->left_child;
+        }
+    }
+
+    if (y->left_child != NULL)
+    {
+        x = y->left_child;
+    }
+    else
+    {
+        x = y->right_child;
+    }
+
+    if (x != NULL)
+    {
+        x->parent = y->parent;
+    }
+
+    if (y->parent == NULL)
+    {
+        songlist_tree = x;
+    }
+    else if (y == y->parent->left_child)
+    {
+        y->parent->left_child = x;
+    }
+    else
+    {
+        y->parent->right_child = x;
+    }
+
+    if (y != target)
+    {
+        target->data = y->data;
+        target->songlist_name = y->songlist_name;
+    }
+    
+    delete_all_song(y->data);
+    free(y);
+    return;
 }
