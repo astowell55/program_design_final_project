@@ -46,7 +46,7 @@ node *search_songlist(node *songlist_tree, wchar_t songlist_name[])
 {
     /*
         search songlist_name in songlist_tree.
-        if found, return the pointer of sonlist_name.
+        if found, return the pointer of songlist_name.
         if not, return NULL.
     */
     node *curr = songlist_tree;

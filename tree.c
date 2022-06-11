@@ -91,6 +91,7 @@ int main()
         {
         case 'a':
             //Build or Add songlist into tree.
+            printf("here!\n");
             read_wstring(songlist_name);
             //find
             target_songlist = search_songlist(songlist_tree,songlist_name);
