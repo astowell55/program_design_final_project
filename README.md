@@ -72,6 +72,9 @@ abcd already exist
     * Change: Comment Out old function.
 * 0.1.7
     * Change: complete search_song and search_songlist in myalgo
+* 0.1.8
+    * Change: complete delete_song and delete_songlist.
+    * Change: add delete_all_song function in myDS.c.
 ## target 每周目標
 
 ### 第二周
