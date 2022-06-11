@@ -60,11 +60,11 @@ void Choose_a_songlist(const song *cur_songlist){
             break;
         default:
             printf("Invalid operation\n");
-            printf("[a]Add a song\n[d]Delete a song\n" \
-        "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \ 
-        "[<]Back to main page\nEnter your operater:\n");
             break;
         }
+        printf("[a]Add a song\n[d]Delete a song\n" \
+    "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \ 
+    "[<]Back to main page\nEnter your operater:\n");
     }
 }
 
@@ -139,11 +139,11 @@ int main()
             break;
         default:
             printf("Invalid operater\n");
-            printf("[a]Add a songlist\n[d]Delete a songlist\n[c]Choose a songlist\n" \
-    "[o]Output all songlists\n[i]import a .csv songlist\nEnter your operater:\n");
+            
             break;
         }
-
+        printf("[a]Add a songlist\n[d]Delete a songlist\n[c]Choose a songlist\n" \
+    "[o]Output all songlists\n[i]import a .csv songlist\nEnter your operater:\n");
     }
     return 0;
     /* -----OLD DATA------
