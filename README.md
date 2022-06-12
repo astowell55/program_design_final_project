@@ -53,6 +53,35 @@ abcd already exist
     * Change: Put traversal functions and search funtion into tree.c
 * 0.0.9
     * Change: Update delete_name function(there are some overused malloc() and didn't free() it. wtf= =)
+* 0.1.0
+    * Change: Update W_char.
+* 0.1.1
+    * Change: Add search_Choose for search by artist or title 
+              (idk whether this version lost Chinese output in Unix and sorry for not freeing malloc, my bad. J)
+    * Change: Add artist, length in struct item (index has not been deleted yet)
+* 0.1.2
+    * Change: modify tree.c
+* 0.1.3
+    * Change: Add function name and comment, modify all .c file.
+* 0.1.4
+    * Change: Replace struct "item" to "song".
+* 0.1.5
+    * Change: modify all .h file.
+* 0.1.6
+    * Change: Replace the variable "item" to "song".
+    * Change: Comment Out old function.
+* 0.1.7
+    * Change: complete search_song and search_songlist in myalgo
+* 0.1.8
+    * Change: complete delete_song and delete_songlist.
+    * Change: add delete_all_song function in myDS.c.
+* 0.1.9
+    * Change: complete build_songlist, half complete build_song in myDS.c
+    * Change: Update FILE I/O
+* 0.1.10
+    * Change: modify delete_song and delete_songlist.
+    * Change: modify read_wstring.
+    * Change: modify tree.c .
 ## target 每周目標
 
 ### 第二周

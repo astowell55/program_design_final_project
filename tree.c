@@ -1,19 +1,158 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>
 #include "myDS.h"
 #include "myIO.h"
 #include "myAlgo.h"
 
+void Choose_a_songlist(const song *cur_songlist){
+    /*
+        In a songlist,it is the UI.
+    */
+    //Operate
+    wchar_t song_name[MAX_SONG_NAME+1];
+    song *target_song = NULL;
+    printf("[a]Add a song\n[d]Delete a song\n" \
+    "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \ 
+    "[<]Back to main page\nEnter your operater:\n");
+    char operater;
+    while(scanf("%c",&operater)!=EOF){
+        switch (operater)
+        {
+        case 'a':
+            //Add song.
+            read_wstring(song_name);
+            target_song = search_song(cur_songlist,song_name);
+            if(target_song==NULL){
+                build_song(&cur_songlist,song_name,NULL);
+                printf("Add song : %s\n",song_name);
+            }else{
+                printf("Invalid operation\n");
+            }
+            break;
+        case 'd':
+            //Delete song.
+            read_wstring(song_name);
+            target_song = search_song(cur_songlist,song_name);
+            if(target_song!=NULL){
+                delete_song(&cur_songlist,song_name);
+                printf("Delete song : %s\n",song_name);
+            }else{
+                printf("Invalid operation\n");
+            }
+            break;
+        case 'o':
+            //Output all song in this list.
+            output_song(cur_songlist);
+            break;
+        case 'e':
+            //Export this songlist as .csv
+            Export_songlist(cur_songlist);
+            break;
+        // case 's':
+        //     //Sort and output all song(?)
+        //     break;
+        // case 'r':
+        //     //Random all song(?)
+        //     break;
+        case '<':
+            return;//Back
+            break;
+        default:
+            printf("Invalid operation\n");
+            break;
+        }
+        printf("[a]Add a song\n[d]Delete a song\n" \
+    "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \ 
+    "[<]Back to main page\nEnter your operater:\n");
+    }
+}
+
 int main()
 {
-    int data_num, input_Choose, output_Choose;
+    int data_num, input_Choose, output_Choose, search_Choose;
+    
     int error = 0;
-    printf("[1] Input a csv file. [2] Input the data on terminal. :");
+    //setlocale(LC_ALL,"");
+    printf("Welcome to use this project!\n");
+    //- Preload songdata
+    //read_SongFile("songFile.csv");
+    //- Preload songdata end
+    
+    node *songlist_tree=NULL;//the root of songlist tree.
+    song *target_songlist=NULL;//point to the songlist.
+    //select oprerater
+    printf("[a]Add a songlist\n[d]Delete a songlist\n" \
+    "[c]Choose a songlist\n[o]Output all songlists\n[i]import a .csv songlist\nEnter your operater:\n");
+    char operater;
+    wchar_t *songlist_name;
+
+    //Operate
+    while(scanf(" %c\n",&operater)!=EOF){
+        switch (operater)
+        {
+        case 'a':
+            //Build or Add songlist into tree.
+            songlist_name = read_wstring();
+            //find
+            target_songlist = search_songlist(songlist_tree,songlist_name);
+            if(target_songlist==NULL){
+                build_songlist(&songlist_tree,songlist_name,NULL);
+                printf("Add songlist : %s\n",songlist_name);
+            }else{
+                printf("Invalid operation: EXIST SONGLIST\n");
+            }
+            break;
+        case 'd':
+            //Delete target songlist.
+            songlist_name = read_wstring();
+            //find
+            target_songlist = search_songlist(songlist_tree,songlist_name);
+            if(target_songlist!=NULL){
+                delete_songlist(&target_songlist,songlist_name);
+                printf("Delete songlist : %s\n",songlist_name);
+            }else{
+                printf("Invalid operation: NULL SONGLIST\n");
+            }
+            break;
+        case 'c':
+            //Enter the target songlist, going to another UI.
+            
+            songlist_name = read_wstring();
+            //find
+            target_songlist = search_songlist(songlist_tree,songlist_name);
+            if(target_songlist!=NULL){
+                Choose_a_songlist(target_songlist);
+                printf("Choose songlist : %s\n",songlist_name);
+            }else{
+                printf("Invalid operation: NULL SONGLIST\n");
+            }
+            
+            break;
+        case 'o':
+            //Output all songlist name.
+            output_songlist(songlist_tree);
+            break;
+        case 'i':
+            //Import a songlist.
+            read_wstring(songlist_name);
+            Import_songlist(songlist_tree,songlist_name);
+            break;
+        default:
+            printf("Invalid operater\n");
+            
+            break;
+        }
+        printf("[a]Add a songlist\n[d]Delete a songlist\n[c]Choose a songlist\n" \
+    "[o]Output all songlists\n[i]import a .csv songlist\nEnter your operater:\n");
+    }
+    return 0;
+    /* -----OLD DATA------
     scanf("%d", &input_Choose);
     if (input_Choose == 1)
     {
-        read_SongFile();
+        // read_SongFile();
     }
     else if (input_Choose == 2)
     {
@@ -21,7 +160,7 @@ int main()
         while (data_num--)
         {
 
-            item *temp = (item *)malloc(sizeof(temp));
+            song *temp = (song *)malloc(sizeof(temp));
             read_line(temp);
             build_tree(&root, temp, root, &error);
             if (error)
@@ -38,7 +177,7 @@ int main()
     scanf("%d", &output_Choose);
     if (output_Choose == 1)
     {
-        write_SongFile(root);
+        // write_SongFile(root);
     }
     else if (output_Choose == 2)
     {
@@ -65,34 +204,66 @@ int main()
     }
     else if (output_Choose == 3)
     {
-        getchar();
-        printf("Enter songname:");
-        char buf[MAX_SONG_NAME + 1];
-        read_song_name(buf);
-        item *target = (item *)malloc(sizeof(target));
-        target->song_name = (char *)malloc(sizeof(buf));
-        strncpy(target->song_name, buf, MAX_SONG_NAME);
-
-        node *result = (node *)malloc(sizeof(result));
-        result = search(root, target);
-
-        if (result != NULL)
+        printf("[1] Search by artist [2] Search by title :");
+        scanf("%d", &search_Choose);
+        if (search_Choose == 1)
         {
-            printf("%d %s\n", result->data->index, result->data->song_name);
+            getchar();
+            printf("Enter the artist:");
+            wchar_t buf[MAX_SONG_NAME + 1];
+            read_song_name(buf);
+            song *target = (song *)malloc(sizeof(target));
+            target->artist = (wchar_t *)malloc(sizeof(buf));
+            wcsncpy(target->artist, buf, MAX_SONG_NAME);
+
+            node *result = (node *)malloc(sizeof(result));
+            result = search(root, target, 1);
+
+            if (result != NULL)
+            {
+                printf("%ls %ls\n", result->data->song_name, result->data->artist);
+            }
+            else
+            {
+                printf("No result\n");
+            }
+            free(target);
+            free(result);
         }
-        else
+        else if (search_Choose == 2)
         {
-            printf("No result\n");
+            getchar();
+            printf("Enter the title:");
+            wchar_t buf[MAX_SONG_NAME + 1];
+            read_song_name(buf);
+            song *target = (song *)malloc(sizeof(target));
+            target->song_name = (wchar_t *)malloc(sizeof(buf));
+            wcsncpy(target->song_name, buf, MAX_SONG_NAME);
+
+            node *result = (node *)malloc(sizeof(result));
+            result = search(root, target, 2);
+
+            if (result != NULL)
+            {
+                printf("%ls %ls\n", result->data->song_name, result->data->artist);
+            }
+            else
+            {
+                printf("No result\n");
+            }
+            free(target);
+            free(result);
         }
-        free(target);
-        free(result);
     }
-    else if(output_Choose == 4){
-        char s[MAX_SONG_NAME+1];
-        scanf("%s",s);
-        item *target = (item *)malloc(sizeof(target));
+    else if (output_Choose == 4)
+    {
+        //printf("[1] Delete by artist [2] Delete by title :");
+        //scanf("%d", &search_Choose);
+        wchar_t s[MAX_SONG_NAME + 1];
+        wscanf(L"%ls", s);
+        song *target = (song *)malloc(sizeof(target));
         target->song_name = s;
-        delete_name(root,target);
+        delete_name(&root, target, search_Choose);
         Inorder_traverse(root, 2);
         free(target);
     }
@@ -100,4 +271,5 @@ int main()
     {
         return 0;
     }
+    */
 }
