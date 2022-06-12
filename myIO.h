@@ -17,5 +17,5 @@ void output_songlist(node *songlist_tree);
 void Export_songlist(song *cur_songlist);
 void Import_songlist(node *songlist_tree,wchar_t songlist_name[]);
 void read_song_name(wchar_t *buffer);
-void read_wstring(wchar_t buffer[MAX_SONG_NAME + 1]);
+wchar_t *read_wstring();
 #endif
