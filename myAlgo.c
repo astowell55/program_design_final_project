@@ -52,7 +52,7 @@ node *search_songlist(node *songlist_tree, wchar_t songlist_name[])
     node *curr = songlist_tree;
     while (curr != NULL && wcscmp(songlist_name, curr->songlist_name) != 0)
     {
-
+        //printf("while: _%p_\n",curr);
         if (wcscmp(songlist_name, curr->songlist_name) > 0)
         {
             curr = curr->left_child;
@@ -74,7 +74,7 @@ song *search_song(song *cur_songlist, wchar_t song_name[])
     song *curr = cur_songlist;
     while (curr != NULL && wcscmp(song_name, curr->song_name) != 0)
     {
-
+        //printf("while: _%p_\n",curr);
         if (wcscmp(song_name, curr->song_name) > 0)
         {
             curr = curr->left_child;

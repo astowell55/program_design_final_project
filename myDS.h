@@ -2,12 +2,21 @@
 #define MYDS_H
 #define MAX_SONG_NAME 100
 #include <wchar.h>
+#include <time.h>
+struct systime{
+    int month;
+    int day;
+    int hour;
+    int minute;
+};
+typedef struct systime systime;
 // the struct store all the information of song.
 struct song
 {
-    wchar_t *song_name;
-    wchar_t *artist;
-    wchar_t *length;
+    wchar_t song_name[MAX_SONG_NAME+1];
+    wchar_t artist[MAX_SONG_NAME+1];
+    wchar_t length[8];
+    systime times;
     struct song *parent;
     struct song *left_child;
     struct song *right_child;
@@ -19,7 +28,7 @@ typedef struct song song;
 struct node
 {
     song *data;
-    wchar_t *songlist_name;
+    wchar_t songlist_name[MAX_SONG_NAME+1];
     struct node *parent;
     struct node *left_child;
     struct node *right_child;
@@ -27,8 +36,8 @@ struct node
 typedef struct node node;
 // compare input index and build the binary search tree
 void build_tree(node **root, song *data, node *cur, int *error);
-void build_song(song **cur_songlist,wchar_t song_name[],song *par);
-void build_songlist(node **songlist_tree,wchar_t songlist_name[],node *par);
+void build_song(song **cur_songlist,wchar_t song_name[]);
+void build_songlist(node **songlist_tree,wchar_t *target);
 void delete_name(node **root, song *data, int search_Choose);
 void delete_song(song **cur_songlist,wchar_t song_name[]);
 void delete_songlist(node **songlist_tree,wchar_t songlist_name[]);
