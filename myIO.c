@@ -140,7 +140,7 @@ void read_SongFile(char *FileName)
         tmp = wcstok(NULL, delim, &ptr);
         song->artist = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
         wcscpy(song->artist, tmp);
-
+        
         tmp = wcstok(NULL, delim, &ptr);
         song->length = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
         wcscpy(song->length, tmp);
