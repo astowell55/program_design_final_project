@@ -133,7 +133,7 @@ void read_SongFile(char *FileName)
     {
         if ((wcslen(buf) > 0) && (buf[wcslen(buf) - 1] == '\n'))
             buf[wcslen(buf) - 1] = '\0';
-        song *song = malloc(sizeof(song));
+        song *songs = malloc(sizeof(song));
         wchar_t *ptr;
 
         // Define the delimeter of the string
@@ -141,18 +141,17 @@ void read_SongFile(char *FileName)
 
         // Call the wcstok() method
         wchar_t *tmp = wcstok(buf, delim, &ptr);
-        song->song_name = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
-        wcscpy(song->song_name, tmp);
+        songs->song_name = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
+        wcscpy(songs->song_name, tmp);
 
         tmp = wcstok(NULL, delim, &ptr);
-        song->artist = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
-        wcscpy(song->artist, tmp);
+        songs->artist = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
+        wcscpy(songs->artist, tmp);
 
         tmp = wcstok(NULL, delim, &ptr);
-        song->length = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
-        wcscpy(song->length, tmp);
-        int error = 0;
-        build_tree(&root, song, root, &error);
+        songs->length = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
+        wcscpy(songs->length, tmp);
+        build_song_data(&song_data,songs);
     }
     fclose(songFile);
     return;

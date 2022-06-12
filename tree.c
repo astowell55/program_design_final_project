@@ -26,6 +26,7 @@ void Choose_a_songlist(song **cur_songlist){
             printf("read: _%ls_\n",song_name);
             target_song = search_song(*cur_songlist,song_name);
             printf("point:_%p_\n",target_song);
+            
             if(target_song==NULL){
                 build_song(cur_songlist,song_name);
                 printf("Add song : %ls\n",song_name);
@@ -82,7 +83,7 @@ int main()
     //setlocale(LC_ALL,"");
     printf("Welcome to use this project!\n");
     //- Preload songdata
-    //read_SongFile("songFile.csv");
+    read_SongFile("info.csv");
     //- Preload songdata end
     
     node *songlist_tree=NULL;//the root of songlist tree.

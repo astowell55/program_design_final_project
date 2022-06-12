@@ -13,14 +13,15 @@ typedef struct systime systime;
 // the struct store all the information of song.
 struct song
 {
-    wchar_t song_name[MAX_SONG_NAME+1];
-    wchar_t artist[MAX_SONG_NAME+1];
-    wchar_t length[8];
+    wchar_t *song_name;
+    wchar_t *artist;
+    float length;
+    long long like;
     systime times;
     struct song *parent;
     struct song *left_child;
     struct song *right_child;
-};
+}*song_data;
 
 typedef struct song song;
 
@@ -38,6 +39,7 @@ typedef struct node node;
 void build_tree(node **root, song *data, node *cur, int *error);
 void build_song(song **cur_songlist,wchar_t song_name[]);
 void build_songlist(node **songlist_tree,wchar_t *target);
+void build_song_data(song **song_data,song *songs);
 void delete_name(node **root, song *data, int search_Choose);
 void delete_song(song **cur_songlist,wchar_t song_name[]);
 void delete_songlist(node **songlist_tree,wchar_t songlist_name[]);

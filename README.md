@@ -82,6 +82,10 @@ abcd already exist
     * Change: modify delete_song and delete_songlist.
     * Change: modify read_wstring.
     * Change: modify tree.c .
+* 0.2.0
+    * Change: a lot.
+* 0.2.1
+    * Change: modify data_type.
 ## target 每周目標
 
 ### 第二周

@@ -43,14 +43,14 @@ void build_song(song **cur_songlist,wchar_t *target){
     song *par=NULL;
     song *cur=NULL;
     song *build_node = malloc(sizeof(song));
-    
-    //(build_node->times).month 
-    wcscpy(build_node->song_name,target);
+    build_node->song_name = target;
+    //wcscpy(build_node->song_name,target);
     /*
         song *target = search_song(song_data,song_name);
         wcscpy(build_node->artist ,target->artist);
         wcscpy(build_node->length ,target->length);
     */
+
     cur = *cur_songlist;
     while(cur!=NULL){
         par = cur;
@@ -171,6 +171,29 @@ void build_songlist(node **songlist_tree,wchar_t *target){
     //         return;
     //     }
     // }
+}
+void build_song_data(song **song_data,song *songs){
+    song *par=NULL;
+    song *cur=NULL;
+
+    cur = *song_data;
+    while(cur!=NULL){
+        par = cur;
+        if(wcscmp(((*song_data)->song_name), (songs->song_name)) > 0){
+            cur = cur->right_child;
+        }else{
+            cur = cur->left_child;
+        }
+    }
+
+    songs->parent = par;
+    if(par==NULL){
+        *song_data = songs;
+    }else if(wcscmp(((*song_data)->song_name), (songs->song_name)) > 0){
+        par->right_child = songs;
+    }else{
+        par->left_child = songs;
+    }
 }
 // void delete_name(node **root, song *data, int search_Choose)
 // {
