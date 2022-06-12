@@ -106,37 +106,51 @@ void Postorder_traverse(node *root, int output_choose)
     }
 }
 
-int read_SongFile()
+void read_SongFile(char *FileName)
 {
     FILE *songFile;
 
     /* allocation of the buffer for every line in the File */
 
     wchar_t *buf = malloc(MAX_SONG_NAME + 10);
-    wchar_t *tmp;
 
     /* if the space could not be allocated, return an error */
     if (buf == NULL)
     {
         printf("No memory\n");
-        return 1;
+        return;
     }
 
-    if ((songFile = fopen("songFile.csv", "r")) == NULL) // Reading a file
+    if ((songFile = fopen(FileName, "r")) == NULL) // Reading a file
     {
         printf("File could not be opened.\n");
     }
 
-    tmp = wcstok(NULL, delim, &ptr);
-    song->artist = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
-    wcscpy(song->artist, tmp);
+    while (fgetws(buf, 255, songFile) != NULL)
+    {
+        if ((wcslen(buf) > 0) && (buf[wcslen(buf) - 1] == '\n'))
+            buf[wcslen(buf) - 1] = '\0';
+        song *song = malloc(sizeof(song));
+        wchar_t *ptr;
 
-    tmp = wcstok(NULL, delim, &ptr);
-    song->length = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
-    wcscpy(song->length, tmp);
-    int error = 0;
-    build_tree(&root, song, root, &error);
+        // Define the delimeter of the string
+        wchar_t delim[] = L",";
 
+        // Call the wcstok() method
+        wchar_t *tmp = wcstok(buf, delim, &ptr);
+        song->song_name = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
+        wcscpy(song->song_name, tmp);
+
+        tmp = wcstok(NULL, delim, &ptr);
+        song->artist = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
+        wcscpy(song->artist, tmp);
+
+        tmp = wcstok(NULL, delim, &ptr);
+        song->length = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
+        wcscpy(song->length, tmp);
+        int error = 0;
+        build_tree(&root, song, root, &error);
+    }
     fclose(songFile);
     return;
 }
@@ -146,11 +160,11 @@ void write_SongFile(node *root)
     outputSongFile = fopen("output.csv", "w");
     if (root == NULL)
     {
-        return 0;
+        return;
     }
     Inorder_traverse(root, 1);
     fclose(outputSongFile);
-    return 0;
+    return;
 }
 
 void output_song(song *cur_songlist)
