@@ -1,6 +1,5 @@
 {
     "files.associations": {
-        "*.rmd": "markdown",
-        "myalgo.h": "c"
+        "wchar.h": "c"
     }
 }

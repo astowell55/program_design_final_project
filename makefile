@@ -1,7 +1,7 @@
-tree: tree.o myDS.o myIO.o myAlgo.o
-	gcc -o tree tree.o myDS.o  myIO.o myAlgo.o
+tree: tree.o myDS.o myIO.o myAlgo.o myUI.o
+	gcc -o tree tree.o myDS.o  myIO.o myAlgo.o myUI.o
 
-tree.o: tree.c myIO.h myDS.h myAlgo.h 
+tree.o: tree.c myIO.h myDS.h myAlgo.h myUI.h
 	gcc -c tree.c
 
 myIO.o: myIO.c myIO.h myDS.h	
@@ -12,6 +12,9 @@ myDS.o: myDS.c myDS.h
 
 myAlgo.o: myAlgo.c myAlgo.h
 	gcc -c myAlgo.c
+
+myUI.o: myUI.c myUI.h
+	gcc -c myUI.c
 	
 clean:
 	rm *.o

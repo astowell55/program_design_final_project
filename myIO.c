@@ -21,6 +21,7 @@ wchar_t *read_wstring()
         }
     }
     buffer[length] = '\0';
+    
     // if(printf("read_wstring: -%ls-\n", buffer)<0){
     //     perror("printf");
     // }
@@ -31,7 +32,9 @@ wchar_t *read_wstring()
         buffer[length - 2] = '.';
         buffer[length - 3] = '.';
     }
-    return buffer;
+    wchar_t *result = malloc(length*sizeof(wchar_t));
+    wcscpy(result,buffer);
+    return result;
 }
 // void read_line(song *data)
 // {
