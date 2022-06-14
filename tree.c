@@ -7,14 +7,12 @@
 #include "myAlgo.h"
 #include "myUI.h"
 void Choose_a_songlist(song **cur_songlist){
-    /*
-        In a songlist,it is the UI.
-    */
+
     //Operate
     wchar_t *song_name;
     song *target_song = NULL;
     printf("[a]Add a song\n[d]Delete a song\n" \
-    "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \ 
+    "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \
     "[<]Back to main page\nEnter your operater:\n");
     char operater;
     while(scanf(" %c\n",&operater)!=EOF){
@@ -24,8 +22,7 @@ void Choose_a_songlist(song **cur_songlist){
             //Add song.
             song_name = read_wstring();
             printf("read: _%ls_\n",song_name);
-            //traverse(cur_songlist,1);
-            target_song = search_song((*cur_songlist),song_name);
+            target_song = search_song(*cur_songlist,song_name);
             printf("point:_%p_\n",target_song);
             
             if(target_song==NULL){
@@ -71,13 +68,12 @@ void Choose_a_songlist(song **cur_songlist){
             break;
         }
         printf("[a]Add a song\n[d]Delete a song\n" \
-    "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \ 
+    "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \
     "[<]Back to main page\nEnter your operater:\n");
     }
 }
 
-int main()
-{
+int main(){
     int data_num, input_Choose, output_Choose, search_Choose;
     
     int error = 0;
@@ -104,7 +100,6 @@ int main()
             //scanf("%ls",songlist_name);
             songlist_name = read_wstring();
             printf("name:_%ls_\n",songlist_name);
-            //traverse(*songlist_name,1);
             //find
             target_songlist = search_songlist(songlist_tree,songlist_name);
             printf("point:_%p_\n",target_songlist);
@@ -146,7 +141,7 @@ int main()
             }
             free(songlist_name);
             break;
-        case 'o':               
+        case 'o':
             //Output all songlist name.
             output_songlist(songlist_tree);
             break;

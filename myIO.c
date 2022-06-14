@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <wchar.h>
 #include "myDS.h"
 #include "myIO.h"
 static FILE *outputSongFile;
@@ -86,26 +87,7 @@ void Inorder_traverse(node *root, int output_choose)
     }
     Inorder_traverse(root->right_child, output_choose);
 }
-void traverse(song *root, int output_choose)
-{
-    if (root == NULL)
-    {
-        return;
-    }
-    if (output_choose == 1)
-    {
-        Inorder_traverse(root->left_child, output_choose);
-        // fprintf(outputSongFile, "%d ", root->data->index);
-        fprintf(outputSongFile, "%ls", root->song_name);
-        fprintf(outputSongFile, "\n");
-    }
-    else if (output_choose == 2)
-    {
-        Inorder_traverse(root->left_child, output_choose);
-        // printf("%d %ls\n", root->data->index, root->data->song_name);
-    }
-    Inorder_traverse(root->right_child, output_choose);
-}
+
 void Postorder_traverse(node *root, int output_choose)
 {
     if (root == NULL)
@@ -126,6 +108,25 @@ void Postorder_traverse(node *root, int output_choose)
         Postorder_traverse(root->right_child, output_choose);
         // printf("%d %ls\n", root->data->index, root->data->song_name);
     }
+}
+
+void Inorder_traverse_song(song *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    if (output_choose == 1)
+    {
+        Inorder_traverse_song(root->left_child);
+        fprintf(outputSongFile, "%ls", root->song_name);
+        fprintf(outputSongFile, "\n");
+    }
+    else if (output_choose == 2)
+    {
+        Inorder_traverse_song(root->left_child);
+    }
+    Inorder_traverse_song(root->right_child);
 }
 
 void read_SongFile()
@@ -241,5 +242,4 @@ void Import_songlist(node *songlist_tree, wchar_t songlist_name[])
         Import a .csv file which file name is {songlist_name}.csv, as a songlist.
         if there's not , print "Missing File : {songlist_name}\n".
     */
-   
 }
