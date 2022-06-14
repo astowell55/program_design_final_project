@@ -21,7 +21,7 @@ wchar_t *read_wstring()
         }
     }
     buffer[length] = '\0';
-    
+
     // if(printf("read_wstring: -%ls-\n", buffer)<0){
     //     perror("printf");
     // }
@@ -32,8 +32,8 @@ wchar_t *read_wstring()
         buffer[length - 2] = '.';
         buffer[length - 3] = '.';
     }
-    wchar_t *result = malloc(length*sizeof(wchar_t));
-    wcscpy(result,buffer);
+    wchar_t *result = malloc(length * sizeof(wchar_t));
+    wcscpy(result, buffer);
     return result;
 }
 // void read_line(song *data)
@@ -109,12 +109,13 @@ void Postorder_traverse(node *root, int output_choose)
     }
 }
 
-void read_SongFile(char *FileName)
+void read_SongFile()
 {
     FILE *songFile;
 
     /* allocation of the buffer for every line in the File */
-
+    char *FileName;
+    scanf("%s", FileName);
     wchar_t *buf = malloc(MAX_SONG_NAME + 10);
 
     /* if the space could not be allocated, return an error */
@@ -149,9 +150,18 @@ void read_SongFile(char *FileName)
         wcscpy(songs->artist, tmp);
 
         tmp = wcstok(NULL, delim, &ptr);
-        songs->length = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
-        wcscpy(songs->length, tmp);
-        build_song_data(&song_data,songs);
+        for (int i = 0; i < wcslen(tmp); i++)
+        {
+            if (tmp[i] == ':')
+            {
+                tmp[i] = '.';
+                break;
+            }
+        }
+        wchar_t *stop;
+        float time = wcstof(tmp, &stop);
+        songs->length = time;
+        build_song_data(&song_data, songs);
     }
     fclose(songFile);
     return;
@@ -181,10 +191,30 @@ void output_song(song *cur_songlist)
 void output_songlist(node *songlist_tree)
 {
     // output all songlist name in songlist_tree
+    char *filename;
+    wcstombs(filename, songlist_tree->songlist_name, 101);
+    outputSongFile = fopen(filename, "w");
+    if (root == NULL)
+    {
+        return;
+    }
+    Inorder_traverse(root, 1);
+    fclose(outputSongFile);
+    return;
 }
-void Export_songlist(song *cur_songlist)
+void Export_songlist(node *cur_songlist)
 {
     // Export cur_songlist's song as .csv file.
+    char *filename;
+    wcstombs(filename, cur_songlist->songlist_name, 101);
+    outputSongFile = fopen(filename, "w");
+    if (root == NULL)
+    {
+        return;
+    }
+    Inorder_traverse(root, 1);
+    fclose(outputSongFile);
+    return;
 }
 void Import_songlist(node *songlist_tree, wchar_t songlist_name[])
 {
@@ -192,4 +222,5 @@ void Import_songlist(node *songlist_tree, wchar_t songlist_name[])
         Import a .csv file which file name is {songlist_name}.csv, as a songlist.
         if there's not , print "Missing File : {songlist_name}\n".
     */
+   
 }
