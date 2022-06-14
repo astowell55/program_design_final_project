@@ -116,26 +116,20 @@ void Inorder_traverse_song(song *root)
     {
         return;
     }
-    if (output_choose == 1)
+    else
     {
         Inorder_traverse_song(root->left_child);
         fprintf(outputSongFile, "%ls", root->song_name);
         fprintf(outputSongFile, "\n");
     }
-    else if (output_choose == 2)
-    {
-        Inorder_traverse_song(root->left_child);
-    }
     Inorder_traverse_song(root->right_child);
 }
 
-void read_SongFile()
+void read_SongFile(char *FileName)
 {
     FILE *songFile;
 
     /* allocation of the buffer for every line in the File */
-    char *FileName;
-    scanf("%s", FileName);
     wchar_t *buf = malloc(MAX_SONG_NAME + 10);
 
     /* if the space could not be allocated, return an error */

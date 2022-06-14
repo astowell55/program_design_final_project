@@ -6,52 +6,62 @@
 #include "myIO.h"
 #include "myAlgo.h"
 #include "myUI.h"
-void Choose_a_songlist(song **cur_songlist){
-
-    //Operate
+void Choose_a_songlist(song **cur_songlist)
+{
+    /*
+        In a songlist,it is the UI.
+    */
+    // Operate
     wchar_t *song_name;
     song *target_song = NULL;
-    printf("[a]Add a song\n[d]Delete a song\n" \
-    "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \
+    printf("[a]Add a song\n[d]Delete a song\n"
+           "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \
     "[<]Back to main page\nEnter your operater:\n");
     char operater;
-    while(scanf(" %c\n",&operater)!=EOF){
+    while (scanf(" %c\n", &operater) != EOF)
+    {
         switch (operater)
         {
         case 'a':
-            //Add song.
+            // Add song.
             song_name = read_wstring();
-            printf("read: _%ls_\n",song_name);
-            target_song = search_song(*cur_songlist,song_name);
-            printf("point:_%p_\n",target_song);
-            
-            if(target_song==NULL){
-                build_song(cur_songlist,song_name);
-                printf("Add song : %ls\n",song_name);
-            }else{
+            printf("read: _%ls_\n", song_name);
+            target_song = search_song(*cur_songlist, song_name);
+            printf("point:_%p_\n", target_song);
+
+            if (target_song == NULL)
+            {
+                build_song(cur_songlist, song_name);
+                printf("Add song : %ls\n", song_name);
+            }
+            else
+            {
                 printf("Invalid operation\n");
             }
             free(song_name);
-            printf("_%ls_\n",(*cur_songlist)->song_name);
+            printf("_%ls_\n", (*cur_songlist)->song_name);
             break;
         case 'd':
-            //Delete song.
+            // Delete song.
             song_name = read_wstring();
-            target_song = search_song(*cur_songlist,song_name);
-            if(target_song!=NULL){
-                delete_song(cur_songlist,song_name);
-                printf("Delete song : %ls\n",song_name);
-            }else{
+            target_song = search_song(*cur_songlist, song_name);
+            if (target_song != NULL)
+            {
+                delete_song(cur_songlist, song_name);
+                printf("Delete song : %ls\n", song_name);
+            }
+            else
+            {
                 printf("Invalid operation\n");
             }
             free(song_name);
             break;
         case 'o':
-            //Output all song in this list.
+            // Output all song in this list.
             output_song(*cur_songlist);
             break;
         case 'e':
-            //Export this songlist as .csv
+            // Export this songlist as .csv
             Export_songlist(*cur_songlist);
             break;
         // case 's':
@@ -61,105 +71,115 @@ void Choose_a_songlist(song **cur_songlist){
         //     //Random all song(?)
         //     break;
         case '<':
-            return;//Back
+            return; // Back
             break;
         default:
             printf("Invalid operation\n");
             break;
         }
-        printf("[a]Add a song\n[d]Delete a song\n" \
-    "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \
+        printf("[a]Add a song\n[d]Delete a song\n"
+               "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \
     "[<]Back to main page\nEnter your operater:\n");
     }
 }
 
 int main(){
     int data_num, input_Choose, output_Choose, search_Choose;
-    
+
     int error = 0;
-    //setlocale(LC_ALL,"");
+    // setlocale(LC_ALL,"");
     printf("Welcome to use this project!\n");
     //- Preload songdata
     read_SongFile("info.csv");
     //- Preload songdata end
-    
-    node *songlist_tree=NULL;//the root of songlist tree.
-    node *target_songlist=NULL;//point to the songlist.
-    //select oprerater
-    printf("[a]Add a songlist\n[d]Delete a songlist\n" \
-    "[c]Choose a songlist\n[o]Output all songlists\n[i]import a .csv songlist\n[e]Exit\nEnter your operater:\n");
+
+    node *songlist_tree = NULL;   // the root of songlist tree.
+    node *target_songlist = NULL; // point to the songlist.
+    // select oprerater
+    printf("[a]Add a songlist\n[d]Delete a songlist\n"
+           "[c]Choose a songlist\n[o]Output all songlists\n[i]import a .csv songlist\n[e]Exit\nEnter your operater:\n");
     char operater;
     wchar_t *songlist_name;
 
-    //Operate
-    while(scanf(" %c\n",&operater)!=EOF){
+    // Operate
+    while (scanf(" %c\n", &operater) != EOF)
+    {
         switch (operater)
         {
         case 'a':
-            //Build or Add songlist into tree.
-            //scanf("%ls",songlist_name);
+            // Build or Add songlist into tree.
+            // scanf("%ls",songlist_name);
             songlist_name = read_wstring();
-            printf("name:_%ls_\n",songlist_name);
-            //find
-            target_songlist = search_songlist(songlist_tree,songlist_name);
-            printf("point:_%p_\n",target_songlist);
-            if(target_songlist==(node *)NULL){
-                build_songlist(&songlist_tree,songlist_name);
-                printf("Add songlist : %ls\n",songlist_name);
-            }else{
+            printf("name:_%ls_\n", songlist_name);
+            // find
+            target_songlist = search_songlist(songlist_tree, songlist_name);
+            printf("point:_%p_\n", target_songlist);
+            if (target_songlist == (node *)NULL)
+            {
+                build_songlist(&songlist_tree, songlist_name);
+                printf("Add songlist : %ls\n", songlist_name);
+            }
+            else
+            {
                 printf("Invalid operation: EXIST SONGLIST\n");
             }
             free(songlist_name);
             break;
         case 'd':
-            //Delete target songlist.
+            // Delete target songlist.
             songlist_name = read_wstring();
-            //find
-            target_songlist = search_songlist(songlist_tree,songlist_name);
-            
-            if(target_songlist!=NULL){
-                delete_songlist(&target_songlist,songlist_name);
-                printf("Delete songlist : %ls\n",songlist_name);
-            }else{
+            // find
+            target_songlist = search_songlist(songlist_tree, songlist_name);
+
+            if (target_songlist != NULL)
+            {
+                delete_songlist(&target_songlist, songlist_name);
+                printf("Delete songlist : %ls\n", songlist_name);
+            }
+            else
+            {
                 printf("Invalid operation: NULL SONGLIST\n");
             }
             free(songlist_name);
             break;
         case 'c':
-            //Enter the target songlist, going to another UI.
-            //printf("read\n");
+            // Enter the target songlist, going to another UI.
+            // printf("read\n");
             songlist_name = read_wstring();
-            printf("name:_%ls_\n",songlist_name);
-            //find
-            target_songlist = search_songlist(songlist_tree,songlist_name);
-            printf("point:_%p_\n",target_songlist);
-            if(target_songlist!=NULL){
-                printf("Choose songlist : %ls\n",songlist_name);
+            printf("name:_%ls_\n", songlist_name);
+            // find
+            target_songlist = search_songlist(songlist_tree, songlist_name);
+            printf("point:_%p_\n", target_songlist);
+            if (target_songlist != NULL)
+            {
+                printf("Choose songlist : %ls\n", songlist_name);
                 Choose_a_songlist(&(target_songlist->data));
-            }else{
+            }
+            else
+            {
                 printf("Invalid operation: NULL SONGLIST\n");
             }
             free(songlist_name);
             break;
         case 'o':
-            //Output all songlist name.
+            // Output all songlist name.
             output_songlist(songlist_tree);
             break;
         case 'i':
-            //Import a songlist.
+            // Import a songlist.
             songlist_name = read_wstring();
-            Import_songlist(songlist_tree,songlist_name);
+            Import_songlist(songlist_tree, songlist_name);
             free(songlist_name);
             break;
         case 'e':
             return 0;
         default:
             printf("Invalid operater\n");
-            
+
             break;
         }
-        printf("[a]Add a songlist\n[d]Delete a songlist\n[c]Choose a songlist\n" \
-    "[o]Output all songlists\n[i]import a .csv songlist\n[e]Exit\nEnter your operater:\n");
+        printf("[a]Add a songlist\n[d]Delete a songlist\n[c]Choose a songlist\n"
+               "[o]Output all songlists\n[i]import a .csv songlist\n[e]Exit\nEnter your operater:\n");
     }
     return 0;
     /* -----OLD DATA------
