@@ -13,9 +13,9 @@ typedef struct systime systime;
 // the struct store all the information of song.
 struct song
 {
-    wchar_t song_name[MAX_SONG_NAME+1];
-    wchar_t artist[MAX_SONG_NAME+1];
-    wchar_t length[8];
+    wchar_t *song_name;
+    wchar_t *artist;
+    wchar_t *length;
     systime times;
     struct song *parent;
     struct song *left_child;

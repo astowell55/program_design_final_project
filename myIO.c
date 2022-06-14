@@ -86,7 +86,26 @@ void Inorder_traverse(node *root, int output_choose)
     }
     Inorder_traverse(root->right_child, output_choose);
 }
-
+void traverse(song *root, int output_choose)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    if (output_choose == 1)
+    {
+        Inorder_traverse(root->left_child, output_choose);
+        // fprintf(outputSongFile, "%d ", root->data->index);
+        fprintf(outputSongFile, "%ls", root->song_name);
+        fprintf(outputSongFile, "\n");
+    }
+    else if (output_choose == 2)
+    {
+        Inorder_traverse(root->left_child, output_choose);
+        // printf("%d %ls\n", root->data->index, root->data->song_name);
+    }
+    Inorder_traverse(root->right_child, output_choose);
+}
 void Postorder_traverse(node *root, int output_choose)
 {
     if (root == NULL)
