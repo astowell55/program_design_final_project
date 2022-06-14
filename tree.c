@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
+#include <wchar.h>
 #include "myDS.h"
 #include "myIO.h"
 #include "myAlgo.h"
@@ -16,7 +17,7 @@ void Choose_a_songlist(song **cur_songlist)
     song *target_song = NULL;
     printf("[a]Add a song\n[d]Delete a song\n"
            "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \
-    "[<]Back to main page\nEnter your operater:\n");
+            "[<]Back to main page\nEnter your operater:\n");
     char operater;
     while (scanf(" %c\n", &operater) != EOF)
     {
@@ -90,8 +91,7 @@ int main(){
     // setlocale(LC_ALL,"");
     printf("Welcome to use this project!\n");
     //- Preload songdata
-    read_SongFile();
-    
+    read_SongFile();    
     Inorder_traverse_song(song_data);
     //- Preload songdata end
 

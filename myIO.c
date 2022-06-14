@@ -132,18 +132,14 @@ void read_SongFile()
     FILE *songFile;
 
     /* allocation of the buffer for every line in the File */
-
     wchar_t buf[300];
-
     /* if the space could not be allocated, return an error */
-
     if ((songFile = fopen("songFile.csv", "r")) == NULL) // Reading a file
     {
         printf("File could not be opened.\n");
     }
-
-    while (fgetws(buf, 255, songFile) != NULL)
-    {
+    
+    while (fgetws(buf, 255, songFile) != NULL){
         if ((wcslen(buf) > 0) && (buf[wcslen(buf) - 1] == '\n'))
             buf[wcslen(buf) - 1] = '\0';
         song *songs = malloc(sizeof(song));
@@ -155,7 +151,6 @@ void read_SongFile()
         wchar_t *tmp = wcstok(buf, delim, &ptr);
         songs->song_name = (wchar_t *)malloc(sizeof(wchar_t) * (wcslen(tmp) + 1));
         wcscpy(songs->song_name, tmp);
-
         tmp = wcstok(NULL, delim, &ptr);
         songs->artist = (wchar_t *)malloc(sizeof(wchar_t) * (wcslen(tmp) + 1));
         wcscpy(songs->artist, tmp);

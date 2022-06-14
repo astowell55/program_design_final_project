@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <wchar.h>
 #include "myDS.h"
 #include "myIO.h"
 #include "myAlgo.h"
@@ -175,8 +176,9 @@ void build_songlist(node **songlist_tree,wchar_t *target){
 void build_song_data(song **song_data,song *songs){
     song *par=NULL;
     song *cur=NULL;
-    printf("%ls\n",songs->song_name);
+    
     cur = *song_data;
+
     while(cur!=NULL){
         par = cur;
         if(wcscmp(((*song_data)->song_name), (songs->song_name)) > 0){
