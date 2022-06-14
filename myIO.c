@@ -109,7 +109,7 @@ void Postorder_traverse(node *root, int output_choose)
     }
 }
 
-void Inorder_traverse_song(song *root, int output_choose)
+void Inorder_traverse_song(song *root)
 {
     if (root == NULL)
     {
