@@ -109,6 +109,21 @@ void Postorder_traverse(node *root, int output_choose)
     }
 }
 
+void Inorder_traverse_song(song *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    else
+    {
+        Inorder_traverse_song(root->left_child);
+        fprintf(outputSongFile, "%ls", root->song_name);
+        fprintf(outputSongFile, "\n");
+    }
+    Inorder_traverse_song(root->right_child);
+}
+
 void read_SongFile()
 {
     FILE *songFile;

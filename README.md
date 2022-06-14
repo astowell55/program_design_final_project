@@ -88,6 +88,8 @@ abcd already exist
     * Change: modify data_type.
 * 0.2.2
     * Change: Update File I/O
+* 0.2.3
+    * Change: Add Inorder_traverse_song in myIO
 ## target 每周目標
 
 ### 第二周
