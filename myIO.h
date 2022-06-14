@@ -9,6 +9,8 @@ void Inorder_traverse(node *root, int output_choose);
 // postorder traverse the tree and print out the value of every node
 void Postorder_traverse(node *root, int output_choose);
 
+void Inorder_traverse_song(song *root)
+
 void read_line(song *data);
 void read_SongFile(char *FileName);
 void write_SongFile(node *root);

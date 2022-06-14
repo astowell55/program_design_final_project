@@ -109,6 +109,25 @@ void Postorder_traverse(node *root, int output_choose)
     }
 }
 
+void Inorder_traverse_song(song *root, int output_choose)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    if (output_choose == 1)
+    {
+        Inorder_traverse_song(root->left_child);
+        fprintf(outputSongFile, "%ls", root->song_name);
+        fprintf(outputSongFile, "\n");
+    }
+    else if (output_choose == 2)
+    {
+        Inorder_traverse_song(root->left_child);
+    }
+    Inorder_traverse_song(root->right_child);
+}
+
 void read_SongFile()
 {
     FILE *songFile;
@@ -222,5 +241,4 @@ void Import_songlist(node *songlist_tree, wchar_t songlist_name[])
         Import a .csv file which file name is {songlist_name}.csv, as a songlist.
         if there's not , print "Missing File : {songlist_name}\n".
     */
-   
 }
