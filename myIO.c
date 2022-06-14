@@ -73,16 +73,16 @@ void Inorder_traverse(node *root, int output_choose)
     {
         return;
     }
+    Inorder_traverse(root->left_child, output_choose);
     if (output_choose == 1)
     {
-        Inorder_traverse(root->left_child, output_choose);
+        
         // fprintf(outputSongFile, "%d ", root->data->index);
         fprintf(outputSongFile, "%ls", root->data->song_name);
         fprintf(outputSongFile, "\n");
     }
     else if (output_choose == 2)
     {
-        Inorder_traverse(root->left_child, output_choose);
         // printf("%d %ls\n", root->data->index, root->data->song_name);
     }
     Inorder_traverse(root->right_child, output_choose);
@@ -94,18 +94,17 @@ void Postorder_traverse(node *root, int output_choose)
     {
         return;
     }
+    Postorder_traverse(root->left_child, output_choose);
+    Postorder_traverse(root->right_child, output_choose);
     if (output_choose == 1)
     {
-        Postorder_traverse(root->left_child, output_choose);
-        Postorder_traverse(root->right_child, output_choose);
         // fprintf(outputSongFile, "%d ", root->data->index);
         fprintf(outputSongFile, "%ls", root->data->song_name);
         fprintf(outputSongFile, "\n");
     }
     else if (output_choose == 2)
     {
-        Postorder_traverse(root->left_child, output_choose);
-        Postorder_traverse(root->right_child, output_choose);
+
         // printf("%d %ls\n", root->data->index, root->data->song_name);
     }
 }
@@ -113,33 +112,32 @@ void Postorder_traverse(node *root, int output_choose)
 void Inorder_traverse_song(song *root)
 {
     if (root == NULL)
-    {
+    {   
+        //printf("song data null\n");
         return;
     }
     else
     {
         Inorder_traverse_song(root->left_child);
-        fprintf(outputSongFile, "%ls", root->song_name);
-        fprintf(outputSongFile, "\n");
+        //fprintf(outputSongFile, "%ls", root->song_name);
+        //fprintf(outputSongFile, "\n");
+        printf("%ls", root->song_name);
+
+        Inorder_traverse_song(root->right_child);
     }
-    Inorder_traverse_song(root->right_child);
 }
 
-void read_SongFile(char *FileName)
+void read_SongFile()
 {
     FILE *songFile;
 
     /* allocation of the buffer for every line in the File */
-    wchar_t *buf = malloc(MAX_SONG_NAME + 10);
+
+    wchar_t buf[300];
 
     /* if the space could not be allocated, return an error */
-    if (buf == NULL)
-    {
-        printf("No memory\n");
-        return;
-    }
 
-    if ((songFile = fopen(FileName, "r")) == NULL) // Reading a file
+    if ((songFile = fopen("songFile.csv", "r")) == NULL) // Reading a file
     {
         printf("File could not be opened.\n");
     }
@@ -150,19 +148,17 @@ void read_SongFile(char *FileName)
             buf[wcslen(buf) - 1] = '\0';
         song *songs = malloc(sizeof(song));
         wchar_t *ptr;
-
         // Define the delimeter of the string
         wchar_t delim[] = L",";
 
         // Call the wcstok() method
         wchar_t *tmp = wcstok(buf, delim, &ptr);
-        songs->song_name = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
+        songs->song_name = (wchar_t *)malloc(sizeof(wchar_t) * (wcslen(tmp) + 1));
         wcscpy(songs->song_name, tmp);
 
         tmp = wcstok(NULL, delim, &ptr);
-        songs->artist = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
+        songs->artist = (wchar_t *)malloc(sizeof(wchar_t) * (wcslen(tmp) + 1));
         wcscpy(songs->artist, tmp);
-
         tmp = wcstok(NULL, delim, &ptr);
         for (int i = 0; i < wcslen(tmp); i++)
         {

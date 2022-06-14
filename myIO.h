@@ -11,7 +11,7 @@ void Postorder_traverse(node *root, int output_choose);
 
 void Inorder_traverse_song(song *root);
 void read_line(song *data);
-void read_SongFile(char *FileName);
+void read_SongFile();
 void write_SongFile(node *root);
 void output_song(song *cur_songlist);
 void output_songlist(node *songlist_tree);

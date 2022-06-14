@@ -90,7 +90,9 @@ int main(){
     // setlocale(LC_ALL,"");
     printf("Welcome to use this project!\n");
     //- Preload songdata
-    read_SongFile("info.csv");
+    read_SongFile();
+    
+    Inorder_traverse_song(song_data);
     //- Preload songdata end
 
     node *songlist_tree = NULL;   // the root of songlist tree.
@@ -175,7 +177,6 @@ int main(){
             return 0;
         default:
             printf("Invalid operater\n");
-
             break;
         }
         printf("[a]Add a songlist\n[d]Delete a songlist\n[c]Choose a songlist\n"

@@ -175,7 +175,7 @@ void build_songlist(node **songlist_tree,wchar_t *target){
 void build_song_data(song **song_data,song *songs){
     song *par=NULL;
     song *cur=NULL;
-
+    printf("%ls\n",songs->song_name);
     cur = *song_data;
     while(cur!=NULL){
         par = cur;
@@ -185,6 +185,7 @@ void build_song_data(song **song_data,song *songs){
             cur = cur->left_child;
         }
     }
+    //printf("%ls",songs->song_name);
 
     songs->parent = par;
     if(par==NULL){
@@ -328,7 +329,7 @@ void delete_song(song **cur_songlist,wchar_t song_name[]){
     {
         wcscpy( target->artist, y->artist);
         wcscpy(target->song_name, y->song_name);
-        target->length =  y->length;
+        target->length = y->length;
     }
 
     free(y);
