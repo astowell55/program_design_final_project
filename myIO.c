@@ -115,15 +115,11 @@ void Inorder_traverse_song(song *root)
     {
         return;
     }
-    if (output_choose == 1)
+    else
     {
         Inorder_traverse_song(root->left_child);
         fprintf(outputSongFile, "%ls", root->song_name);
         fprintf(outputSongFile, "\n");
-    }
-    else if (output_choose == 2)
-    {
-        Inorder_traverse_song(root->left_child);
     }
     Inorder_traverse_song(root->right_child);
 }
