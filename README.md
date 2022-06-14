@@ -86,6 +86,8 @@ abcd already exist
     * Change: a lot.
 * 0.2.1
     * Change: modify data_type.
+* 0.2.2
+    * Change: Update File I/O
 ## target 每周目標
 
 ### 第二周
