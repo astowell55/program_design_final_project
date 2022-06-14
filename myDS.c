@@ -328,7 +328,7 @@ void delete_song(song **cur_songlist,wchar_t song_name[]){
     {
         wcscpy( target->artist, y->artist);
         wcscpy(target->song_name, y->song_name);
-        wcscpy(target->length, y->length);
+        target->length = y->length;
     }
 
     free(y);

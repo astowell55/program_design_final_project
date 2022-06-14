@@ -114,18 +114,12 @@ void read_SongFile()
     FILE *songFile;
 
     /* allocation of the buffer for every line in the File */
-    char *FileName;
-    scanf("%s", FileName);
-    wchar_t *buf = malloc(MAX_SONG_NAME + 10);
+
+    wchar_t buf[300];
 
     /* if the space could not be allocated, return an error */
-    if (buf == NULL)
-    {
-        printf("No memory\n");
-        return;
-    }
 
-    if ((songFile = fopen(FileName, "r")) == NULL) // Reading a file
+    if ((songFile = fopen("songFile.csv", "r")) == NULL) // Reading a file
     {
         printf("File could not be opened.\n");
     }
@@ -136,19 +130,17 @@ void read_SongFile()
             buf[wcslen(buf) - 1] = '\0';
         song *songs = malloc(sizeof(song));
         wchar_t *ptr;
-
         // Define the delimeter of the string
         wchar_t delim[] = L",";
 
         // Call the wcstok() method
         wchar_t *tmp = wcstok(buf, delim, &ptr);
-        songs->song_name = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
+        songs->song_name = (wchar_t *)malloc(sizeof(wchar_t)*(wcslen(tmp) + 1));
         wcscpy(songs->song_name, tmp);
 
         tmp = wcstok(NULL, delim, &ptr);
-        songs->artist = (wchar_t *)malloc(sizeof(wcslen(tmp) + 1));
+        songs->artist = (wchar_t *)malloc(sizeof(wchar_t)*(wcslen(tmp) + 1));
         wcscpy(songs->artist, tmp);
-
         tmp = wcstok(NULL, delim, &ptr);
         for (int i = 0; i < wcslen(tmp); i++)
         {
@@ -222,5 +214,4 @@ void Import_songlist(node *songlist_tree, wchar_t songlist_name[])
         Import a .csv file which file name is {songlist_name}.csv, as a songlist.
         if there's not , print "Missing File : {songlist_name}\n".
     */
-   
 }
