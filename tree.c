@@ -35,13 +35,14 @@ void Choose_a_songlist(song **cur_songlist)
             printf("-.%s.-\n",song_name);
             //printf("read: _%s_\n", song_name);
             target_song = search_song(*cur_songlist, song_name);
-            
+
             if (target_song == NULL)
             {   
                 printf("Add song : %s\n", song_name);
                 build_song(cur_songlist, song_name);
                 
                 printf("build finish\n");
+                output_song(*cur_songlist);
             }
             else
             {

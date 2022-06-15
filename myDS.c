@@ -44,8 +44,10 @@ void build_song(song **cur_songlist,char *target){
     song *par=NULL;
     song *cur=NULL;
     song *build_node = malloc(sizeof(song));
-    char *name = malloc((strlen(target) + 1));
-    strcpy(name,target);
+    //char *name = malloc((strlen(target) + 1));
+    build_node->song_name = malloc(strlen(target));
+    strcpy(build_node->song_name,target);
+    printf("node:%s\n",build_node->song_name);
     //char_t *name = malloc(sizeof(target)*sizeof(wchar_t));
     //wcscpy(name,target);
     //build_node->song_name = name;

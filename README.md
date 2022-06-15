@@ -96,6 +96,8 @@ abcd already exist
 * 1.0.0
     * Change: forgiving wide char.
     * Change: FIX build_song_data.
+* 1.0.1
+    * Change: FIX build function.
 ## target 每周目標
 
 ### 第二周
