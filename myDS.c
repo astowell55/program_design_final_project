@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <wchar.h>
 #include "myDS.h"
 #include "myIO.h"
 #include "myAlgo.h"
@@ -34,7 +35,7 @@ void build_tree(node **root, song *data, node *cur, int *error)
         }
     }
 }
-void build_song(song **cur_songlist,wchar_t *target){
+void build_song(song **cur_songlist,char *target){
     /*
         Add a song named song_name[] into cur_songlist.
         Also store the artist and time.
@@ -43,7 +44,11 @@ void build_song(song **cur_songlist,wchar_t *target){
     song *par=NULL;
     song *cur=NULL;
     song *build_node = malloc(sizeof(song));
-    build_node->song_name = target;
+    char *name = malloc((strlen(target) + 1));
+    strcpy(name,target);
+    //char_t *name = malloc(sizeof(target)*sizeof(wchar_t));
+    //wcscpy(name,target);
+    //build_node->song_name = name;
     //wcscpy(build_node->song_name,target);
     /*
         song *target = search_song(song_data,song_name);
@@ -54,20 +59,24 @@ void build_song(song **cur_songlist,wchar_t *target){
     cur = *cur_songlist;
     while(cur!=NULL){
         par = cur;
-        if(strcmp(((*cur_songlist)->song_name), (target)) < 0){
-            cur = cur->right_child;
-        }else{
+        if(strcmp(((cur)->song_name), (target)) > 0){
+            //cur = cur->right_child;
             cur = cur->left_child;
+        }else{
+            //cur = cur->left_child;
+            cur = cur->right_child;
         }
     }
-
+    //printf("%p",build_node);
     build_node->parent = par;
     if(par==NULL){
         *cur_songlist = build_node;
-    }else if(strcmp(((*cur_songlist)->song_name), (target)) < 0){
-        par->right_child = build_node;
-    }else{
+    }else if(strcmp(((par)->song_name), (target)) > 0){
+        //par->right_child = build_node;
         par->left_child = build_node;
+    }else{
+        //par->left_child = build_node;
+        par->right_child = build_node;
     }
     // if ((*cur_songlist) == NULL)
     // {
@@ -114,20 +123,24 @@ void build_songlist(node **songlist_tree,char *target){
     cur = *songlist_tree;
     while(cur!=NULL){
         par = cur;
-        if(strcmp(((*songlist_tree)->songlist_name), (target)) < 0){
-            cur = cur->right_child;
-        }else{
+        if(strcmp(((cur)->songlist_name), (target)) > 0){
+            //cur = cur->right_child;
             cur = cur->left_child;
+        }else{
+            //cur = cur->left_child;
+            cur = cur->right_child;
         }
     }
 
     build_node->parent = par;
     if(par==NULL){
         *songlist_tree = build_node;
-    }else if(strcmp(((*songlist_tree)->songlist_name), (target)) < 0){
-        par->right_child = build_node;
-    }else{
+    }else if(strcmp(((par)->songlist_name), (target)) > 0){
+        //par->right_child = build_node;
         par->left_child = build_node;
+    }else{
+        //par->left_child = build_node;
+        par->right_child = build_node;
     }
 
     // if ((*songlist_tree) == NULL)
@@ -171,28 +184,38 @@ void build_songlist(node **songlist_tree,char *target){
     //     }
     // }
 }
-void build_song_data(song *song_data,song *songs){
+void build_song_data(song **song_data,song *songs){
+    /*
+        *songs is 
+    */
     song *par=NULL;
     song *cur=NULL;
-    printf("_%s_\n",songs->song_name);
-    cur = song_data;
+    
+    cur = *song_data;
+
     while(cur!=NULL){
         par = cur;
-        if(strcmp(((song_data)->song_name), (songs->song_name)) < 0){
+        //printf("--%s--\n",songs->song_name);
+        
+        if(strcmp(((cur)->song_name), (songs->song_name)) > 0){
             cur = cur->right_child;
         }else{
             cur = cur->left_child;
         }
+        //printf("cur:%p\n",cur);
+       // printf("-1-%s-1-\n",songs->song_name);
     }
+    //printf("%s\n",songs->song_name);
 
     songs->parent = par;
     if(par==NULL){
-        song_data = songs;
-    }else if(strcmp(((song_data)->song_name), (songs->song_name)) < 0){
+        *song_data = songs;
+    }else if(strcmp(((par)->song_name), (songs->song_name)) > 0){
         par->right_child = songs;
     }else{
         par->left_child = songs;
     }
+    return;
 }
 // void delete_name(node **root, song *data, int search_Choose)
 // {
@@ -266,7 +289,7 @@ static void delete_all_song(song *songlist_root){
     free(songlist_root);
     return;
 }
-void delete_song(song **cur_songlist,wchar_t song_name[]){
+void delete_song(song **cur_songlist,char song_name[]){
     /*
         search song_name in cur_songlist. 
         if found, free it.
@@ -334,7 +357,7 @@ void delete_song(song **cur_songlist,wchar_t song_name[]){
     return;
     
 }
-void delete_songlist(node **songlist_tree,wchar_t songlist_name[]){
+void delete_songlist(node **songlist_tree,char songlist_name[]){
     /*
         search songlist_name in songlist_tree. 
         if found, free it and its all song.

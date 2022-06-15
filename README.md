@@ -93,6 +93,9 @@ abcd already exist
 * 0.2.4
     * Change: Add guide in tree.c
     * Change: Add output_song in myIO
+* 1.0.0
+    * Change: forgiving wide char.
+    * Change: FIX build_song_data.
 ## target 每周目標
 
 ### 第二周
