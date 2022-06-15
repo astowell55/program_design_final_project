@@ -212,11 +212,13 @@ void Import_songlist(node *songlist_tree, char songlist_name[])
         if there's not , print "Missing File : {songlist_name}\n".
     */
     FILE *songFile;
-    wchar_t buf[300];
+    char buf[300];
     char *filename;
+    
     /* if the space could not be allocated, return an error */
     if ((songFile = fopen(filename, "r")) == NULL) // Reading a file
     {
         printf("Missing File : {%s}\n", songlist_name);
     }
+    
 }
