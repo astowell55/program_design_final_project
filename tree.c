@@ -195,6 +195,7 @@ int main()
                 break;
             }
         case 'i':
+            printf("Enter the name of the file you want to import: \n");
             // Import a songlist.
             songlist_name = read_wstring();
             Import_songlist(songlist_tree, songlist_name);
