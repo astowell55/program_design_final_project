@@ -187,7 +187,7 @@ int main(){
         case 4:
             // Import a songlist.
             songlist_name = read_wstring();
-            Import_songlist(songlist_tree, songlist_name);
+            Import_songlist(&songlist_tree, songlist_name);
             free(songlist_name);
             break;
         case 5:
