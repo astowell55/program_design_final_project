@@ -58,14 +58,3 @@ int button(int num,char *options[num]){
     }while(action != 'e');
     return cur_choose;
 }
-
-    
-
-
-int tree_button(node *songlist){
-    char action;
-    node *cur = songlist;
-    do{
-        
-    }while();
-}

@@ -24,7 +24,7 @@ void Choose_a_songlist(song **cur_songlist,char *songlist_name)
     {
         operater = button(7,song_options);
        
-        switch (operater){
+        switch (operater){ 
         case 0:
             // Add song.
             //Inorder_traverse_song((*cur_songlist));
@@ -182,7 +182,8 @@ int main(){
             break;
         case 3:
             // Output all songlist name.
-            output_songlist(songlist_tree);
+            while_traverse(songlist_tree);
+            //output_songlist(songlist_tree);
             break;
         case 4:
             // Import a songlist.
