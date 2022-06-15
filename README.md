@@ -106,6 +106,8 @@ abcd already exist
     * Change: modify export function.
     * Change: modify build_song, now it can only accept the song name which existed in song_data.
     * Change: song_data now is a Global variable.
+* 1.0.4
+    * Change: improve UI.
 ## target 每周目標
 
 ### 第二周
