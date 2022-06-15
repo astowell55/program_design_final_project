@@ -72,9 +72,10 @@ song *search_song(song *cur_songlist, char song_name[])
         if not, return NULL.
     */
     song *curr = cur_songlist;
+    printf("before_while: _%p_\n",curr);
     while (curr != NULL && strcmp(song_name, curr->song_name) != 0){
-        //printf("while: _%p_\n",curr);
-        //printf("s_%ls\n",curr->song_name);
+        printf("while: _%p_\n",curr);
+        printf("s_%s\n",curr->song_name);
         if (strcmp(song_name, curr->song_name) > 0){
             curr = curr->right_child;
         }

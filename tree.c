@@ -31,10 +31,11 @@ void Choose_a_songlist(song **cur_songlist)
             //song_name = read_wstring();
             
             fgets(song_name,300,stdin);
-            printf("-.%s\n",song_name);
+            song_name[strlen(song_name)-1] = '\0';
+            printf("-.%s.-\n",song_name);
             //printf("read: _%s_\n", song_name);
             target_song = search_song(*cur_songlist, song_name);
-
+            
             if (target_song == NULL)
             {   
                 printf("Add song : %s\n", song_name);
@@ -64,7 +65,7 @@ void Choose_a_songlist(song **cur_songlist)
             {
                 printf("Invalid operation\n");
             }
-            free(song_name);
+            
             break;
         case 2:
             // Output all song in this list.
@@ -180,31 +181,13 @@ int main(){
             printf("point:_%p_\n", target_songlist);
             if (target_songlist != NULL)
             {
-                printf("There is not any playlist\n");
+                Choose_a_songlist(&(target_songlist->data));
                 break;
 
             }
             else
             {
-                printf("Enter the playlist name : ");
-                //  Enter the target songlist, going to another UI.
-                //  printf("read\n");
-                songlist_name = read_wstring();
-                printf("name:_%s_\n", songlist_name);
-                // find
-                target_songlist = search_songlist(songlist_tree, songlist_name);
-                printf("point:_%p_\n", target_songlist);
-                if (target_songlist != NULL)
-                {
-                    printf("Choose playlist: %s\n", songlist_name);
-                    Choose_a_songlist(&(target_songlist->data));
-                }
-                else
-                {
-                    printf("Invalid operation: THE PLAYLIST DOES NOT EXIST\n");
-                }
-                free(songlist_name);
-                break;
+                printf("There is not any playlist\n");
             }
             free(songlist_name);
             break;
