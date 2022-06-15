@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <termios.h>
+#include "myIO.h"
 #define RED "\033[31m"
 #define GREEN "\033[32m"
 #define YELLOW "\033[33m"
@@ -11,6 +12,7 @@
 #define RESET "\033[0m"
 #define W_BACK "\033[47;"
 #define HEART "❤"
+#define MUSIC "𝄞"
 int getch(void)
 {
     struct termios oldattr, newattr;
@@ -55,4 +57,15 @@ int button(int num,char *options[num]){
         }
     }while(action != 'e');
     return cur_choose;
+}
+
+    
+
+
+int tree_button(node *songlist){
+    char action;
+    node *cur = songlist;
+    do{
+        
+    }while();
 }
