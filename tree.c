@@ -140,7 +140,7 @@ int main()
             if (target_songlist == (node *)NULL)
             {
                 build_songlist(&songlist_tree, songlist_name);
-                printf("Add songlist: %s\n", songlist_name);
+                printf("Add playlist: %s\n", songlist_name);
             }
             else
             {
