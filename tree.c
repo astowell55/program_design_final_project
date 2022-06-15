@@ -17,16 +17,17 @@ void Choose_a_songlist(song **cur_songlist,char *songlist_name)
     //wchar_t *song_name;
     song *target_song = NULL;
    
-    char *song_options[7] = {"[a]Add a song","[d]Delete a song","[o]Output all songlists","[e]Export as .csv","[s]Sort","[r]Random","[<]Back to main page"};
+    char *song_options[7] = {"[a]Add a song","[d]Delete a song","[o]Output all songlists","[e]Export as .csv","[<]Back to main page"};
     int operater = 0;
     char song_name[300];
     while (operater != 6)
     {
         operater = button(7,song_options);
-       
+        getchar();
         switch (operater){
         case 0:
             // Add song.
+            printf("Enter the title of the song you want to add: ");
             //Inorder_traverse_song((*cur_songlist));
             //song_name = read_wstring();
             fgets(song_name,300,stdin);
@@ -54,6 +55,7 @@ void Choose_a_songlist(song **cur_songlist,char *songlist_name)
             break;
         case 1:
             // Delete song.
+            printf("Enter the title of the song you want to delete: ");
             //song_name = read_wstring();
             fgets(song_name,300,stdin);
             song_name[strlen(song_name)-1] = '\0';
@@ -71,18 +73,14 @@ void Choose_a_songlist(song **cur_songlist,char *songlist_name)
             break;
         case 2:
             // Output all song in this list.
+            printf("All of your song(s):\n");
             output_song((*cur_songlist));
             break;
         case 3:
             // Export this songlist as .csv
             Export_songlist(*cur_songlist,songlist_name);
+            printf("The file is created\n");
             break;
-        // case 's':
-        //     //Sort and output all song(?)
-        //     break;
-        // case 'r':
-        //     //Random all song(?)
-        //     break;
         case 6:
             return; // Back
             break;
@@ -112,7 +110,7 @@ int main(){
     // select oprerater
     //printf("[a]Add a songlist\n[d]Delete a songlist\n"
            //"[c]Choose a songlist\n[o]Output all songlists\n[i]import a .csv songlist\n[e]Exit\nEnter your operater:\n");
-    char *songlist_options[6] ={"[a]Add a songlist","[d]Delete a songlist","[c]Choose a songlist","[o]Output all songlists","[i]import a .csv songlist","[e]Exit"}; 
+    char *songlist_options[6] ={"[a]Add a playlist","[d]Delete a playlist","[c]Choose a playlist","[o]Output all playlists","[i]Import a .csv playlist","[e]Exit"}; 
     int operater = 0;
     char *songlist_name;
     while ( operater != 5){
@@ -133,7 +131,7 @@ int main(){
             if (target_songlist == (node *)NULL)
             {
                 build_songlist(&songlist_tree, songlist_name);
-                printf("Add songlist : %s\n", songlist_name); 
+                printf("Add songlist: %s\n", songlist_name); 
             }
             else
             {
