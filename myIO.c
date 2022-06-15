@@ -206,7 +206,7 @@ void Export_songlist(song *cur_songlist, char *Filename)
     {
         return;
     }
-    fprintf(outputSongFile,"Title,Artist,Song,length(min),last Edited time\n");
+    //fprintf(outputSongFile,"Title,Artist,Song,length(min),last Edited time\n");
     Inorder_traverse(cur_songlist);
     fclose(outputSongFile);
     return;
@@ -243,14 +243,16 @@ void Import_songlist(node **songlist_tree, char songlist_name[])
         printf("songs:'%p'\n",songs);
         // Call the wcstok() method
         char *tmp = strtok(buf, delim);
+        //song name
         songs->song_name = (char *)malloc(sizeof(char) * (strlen(tmp) + 1));
         strcpy(songs->song_name, tmp);
         printf("tmp1:'%s'\n",tmp);
-        /*
+        //artist
         tmp = strtok(NULL, delim);
         songs->artist = (char *)malloc(sizeof(char) * (strlen(tmp) + 1));
         strcpy(songs->artist, tmp);
         printf("tmp2:'%s'\n",tmp);
+        //length
         tmp = strtok(NULL, delim);
         for (int i = 0; i < strlen(tmp); i++)
         {
@@ -263,7 +265,9 @@ void Import_songlist(node **songlist_tree, char songlist_name[])
 
         float time = atof(tmp);
         songs->length = time;
-        */
+        tmp = strtok(NULL, delim);
+        //time
+        
         songs->left_child = NULL;
         songs->right_child = NULL;
         songs->parent = NULL;
