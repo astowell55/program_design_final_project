@@ -150,11 +150,11 @@ void read_SongFile()
 
         // Call the wcstok() method
         wchar_t *tmp = wcstok(buf, delim, &ptr);
-        songs->song_name = (wchar_t *)malloc(sizeof(wchar_t)*(wcslen(tmp) + 1));
+        songs->song_name = (wchar_t *)malloc(sizeof(wchar_t) * (wcslen(tmp) + 1));
         wcscpy(songs->song_name, tmp);
 
         tmp = wcstok(NULL, delim, &ptr);
-        songs->artist = (wchar_t *)malloc(sizeof(wchar_t)*(wcslen(tmp) + 1));
+        songs->artist = (wchar_t *)malloc(sizeof(wchar_t) * (wcslen(tmp) + 1));
         wcscpy(songs->artist, tmp);
         tmp = wcstok(NULL, delim, &ptr);
         for (int i = 0; i < wcslen(tmp); i++)
@@ -198,28 +198,26 @@ void output_song(song *cur_songlist)
 void output_songlist(node *songlist_tree)
 {
     // output all songlist name in songlist_tree
-    char *filename;
-    wcstombs(filename, songlist_tree->songlist_name, 101);
-    outputSongFile = fopen(filename, "w");
     if (root == NULL)
     {
         return;
     }
-    Inorder_traverse(root, 1);
-    fclose(outputSongFile);
-    return;
+    output_songlist(songlist_tree->left_child);
+    printf("%ls", songlist_tree->songlist_name);
+    output_songlist(songlist_tree->right_child);
 }
-void Export_songlist(node *cur_songlist)
+void Export_songlist(song *cur_songlist, wchar_t *songlist_name)
 {
     // Export cur_songlist's song as .csv file.
     char *filename;
-    wcstombs(filename, cur_songlist->songlist_name, 101);
+    wcstombs(filename, songlist_name, 101);
+    strcat(filename, ".csv");
     outputSongFile = fopen(filename, "w");
     if (root == NULL)
     {
         return;
     }
-    Inorder_traverse(root, 1);
+    Inorder_traverse_song(cur_songlist);
     fclose(outputSongFile);
     return;
 }
