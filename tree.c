@@ -87,7 +87,7 @@ void Choose_a_songlist(song **cur_songlist, wchar_t *songlist_name)
 int main()
 {
     //int data_num, input_Choose, output_Choose, search_Choose;
-
+    printf("Welcome!\n");
     int error = 0;
     // setlocale(LC_ALL,"");
     //- Preload songdata

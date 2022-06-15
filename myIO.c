@@ -25,7 +25,7 @@ wchar_t *read_wstring()
     // if(printf("read_wstring: -%ls-\n", buffer)<0){
     //     perror("printf");
     // }
-    if (wcslen(buffer) == MAX_SONG_NAME)
+    if (strlen(buffer) == MAX_SONG_NAME)
     {
 
         buffer[length - 1] = '.';
@@ -33,7 +33,7 @@ wchar_t *read_wstring()
         buffer[length - 3] = '.';
     }
     wchar_t *result = malloc(length * sizeof(wchar_t));
-    wcscpy(result, buffer);
+    strcpy(result, buffer);
     return result;
 }
 
@@ -131,24 +131,24 @@ void read_SongFile(song *song_data)
     
     while (fgets(buf, 300, songFile) != NULL)
     {
-        
-        if ((wcslen(buf) > 0) && (buf[wcslen(buf) - 1] == '\n'))
-            buf[wcslen(buf) - 1] = '\0';
+        printf("ww\n");
+        if ((strlen(buf) > 0) && (buf[strlen(buf) - 1] == '\n'))
+            buf[strlen(buf) - 1] = '\0';
         song *songs = malloc(sizeof(song));
-        wchar_t *ptr;
+        char *ptr;
         // Define the delimeter of the string
-        wchar_t delim[] = L",";
+        char delim[] = ",";
         
-        // Call the wcstok() method
-        wchar_t *tmp = wcstok(buf, delim, &ptr);
-        songs->song_name = (wchar_t *)malloc(sizeof(wchar_t) * (wcslen(tmp) + 1));
-        wcscpy(songs->song_name, tmp);
+        // Call the strtok() method
+        char *tmp = strtok(buf, delim);
+        songs->song_name = (char *)malloc(sizeof(char) * (strlen(tmp) + 1));
+        strcpy(songs->song_name, tmp);
 
-        tmp = wcstok(NULL, delim, &ptr);
-        songs->artist = (wchar_t *)malloc(sizeof(wchar_t) * (wcslen(tmp) + 1));
-        wcscpy(songs->artist, tmp);
-        tmp = wcstok(NULL, delim, &ptr);
-        for (int i = 0; i < wcslen(tmp); i++)
+        tmp = strtok(NULL, delim );
+        songs->artist = (char *)malloc(sizeof(char) * (strlen(tmp) + 1));
+        strcpy(songs->artist, tmp);
+        tmp = strtok(NULL, delim);
+        for (int i = 0; i < strlen(tmp); i++)
         {
             if (tmp[i] == ':')
             {
@@ -156,9 +156,10 @@ void read_SongFile(song *song_data)
                 break;
             }
         }
-        wchar_t *stop;
-        float time = wcstof(tmp, &stop);
+        char *stop;
+        float time = strtof(tmp, &stop);
         songs->length = time;
+        printf("ya\n");
         build_song_data(song_data, songs);
     }
     printf("cc\n");

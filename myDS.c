@@ -18,11 +18,11 @@ void build_tree(node **root, song *data, node *cur, int *error)
     }
     else
     {
-        if (wcscmp(((*root)->data->song_name), (data->song_name)) > 0)
+        if (strcmp(((*root)->data->song_name), (data->song_name)) > 0)
         {
             build_tree(&((*root)->left_child), data, (*root), error);
         }
-        else if (wcscmp(((*root)->data->song_name), (data->song_name)) < 0)
+        else if (strcmp(((*root)->data->song_name), (data->song_name)) < 0)
         {
             build_tree(&((*root)->right_child), data, (*root), error);
         }
@@ -54,7 +54,7 @@ void build_song(song **cur_songlist,wchar_t *target){
     cur = *cur_songlist;
     while(cur!=NULL){
         par = cur;
-        if(wcscmp(((*cur_songlist)->song_name), (target)) < 0){
+        if(strcmp(((*cur_songlist)->song_name), (target)) < 0){
             cur = cur->right_child;
         }else{
             cur = cur->left_child;
@@ -64,7 +64,7 @@ void build_song(song **cur_songlist,wchar_t *target){
     build_node->parent = par;
     if(par==NULL){
         *cur_songlist = build_node;
-    }else if(wcscmp(((*cur_songlist)->song_name), (target)) < 0){
+    }else if(strcmp(((*cur_songlist)->song_name), (target)) < 0){
         par->right_child = build_node;
     }else{
         par->left_child = build_node;
@@ -99,7 +99,7 @@ void build_song(song **cur_songlist,wchar_t *target){
     //     }
     // }
 }
-void build_songlist(node **songlist_tree,wchar_t *target){
+void build_songlist(node **songlist_tree,char *target){
     /*
         Add a pointer of songlist named songlist_name[] into songlist_tree.
         if there's no tree, build one.
@@ -108,13 +108,13 @@ void build_songlist(node **songlist_tree,wchar_t *target){
     node *par=NULL;
     node *cur=NULL;
     node *build_node = malloc(sizeof(node));
-    wcscpy(build_node->songlist_name,target);
+    strcpy(build_node->songlist_name,target);
     build_node->data = NULL;
 
     cur = *songlist_tree;
     while(cur!=NULL){
         par = cur;
-        if(wcscmp(((*songlist_tree)->songlist_name), (target)) < 0){
+        if(strcmp(((*songlist_tree)->songlist_name), (target)) < 0){
             cur = cur->right_child;
         }else{
             cur = cur->left_child;
@@ -124,7 +124,7 @@ void build_songlist(node **songlist_tree,wchar_t *target){
     build_node->parent = par;
     if(par==NULL){
         *songlist_tree = build_node;
-    }else if(wcscmp(((*songlist_tree)->songlist_name), (target)) < 0){
+    }else if(strcmp(((*songlist_tree)->songlist_name), (target)) < 0){
         par->right_child = build_node;
     }else{
         par->left_child = build_node;
@@ -174,11 +174,11 @@ void build_songlist(node **songlist_tree,wchar_t *target){
 void build_song_data(song *song_data,song *songs){
     song *par=NULL;
     song *cur=NULL;
-    printf("_%ls_\n",songs->song_name);
+    printf("_%s_\n",songs->song_name);
     cur = song_data;
     while(cur!=NULL){
         par = cur;
-        if(wcscmp(((song_data)->song_name), (songs->song_name)) < 0){
+        if(strcmp(((song_data)->song_name), (songs->song_name)) < 0){
             cur = cur->right_child;
         }else{
             cur = cur->left_child;
@@ -188,7 +188,7 @@ void build_song_data(song *song_data,song *songs){
     songs->parent = par;
     if(par==NULL){
         song_data = songs;
-    }else if(wcscmp(((song_data)->song_name), (songs->song_name)) < 0){
+    }else if(strcmp(((song_data)->song_name), (songs->song_name)) < 0){
         par->right_child = songs;
     }else{
         par->left_child = songs;
@@ -325,8 +325,8 @@ void delete_song(song **cur_songlist,wchar_t song_name[]){
 
     if (y != target)
     {
-        wcscpy( target->artist, y->artist);
-        wcscpy(target->song_name, y->song_name);
+        strcpy( target->artist, y->artist);
+        strcpy(target->song_name, y->song_name);
         target->length = y->length;
     }
 
@@ -395,7 +395,7 @@ void delete_songlist(node **songlist_tree,wchar_t songlist_name[]){
     if (y != target)
     {
         target->data = y->data;
-       wcscpy(target->songlist_name,y->songlist_name);
+       strcpy(target->songlist_name,y->songlist_name);
     }
     
     delete_all_song(y->data);

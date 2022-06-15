@@ -13,8 +13,8 @@ typedef struct systime systime;
 // the struct store all the information of song.
 struct song
 {
-    wchar_t *song_name;
-    wchar_t *artist;
+    char *song_name;
+    char *artist;
     float length;
     long long like;
     systime times;
@@ -29,7 +29,7 @@ typedef struct song song;
 struct node
 {
     song *data;
-    wchar_t songlist_name[MAX_SONG_NAME+1];
+    char songlist_name[MAX_SONG_NAME+1];
     struct node *parent;
     struct node *left_child;
     struct node *right_child;
@@ -38,7 +38,7 @@ typedef struct node node;
 // compare input index and build the binary search tree
 void build_tree(node **root, song *data, node *cur, int *error);
 void build_song(song **cur_songlist,wchar_t song_name[]);
-void build_songlist(node **songlist_tree,wchar_t *target);
+void build_songlist(node **songlist_tree,char *target);
 void build_song_data(song *song_data,song *songs);
 void delete_name(node **root, song *data, int search_Choose);
 void delete_song(song **cur_songlist,wchar_t song_name[]);
