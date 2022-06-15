@@ -8,6 +8,9 @@
 #include "myAlgo.h"
 #include "myUI.h"
 #include "myUI.h"
+#include "tree.h"
+song *song_data=NULL;
+
 void Choose_a_songlist(song **cur_songlist,char *songlist_name)
 {
     /*
@@ -42,7 +45,7 @@ void Choose_a_songlist(song **cur_songlist,char *songlist_name)
                 build_song(cur_songlist, song_name);
                 
                 //printf("build finish\n");
-                output_song(*cur_songlist);
+                //output_song(*cur_songlist);
             }
             else
             {
@@ -101,7 +104,7 @@ int main(){
     
     // setlocale(LC_ALL,"");
     //- Preload songdata
-    song *song_data=NULL;
+    
     read_SongFile(&song_data);
     printf("song_data:%p\n",song_data);    
     //output_song(song_data);

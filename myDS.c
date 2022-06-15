@@ -5,6 +5,7 @@
 #include "myDS.h"
 #include "myIO.h"
 #include "myAlgo.h"
+#include "tree.h"
 void build_song(song **cur_songlist,char *target){
     /*
         Add a song named song_name[] into cur_songlist.
@@ -13,10 +14,20 @@ void build_song(song **cur_songlist,char *target){
     */
     song *par=NULL;
     song *cur=NULL;
+    song *target_data = search_song(song_data,target);
+    if(target_data==NULL){
+        printf("Can't find this song in song data!\n");
+        return;
+    }
     song *build_node = malloc(sizeof(song));
     //char *name = malloc((strlen(target) + 1));
-    build_node->song_name = malloc(strlen(target));
-    strcpy(build_node->song_name,target);
+    // build_node->song_name = malloc(strlen(target));
+    // strcpy(build_node->song_name,target);
+    build_node->song_name = target_data->song_name;
+    build_node->artist = target_data->artist;
+    build_node->length = target_data->length;
+    upload_time(&(build_node->times));
+
     printf("node:%s\n",build_node->song_name);
     //char_t *name = malloc(sizeof(target)*sizeof(wchar_t));
     //wcscpy(name,target);

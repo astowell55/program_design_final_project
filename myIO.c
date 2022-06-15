@@ -5,6 +5,7 @@
 #include "myDS.h"
 #include "myIO.h"
 #include "myAlgo.h"
+#include "tree.h"
 static FILE *outputSongFile;
 char *read_wstring()
 {
@@ -67,9 +68,10 @@ void Inorder_traverse(song *root)
         return;
     }
     Inorder_traverse(root->left_child);
-    fprintf(outputSongFile, "%s,", root->artist);
     fprintf(outputSongFile, "%s,", root->song_name);
-    fprintf(outputSongFile, "%.2f", root->length);
+    fprintf(outputSongFile, "%s,", root->artist);
+    fprintf(outputSongFile, "%.2f,", root->length);
+    fprintf(outputSongFile,"%d/%d/%d %d:%d",root->times.year,root->times.month,root->times.day,root->times.hour,root->times.minute);
     fprintf(outputSongFile, "\n");
     Inorder_traverse(root->right_child);
 }
@@ -194,13 +196,18 @@ void output_songlist(node *songlist_tree)
 void Export_songlist(song *cur_songlist, char *Filename)
 {
     // Export cur_songlist's song as .csv file.
-    char *filename = Filename;
+    char filename[MAX_SONG_NAME+1];
+    strcpy(filename,Filename);
+    //printf("filename:'%s'\n",filename);
     strcat(filename, ".csv");
+    //printf("filenames:'%s'\n",filename);
+    
     outputSongFile = fopen(filename, "w");
     if (cur_songlist == NULL)
     {
         return;
     }
+    fprintf(outputSongFile,"Title,Artist,Song,length(min),last Edited time\n");
     Inorder_traverse(cur_songlist);
     fclose(outputSongFile);
     return;
