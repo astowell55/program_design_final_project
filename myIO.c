@@ -238,7 +238,7 @@ void Import_songlist(node **songlist_tree, char songlist_name[])
             buf[strlen(buf) - 1] = '\0';
         song *songs = malloc(sizeof(song));
         // Define the delimeter of the string
-        char delim[] = ",";
+        char delim[] = ",/ ";
         printf("buf2:'%s'\n",buf);
         printf("songs:'%p'\n",songs);
         // Call the wcstok() method
@@ -254,20 +254,29 @@ void Import_songlist(node **songlist_tree, char songlist_name[])
         printf("tmp2:'%s'\n",tmp);
         //length
         tmp = strtok(NULL, delim);
-        for (int i = 0; i < strlen(tmp); i++)
-        {
-            if (tmp[i] == ':')
-            {
-                tmp[i] = '.';
-                break;
-            }
-        }
-
         float time = atof(tmp);
         songs->length = time;
+
         tmp = strtok(NULL, delim);
-        //time
+        int year = atoi(tmp);
+        songs->times.year=year;
         
+        tmp = strtok(NULL, delim);
+        int month = atoi(tmp);
+        songs->times.month = month;
+
+        tmp = strtok(NULL, delim);
+        int day = atoi(tmp);
+        songs->times.day =day;
+
+        tmp = strtok(NULL, delim);
+        int hour = atoi(tmp);
+        songs->times.hour =hour;
+
+        tmp = strtok(NULL, delim);
+        int minute = atoi(tmp);
+        songs->times.minute =minute;
+
         songs->left_child = NULL;
         songs->right_child = NULL;
         songs->parent = NULL;
