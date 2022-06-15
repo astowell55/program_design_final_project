@@ -36,16 +36,7 @@ wchar_t *read_wstring()
     wcscpy(result, buffer);
     return result;
 }
-// void read_line(song *data)
-// {
-//     wchar_t c;
-//     wchar_t buf[MAX_SONG_NAME + 1];
-//     scanf(" %d ", &data->index);
-//     read_song_name(buf);
-//     data->song_name = (wchar_t *)malloc(sizeof(buf));
-//     wcsncpy(data->song_name, buf, MAX_SONG_NAME);
-//     return;
-// }
+
 void Preorder_traverse(node *root, int output_choose)
 {
     if (root == NULL)
@@ -54,7 +45,6 @@ void Preorder_traverse(node *root, int output_choose)
     }
     if (output_choose == 1)
     {
-        // fprintf(outputSongFile, "%d ", root->data->index);
         fprintf(outputSongFile, "%ls", root->data->song_name);
         fprintf(outputSongFile, "\n");
     }
@@ -189,16 +179,23 @@ void write_SongFile(node *root)
 void output_song(song *cur_songlist)
 {
     // output all song name,artist,time in cur_songlist
-    /*
-        Maybe :
-        Inorder_traverse(cur_songlist,2);
-        I guess...
-    */
+    if (root == NULL)
+    {
+        return;
+    }
+    else
+    {
+        output_song(cur_songlist->left_child);
+        printf("%ls", cur_songlist->song_name);
+    }
+    output_song(cur_songlist->right_child);
+
 }
+
 void output_songlist(node *songlist_tree)
 {
     // output all songlist name in songlist_tree
-    if (root == NULL)
+    if (songlist_tree == NULL)
     {
         return;
     }
@@ -221,10 +218,21 @@ void Export_songlist(song *cur_songlist, wchar_t *songlist_name)
     fclose(outputSongFile);
     return;
 }
+
 void Import_songlist(node *songlist_tree, wchar_t songlist_name[])
 {
     /*
         Import a .csv file which file name is {songlist_name}.csv, as a songlist.
         if there's not , print "Missing File : {songlist_name}\n".
     */
+    FILE *songFile;
+    wchar_t buf[300];
+    char *filename;
+    wcstombs(filename, songlist_name, 101);
+    /* if the space could not be allocated, return an error */
+    if ((songFile = fopen(filename, "r")) == NULL) // Reading a file
+    {
+        printf("Missing File : {%ls}\n", songlist_name);
+    }
+
 }
