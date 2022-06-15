@@ -12,6 +12,7 @@
 #define RESET "\033[0m"
 #define W_BACK "\033[47;"
 #define HEART "❤"
+#define HEART_BROKE "💔"
 #define MUSIC "𝄞"
 int getch(void)
 {
@@ -33,7 +34,7 @@ int button(int num,char *options[num]){
         for(int i =0;i< num;i++){
             if(i == cur_choose){
                 printf(RED);
-                printf(HEART);
+                printf("->");
                 printf(" ");
             }
             printf("%s",options[i]);

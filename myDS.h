@@ -3,6 +3,7 @@
 #define MAX_SONG_NAME 100
 #include <wchar.h>
 #include <time.h>
+#include <stdbool.h>
 struct systime{
     int year;
     int month;
@@ -18,7 +19,7 @@ struct song
     char *song_name;
     char *artist;
     float length;
-    long long like;
+    bool like;
     systime times;
     struct song *parent;
     struct song *left_child;
