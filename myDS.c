@@ -175,7 +175,6 @@ void build_songlist(node **songlist_tree,wchar_t *target){
 void build_song_data(song **song_data,song *songs){
     song *par=NULL;
     song *cur=NULL;
-
     cur = *song_data;
     while(cur!=NULL){
         par = cur;

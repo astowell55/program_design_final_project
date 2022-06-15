@@ -36,16 +36,7 @@ wchar_t *read_wstring()
     wcscpy(result, buffer);
     return result;
 }
-// void read_line(song *data)
-// {
-//     wchar_t c;
-//     wchar_t buf[MAX_SONG_NAME + 1];
-//     scanf(" %d ", &data->index);
-//     read_song_name(buf);
-//     data->song_name = (wchar_t *)malloc(sizeof(buf));
-//     wcsncpy(data->song_name, buf, MAX_SONG_NAME);
-//     return;
-// }
+
 void Preorder_traverse(node *root, int output_choose)
 {
     if (root == NULL)
@@ -54,7 +45,6 @@ void Preorder_traverse(node *root, int output_choose)
     }
     if (output_choose == 1)
     {
-        // fprintf(outputSongFile, "%d ", root->data->index);
         fprintf(outputSongFile, "%ls", root->data->song_name);
         fprintf(outputSongFile, "\n");
     }
@@ -210,35 +200,44 @@ void output_song(song *cur_songlist)
 void output_songlist(node *songlist_tree)
 {
     // output all songlist name in songlist_tree
-    char *filename;
-    wcstombs(filename, songlist_tree->songlist_name, 101);
-    outputSongFile = fopen(filename, "w");
-    if (root == NULL)
+    if (songlist_tree == NULL)
     {
         return;
     }
-    Inorder_traverse(root, 1);
-    fclose(outputSongFile);
-    return;
+    output_songlist(songlist_tree->left_child);
+    printf("%ls", songlist_tree->songlist_name);
+    output_songlist(songlist_tree->right_child);
 }
-void Export_songlist(node *cur_songlist)
+void Export_songlist(song *cur_songlist, wchar_t *songlist_name)
 {
     // Export cur_songlist's song as .csv file.
     char *filename;
-    wcstombs(filename, cur_songlist->songlist_name, 101);
+    wcstombs(filename, songlist_name, 101);
+    strcat(filename, ".csv");
     outputSongFile = fopen(filename, "w");
     if (root == NULL)
     {
         return;
     }
-    Inorder_traverse(root, 1);
+    Inorder_traverse_song(cur_songlist);
     fclose(outputSongFile);
     return;
 }
+
 void Import_songlist(node *songlist_tree, wchar_t songlist_name[])
 {
     /*
         Import a .csv file which file name is {songlist_name}.csv, as a songlist.
         if there's not , print "Missing File : {songlist_name}\n".
     */
+    FILE *songFile;
+    wchar_t buf[300];
+    char *filename;
+    wcstombs(filename, songlist_name, 101);
+    /* if the space could not be allocated, return an error */
+    if ((songFile = fopen(filename, "r")) == NULL) // Reading a file
+    {
+        printf("Missing File : {%ls}\n", songlist_name);
+    }
+
 }

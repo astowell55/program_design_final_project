@@ -6,7 +6,7 @@
 #include "myIO.h"
 #include "myAlgo.h"
 #include "myUI.h"
-void Choose_a_songlist(song **cur_songlist)
+void Choose_a_songlist(song **cur_songlist, wchar_t *songlist_name)
 {
     /*
         In a songlist,it is the UI.
@@ -15,7 +15,7 @@ void Choose_a_songlist(song **cur_songlist)
     wchar_t *song_name;
     song *target_song = NULL;
     printf("[a]Add a song\n[d]Delete a song\n"
-           "[o]Output all songs\n[e]Export as .csv\n" \ 
+           "[o]Output all songs\n[e]Export as .csv\n"\ 
     "[<]Back to main page\nEnter your operater: ");
     char operater;
     while (scanf(" %c\n", &operater) != EOF)
@@ -26,6 +26,7 @@ void Choose_a_songlist(song **cur_songlist)
         case 'a':
             printf("Enter the title: ");
             //  Add song.
+
             song_name = read_wstring();
             printf("read: _%ls_\n", song_name);
             target_song = search_song(*cur_songlist, song_name);
@@ -45,6 +46,7 @@ void Choose_a_songlist(song **cur_songlist)
             break;
         case 'd':
             printf("Enter the title of the song you want to delete: ");
+
             //  Delete song.
             song_name = read_wstring();
             target_song = search_song(*cur_songlist, song_name);
@@ -66,7 +68,7 @@ void Choose_a_songlist(song **cur_songlist)
             break;
         case 'e':
             // Export this songlist as .csv
-            Export_songlist(*cur_songlist);
+            Export_songlist(*cur_songlist, songlist_name);
             break;
         case '<':
             return; // Back
@@ -78,6 +80,7 @@ void Choose_a_songlist(song **cur_songlist)
         printf("[a]Add a song\n[d]Delete a song\n"
                "[o]Output all songs\n[e]Export as .csv\n" \ 
     "[<]Back to main page\nEnter your operater: ");
+
     }
 }
 
@@ -91,7 +94,6 @@ int main()
     //- Preload songdata
     read_SongFile();
     //- Preload songdata end
-
     node *songlist_tree = NULL;   // the root of songlist tree.
     node *target_songlist = NULL; // point to the songlist.
     // select oprerater
@@ -128,6 +130,7 @@ int main()
             break;
         case 'd':
             if (songlist_tree == NULL)
+
             {
                 printf("There is not any playlist\n");
                 break;
@@ -154,10 +157,12 @@ int main()
                 break;
             }
         case 'c':
+
             if (songlist_tree == NULL)
             {
                 printf("There is not any playlist\n");
                 break;
+
             }
             else
             {
