@@ -7,7 +7,8 @@
 #include "myDS.h"
 #include "myIO.h"
 
-node *search(node *root,song *target, int search_Choose);// search by song_name
-node *search_songlist(node *songlist_tree,char songlist_name[]);
+node *search(node *root, song *target, int search_Choose); // search by song_name
+node *search_songlist(node *songlist_tree, char songlist_name[]);
 void upload_time(systime *upload_times);
+song *search_song(song *cur_songlist, char song_name[]);
 #endif

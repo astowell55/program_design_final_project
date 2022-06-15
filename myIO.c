@@ -194,7 +194,8 @@ void output_songlist(node *songlist_tree)
 void Export_songlist(song *cur_songlist, char *Filename)
 {
     // Export cur_songlist's song as .csv file.
-    char *filename = Filename;
+    char filename[MAX_SONG_NAME+1];
+    strcpy(filename,Filename);
     strcat(filename, ".csv");
     outputSongFile = fopen(filename, "w");
     if (cur_songlist == NULL)
