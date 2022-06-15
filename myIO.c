@@ -4,6 +4,7 @@
 #include <wchar.h>
 #include "myDS.h"
 #include "myIO.h"
+#include "myAlgo.h"
 static FILE *outputSongFile;
 char *read_wstring()
 {
@@ -112,6 +113,8 @@ void read_SongFile(song **song_data)
         if ((strlen(buf) > 0) && (buf[strlen(buf) - 1] == '\n'))
             buf[strlen(buf) - 1] = '\0';
         song *songs = malloc(sizeof(song));
+        upload_time(&(songs->times));
+        //print_systimes(songs->times);
         // Define the delimeter of the string
         char delim[] = ",";
 
@@ -169,6 +172,7 @@ void output_song(song *cur_songlist)
     }
     output_song(cur_songlist->left_child);
     printf("%s\n", cur_songlist->song_name);
+    //print_systimes(cur_songlist->times);
     output_song(cur_songlist->right_child);
 }
 
@@ -256,4 +260,18 @@ void Import_songlist(node *songlist_tree, char songlist_name[])
     }
     fclose(songFile);
     return;
+
+}
+void print_systimes(systime upload_time){
+    printf("%02d/%02d/%d ", upload_time.day, upload_time.month, upload_time.year);
+    // 打印當地時間
+    if (upload_time.hour < 12) {    // 中午之前
+        printf("%02d:%02d:%02d am\n", upload_time.hour, upload_time.minute,upload_time.second);
+    }
+    else {    // 中午之後
+        printf("%02d:%02d:%02d pm\n", upload_time.hour - 12, upload_time.minute,upload_time.second);
+    }
+ 
+    //打印當前日期
+    
 }

@@ -64,14 +64,17 @@ void build_song(song **cur_songlist,char *target){
         if(strcmp(((cur)->song_name), (target)) > 0){
             //cur = cur->right_child;
             cur = cur->left_child;
-        }else{
+        }else if(strcmp((cur->song_name), (target)) < 0){
             //cur = cur->left_child;
             cur = cur->right_child;
+        }else{
+            printf("already exist\n");
+            return;
         }
     }
     //printf("%p",build_node);
     build_node->parent = par;
-    if(par==NULL){
+    if(par == NULL){
         *cur_songlist = build_node;
     }else if(strcmp(((par)->song_name), (target)) > 0){
         //par->right_child = build_node;
@@ -80,35 +83,6 @@ void build_song(song **cur_songlist,char *target){
         //par->left_child = build_node;
         par->right_child = build_node;
     }
-    // if ((*cur_songlist) == NULL)
-    // {
-    //     song *target = search_song(*cur_songlist,song_name); //still wrong, it should be search_song(song_data,song_name);
-    //     song *new_node = (song *)malloc(sizeof(song));
-    //     wcscpy(new_node->song_name,song_name);
-    //     wcscpy(new_node->artist,target->artist);
-    //     wcscpy(new_node->length,target->length);
-    //     new_node->left_child = NULL;
-    //     new_node->right_child = NULL;
-    //     new_node->parent = par;
-    //     *cur_songlist = new_node;
-    //     return;
-    // }
-    // else
-    // {
-    //     if (wcscmp(((*cur_songlist)->song_name), (song_name)) > 0)
-    //     {
-    //         build_song(&((*cur_songlist)->left_child), song_name, (*cur_songlist));
-    //     }
-    //     else if (wcscmp(((*cur_songlist)->song_name), (song_name)) < 0)
-    //     {
-    //         build_song(&((*cur_songlist)->right_child), song_name, (*cur_songlist));
-    //     }
-    //     else
-    //     {
-    //         printf("%ls already exist\n", song_name);
-    //         return;
-    //     }
-    // }
 }
 void build_songlist(node **songlist_tree,char *target){
     /*
@@ -144,47 +118,6 @@ void build_songlist(node **songlist_tree,char *target){
         //par->left_child = build_node;
         par->right_child = build_node;
     }
-
-    // if ((*songlist_tree) == NULL)
-    // {
-    //     node *new_node = (node *)malloc(sizeof(node));
-    //     //printf("new_node\n");
-    //     wcscpy(new_node->songlist_name,target);
-    //     //printf("cpy\n");
-    //     new_node->data = NULL;
-    //     new_node->left_child = NULL;
-    //     new_node->right_child = NULL;
-    //     new_node->parent = par;
-    //     *songlist_tree = new_node;
-    //     //printf("Builded\n");
-    //     return;
-    // }
-    // else
-    // {
-    //     if (wcscmp(((*songlist_tree)->songlist_name), (target)) > 0)
-    //     {
-    //         if((*songlist_tree)->left_child!=NULL) {
-    //             build_song(&((*songlist_tree)->left_child), target, (*songlist_tree));
-    //         }else{
-    //             build_song(NULL, target, (*songlist_tree));
-    //         }
-    //     }
-    //     else if (wcscmp(((*songlist_tree)->songlist_name), (target)) < 0)
-    //     {
-    //         if((*songlist_tree)->right_child!=NULL) 
-    //         {
-    //             build_song(&((*songlist_tree)->right_child), target, (*songlist_tree));
-    //         }else 
-    //         {
-    //             build_song(NULL, target, (*songlist_tree));
-    //         }
-    //     }
-    //     else
-    //     {
-    //         printf("%ls already exist\n", target);
-    //         return;
-    //     }
-    // }
 }
 void build_song_data(song **song_data,song *songs){
     /*
@@ -200,9 +133,11 @@ void build_song_data(song **song_data,song *songs){
         //printf("--%s--\n",songs->song_name);
         
         if(strcmp(((cur)->song_name), (songs->song_name)) > 0){
-            cur = cur->right_child;
-        }else{
             cur = cur->left_child;
+            //cur = cur->right_child;
+        }else{
+            cur = cur->right_child;
+            //cur = cur->left_child;
         }
         //printf("cur:%p\n",cur);
        // printf("-1-%s-1-\n",songs->song_name);
@@ -213,74 +148,13 @@ void build_song_data(song **song_data,song *songs){
     if(par==NULL){
         *song_data = songs;
     }else if(strcmp(((par)->song_name), (songs->song_name)) > 0){
-        par->right_child = songs;
-    }else{
         par->left_child = songs;
+    }else{
+        par->right_child = songs;
     }
     return;
 }
-// void delete_name(node **root, song *data, int search_Choose)
-// {
-//     node *target = search(*root, data, search_Choose);
-//     if (target == NULL)
-//     {
-//         printf("'%ls' not found.\n", data->song_name);
-//     }
-//     node *y;
-//     node *x;
-//
-//     if (target->left_child == NULL && target->right_child == NULL)
-//     {
-//         y = target;
-//     }
-//     else
-//     {
-//         if (target->right_child != NULL)
-//         {
-//             y = target->right_child;
-//         }
-//         else
-//         {
-//             y = target->left_child;
-//         }
-//     }
-//
-//     if (y->left_child != NULL)
-//     {
-//         x = y->left_child;
-//     }
-//     else
-//     {
-//         x = y->right_child;
-//     }
-//
-//     if (x != NULL)
-//     {
-//         x->parent = y->parent;
-//     }
-//
-//     if (y->parent == NULL)
-//     {
-//         *root = x;
-//     }
-//     else if (y == y->parent->left_child)
-//     {
-//         y->parent->left_child = x;
-//     }
-//     else
-//     {
-//         y->parent->right_child = x;
-//     }
-//
-//     if (y != target)
-//     {
-//         target->data->index = y->data->index;
-//         target->data->song_name = y->data->song_name;
-//     }
-//
-//     free(y);
-//     return;
-// }
+
 static void delete_all_song(song *songlist_root){
     /*
         using recursive to free all song of a songlist.
