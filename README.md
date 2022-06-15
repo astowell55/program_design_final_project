@@ -102,6 +102,7 @@ abcd already exist
     * Change: add system time
 
 
+    * Change: FIX delete function.
 ## target 每周目標
 
 ### 第二周

@@ -29,7 +29,7 @@ void build_tree(node **root, song *data, node *cur, int *error)
         }
         else
         {
-            printf("%ls already exist\n", data->song_name);
+            printf("%s already exist\n", data->song_name);
             *error = 1;
             return;
         }
@@ -165,16 +165,35 @@ static void delete_all_song(song *songlist_root){
     free(songlist_root);
     return;
 }
+static song *leftmost_song(song *cur_songlist){
+    while(cur_songlist->left_child!=NULL){
+        cur_songlist = cur_songlist->left_child;
+    }
+    return cur_songlist;
+}
+static song *Successor_song(song *cur_songlist){
+    if(cur_songlist->right_child!=NULL){
+        return leftmost_song(cur_songlist);
+    }
+
+    song *successor = cur_songlist->parent;
+    while (successor != NULL && cur_songlist == successor->right_child) {
+        cur_songlist = successor;
+        successor = successor->parent;
+    }
+    return successor;
+}
 void delete_song(song **cur_songlist,char song_name[]){
     /*
         search song_name in cur_songlist. 
         if found, free it.
         if not found, print error and return. 
     */
-   song *target = search_song(*cur_songlist,song_name);
-   if (target == NULL)
+    song *target = search_song(*cur_songlist,song_name);
+    if (target == NULL)
     {
-        printf("'%ls' not found.\n", song_name);
+        printf("'%s' not found.\n", song_name);
+        return;
     }
     song *y;
     song *x;
@@ -224,9 +243,9 @@ void delete_song(song **cur_songlist,char song_name[]){
 
     if (y != target)
     {
-        strcpy( target->artist, y->artist);
+        //strcpy(target->artist, y->artist);
         strcpy(target->song_name, y->song_name);
-        target->length = y->length;
+        //target->length = y->length;
     }
 
     free(y);
@@ -242,7 +261,7 @@ void delete_songlist(node **songlist_tree,char songlist_name[]){
     node *target = search_songlist(*songlist_tree,songlist_name);
     if (target == NULL)
     {
-        printf("'%ls' not found.\n", songlist_name);
+        printf("'%s' not found.\n", songlist_name);
         return;
     }
     node *y;
