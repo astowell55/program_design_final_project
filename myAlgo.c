@@ -42,6 +42,7 @@ node *search(node *root, song *target, int search_Choose)
         }
         return curr;
     }
+     return curr;
 }
 node *search_songlist(node *songlist_tree, char songlist_name[])
 {
