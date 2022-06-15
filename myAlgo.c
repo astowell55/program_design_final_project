@@ -11,10 +11,10 @@ node *search(node *root, song *target, int search_Choose)
 
     if (search_Choose == 1)
     {
-        while (curr != NULL && wcscmp(target->artist, curr->data->artist) != 0)
+        while (curr != NULL && strcmp(target->artist, curr->data->artist) != 0)
         {
 
-            if (wcscmp(curr->data->artist, target->artist) > 0)
+            if (strcmp(curr->data->artist, target->artist) > 0)
             {
                 curr = curr->left_child;
             }
@@ -27,10 +27,10 @@ node *search(node *root, song *target, int search_Choose)
     }
     else if (search_Choose == 2)
     {
-        while (curr != NULL && wcscmp(target->song_name, curr->data->song_name) != 0)
+        while (curr != NULL && strcmp(target->song_name, curr->data->song_name) != 0)
         {
 
-            if (wcscmp(curr->data->song_name, target->song_name) > 0)
+            if (strcmp(curr->data->song_name, target->song_name) > 0)
             {
                 curr = curr->left_child;
             }
@@ -42,7 +42,7 @@ node *search(node *root, song *target, int search_Choose)
         return curr;
     }
 }
-node *search_songlist(node *songlist_tree, wchar_t songlist_name[])
+node *search_songlist(node *songlist_tree, char songlist_name[])
 {
     /*
         search songlist_name in songlist_tree.
@@ -50,21 +50,21 @@ node *search_songlist(node *songlist_tree, wchar_t songlist_name[])
         if not, return NULL.
     */
     node *curr = songlist_tree;
-    while (curr != NULL && wcscmp(songlist_name, curr->songlist_name) != 0)
+    while (curr != NULL && strcmp(songlist_name, curr->songlist_name) != 0)
     {
         //printf("while: _%p_\n",curr);
-        if (wcscmp(songlist_name, curr->songlist_name) > 0)
+        if (strcmp(songlist_name, curr->songlist_name) > 0)
         {
-            curr = curr->left_child;
+            curr = curr->right_child;
         }
         else
         {
-            curr = curr->right_child;
+            curr = curr->left_child;
         }
     }
     return curr;
 }
-song *search_song(song *cur_songlist, wchar_t song_name[])
+song *search_song(song *cur_songlist, char song_name[])
 {
     /*
         search song_name in cur_songlist.
@@ -72,16 +72,15 @@ song *search_song(song *cur_songlist, wchar_t song_name[])
         if not, return NULL.
     */
     song *curr = cur_songlist;
-    while (curr != NULL && wcscmp(song_name, curr->song_name) != 0)
-    {
+    while (curr != NULL && strcmp(song_name, curr->song_name) != 0){
         //printf("while: _%p_\n",curr);
-        if (wcscmp(song_name, curr->song_name) > 0)
-        {
-            curr = curr->left_child;
+        //printf("s_%ls\n",curr->song_name);
+        if (strcmp(song_name, curr->song_name) > 0){
+            curr = curr->right_child;
         }
         else
         {
-            curr = curr->right_child;
+            curr = curr->left_child;
         }
     }
     return curr;

@@ -5,10 +5,10 @@
 #include "myDS.h"
 #include "myIO.h"
 static FILE *outputSongFile;
-wchar_t *read_wstring()
+char *read_wstring()
 {
-    wchar_t c;
-    wchar_t buffer[MAX_SONG_NAME + 1];
+    char c;
+    char buffer[MAX_SONG_NAME + 1];
     int length = 0;
     while ((c = getchar()) != '\n' && c != EOF)
     {
@@ -26,15 +26,16 @@ wchar_t *read_wstring()
     // if(printf("read_wstring: -%ls-\n", buffer)<0){
     //     perror("printf");
     // }
-    if (wcslen(buffer) == MAX_SONG_NAME)
+    if (strlen(buffer) == MAX_SONG_NAME)
     {
 
         buffer[length - 1] = '.';
         buffer[length - 2] = '.';
         buffer[length - 3] = '.';
     }
-    wchar_t *result = malloc(length * sizeof(wchar_t));
-    wcscpy(result, buffer);
+    char *result = malloc(length * sizeof(char));
+    printf("%p\n",result);
+    strcpy(result, buffer);                                  
     return result;
 }
 // void read_line(song *data)
@@ -56,7 +57,7 @@ void Preorder_traverse(node *root, int output_choose)
     if (output_choose == 1)
     {
         // fprintf(outputSongFile, "%d ", root->data->index);
-        fprintf(outputSongFile, "%ls", root->data->song_name);
+        fprintf(outputSongFile, "%s", root->data->song_name);
         fprintf(outputSongFile, "\n");
     }
     else if (output_choose == 2)
@@ -78,7 +79,7 @@ void Inorder_traverse(node *root, int output_choose)
     {
         
         // fprintf(outputSongFile, "%d ", root->data->index);
-        fprintf(outputSongFile, "%ls", root->data->song_name);
+        fprintf(outputSongFile, "%s", root->data->song_name);
         fprintf(outputSongFile, "\n");
     }
     else if (output_choose == 2)
@@ -99,7 +100,7 @@ void Postorder_traverse(node *root, int output_choose)
     if (output_choose == 1)
     {
         // fprintf(outputSongFile, "%d ", root->data->index);
-        fprintf(outputSongFile, "%ls", root->data->song_name);
+        fprintf(outputSongFile, "%s", root->data->song_name);
         fprintf(outputSongFile, "\n");
     }
     else if (output_choose == 2)
@@ -109,53 +110,35 @@ void Postorder_traverse(node *root, int output_choose)
     }
 }
 
-void Inorder_traverse_song(song *root)
-{
-    if (root == NULL)
-    {   
-        //printf("song data null\n");
-        return;
-    }
-    else
-    {
-        Inorder_traverse_song(root->left_child);
-        //fprintf(outputSongFile, "%ls", root->song_name);
-        //fprintf(outputSongFile, "\n");
-        printf("%ls", root->song_name);
-
-        Inorder_traverse_song(root->right_child);
-    }
-}
-
 void read_SongFile()
 {
     FILE *songFile;
 
     /* allocation of the buffer for every line in the File */
-    wchar_t buf[300];
+    char buf[300];
     /* if the space could not be allocated, return an error */
-    if ((songFile = fopen("songFile.csv", "r")) == NULL) // Reading a file
+    if ((songFile = fopen("songFile.csv", "r")) == NULL) // Reading a filemnnnnn
     {
         printf("File could not be opened.\n");
     }
     
-    while (fgetws(buf, 255, songFile) != NULL){
-        if ((wcslen(buf) > 0) && (buf[wcslen(buf) - 1] == '\n'))
-            buf[wcslen(buf) - 1] = '\0';
+    while (fgets(buf, 255, songFile) != NULL){
+        printf("%s",buf);
+        if ((strlen(buf) > 0) && (buf[strlen(buf) - 1] == '\n'))
+            buf[strlen(buf) - 1] = '\0';
         song *songs = malloc(sizeof(song));
-        wchar_t *ptr;
         // Define the delimeter of the string
-        wchar_t delim[] = L",";
+        char delim[] = ",";
 
         // Call the wcstok() method
-        wchar_t *tmp = wcstok(buf, delim, &ptr);
-        songs->song_name = (wchar_t *)malloc(sizeof(wchar_t) * (wcslen(tmp) + 1));
-        wcscpy(songs->song_name, tmp);
-        tmp = wcstok(NULL, delim, &ptr);
-        songs->artist = (wchar_t *)malloc(sizeof(wchar_t) * (wcslen(tmp) + 1));
-        wcscpy(songs->artist, tmp);
-        tmp = wcstok(NULL, delim, &ptr);
-        for (int i = 0; i < wcslen(tmp); i++)
+        char *tmp = strtok(buf, delim);
+        songs->song_name = (char*)malloc(sizeof(char) * (strlen(tmp) + 1));
+        strcpy(songs->song_name, tmp);
+        tmp = strtok(NULL, delim);
+        songs->artist = (char *)malloc(sizeof(char) * (strlen(tmp) + 1));
+        strcpy(songs->artist, tmp);
+        tmp = strtok(NULL, delim);
+        for (int i = 0; i < strlen(tmp); i++)
         {
             if (tmp[i] == ':')
             {
@@ -163,15 +146,14 @@ void read_SongFile()
                 break;
             }
         }
-        wchar_t *stop;
-        float time = wcstof(tmp, &stop);
+        char *stop;
+        float time = atof(stop);
         songs->length = time;
         build_song_data(&song_data, songs);
     }
     fclose(songFile);
     return;
 }
-
 void write_SongFile(node *root)
 {
     outputSongFile = fopen("output.csv", "w");
@@ -192,12 +174,19 @@ void output_song(song *cur_songlist)
         Inorder_traverse(cur_songlist,2);
         I guess...
     */
+    if (root == NULL){   
+        return;
+    }
+    output_song(cur_songlist->left_child);
+    printf("%s\n", cur_songlist->song_name);
+    output_song(cur_songlist->right_child);
+
 }
 void output_songlist(node *songlist_tree)
 {
     // output all songlist name in songlist_tree
     char *filename;
-    wcstombs(filename, songlist_tree->songlist_name, 101);
+    //wcstombs(filename, songlist_tree->songlist_name, 101);
     outputSongFile = fopen(filename, "w");
     if (root == NULL)
     {
@@ -211,7 +200,7 @@ void Export_songlist(node *cur_songlist)
 {
     // Export cur_songlist's song as .csv file.
     char *filename;
-    wcstombs(filename, cur_songlist->songlist_name, 101);
+    //wcstombs(filename, cur_songlist->songlist_name, 101);
     outputSongFile = fopen(filename, "w");
     if (root == NULL)
     {
@@ -221,7 +210,7 @@ void Export_songlist(node *cur_songlist)
     fclose(outputSongFile);
     return;
 }
-void Import_songlist(node *songlist_tree, wchar_t songlist_name[])
+void Import_songlist(node *songlist_tree, char songlist_name[])
 {
     /*
         Import a .csv file which file name is {songlist_name}.csv, as a songlist.
