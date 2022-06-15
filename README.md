@@ -108,6 +108,8 @@ abcd already exist
     * Change: song_data now is a Global variable.
 * 1.0.4
     * Change: improve UI.
+* 1.0.5
+    * Change: File I/O finished.
 ## target 每周目標
 
 ### 第二周
