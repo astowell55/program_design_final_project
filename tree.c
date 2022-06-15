@@ -23,7 +23,7 @@ void Choose_a_songlist(song **cur_songlist)
         switch (operater)
         {
         case 'a':
-            printf("Enter the title: ");
+            //printf("Enter the title: ");
             // Add song.
             song_name = read_wstring();
             printf("read: _%ls_\n", song_name);
@@ -43,7 +43,7 @@ void Choose_a_songlist(song **cur_songlist)
             printf("_%ls_\n", (*cur_songlist)->song_name);
             break;
         case 'd':
-            printf("Enter the title of the song you want to delete: ");
+            //printf("Enter the title of the song you want to delete: ");
             // Delete song.
             song_name = read_wstring();
             target_song = search_song(*cur_songlist, song_name);
@@ -59,7 +59,7 @@ void Choose_a_songlist(song **cur_songlist)
             free(song_name);
             break;
         case 'o':
-            printf("All of your song(s) in %ls:\n", cur_songlist);
+            //printf("All of your song(s) in %ls:\n", cur_songlist);
             // Output all song in this list.
             output_song(*cur_songlist);
             break;
@@ -108,12 +108,12 @@ int main()
     // Operate
     while (scanf(" %c\n", &operater) != EOF)
     {
-        fprintf(stderr,"123\n");
+        //fprintf(stderr,"123\n");
         switch (operater)
         {
         case 'a':
             // Build or Add songlist into tree.
-            printf("Enter the new playlist name: ");
+            //printf("Enter the new playlist name: ");
             // scanf("%ls",songlist_name);
             songlist_name = read_wstring();
             printf("name:_%ls_\n", songlist_name);
@@ -133,7 +133,7 @@ int main()
             break;
         case 'd':
             output_songlist(songlist_tree);
-            printf("Enter the playlist you want to delete: ");
+            //printf("Enter the playlist you want to delete: ");
             // Delete target songlist.
             songlist_name = read_wstring();
             // find
@@ -151,7 +151,7 @@ int main()
             free(songlist_name);
             break;
         case 'c':
-            printf("Enter the playlist name : ");
+            //printf("Enter the playlist name : ");
             // Enter the target songlist, going to another UI.
             // printf("read\n");
             songlist_name = read_wstring();
@@ -171,7 +171,7 @@ int main()
             free(songlist_name);
             break;
         case 'o':
-            printf("All of your playlist(s):\n");
+            //printf("All of your playlist(s):\n");
             // Output all songlist name.
             output_songlist(songlist_tree);
             break;
