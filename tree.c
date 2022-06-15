@@ -208,7 +208,7 @@ int main()
             break;
         }
         printf("[a]Add a playlist\n[d]Delete a playlist\n[c]Choose a playlist\n"
-               "[o]Output all playlists\n[i]import a .csv playlist\n[e]Exit\nEnter your operater:\n");
+               "[o]Output all playlists\n[i]Import a .csv playlist\n[e]Exit\nEnter your operater:\n");
     }
     return 0;
     /* -----OLD DATA------
