@@ -8,7 +8,7 @@
 #include "myAlgo.h"
 #include "myUI.h"
 #include "myUI.h"
-void Choose_a_songlist(song **cur_songlist)
+void Choose_a_songlist(song **cur_songlist,char *songlist_name)
 {
     /*
         In a songlist,it is the UI.
@@ -73,7 +73,7 @@ void Choose_a_songlist(song **cur_songlist)
             break;
         case 3:
             // Export this songlist as .csv
-            //Export_songlist(*cur_songlist);
+            Export_songlist(*cur_songlist,songlist_name);
             break;
         // case 's':
         //     //Sort and output all song(?)
@@ -181,7 +181,7 @@ int main(){
             printf("point:_%p_\n", target_songlist);
             if (target_songlist != NULL)
             {
-                Choose_a_songlist(&(target_songlist->data));
+                Choose_a_songlist(&(target_songlist->data),(target_songlist->songlist_name));
                 break;
 
             }
