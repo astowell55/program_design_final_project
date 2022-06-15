@@ -54,7 +54,7 @@ void build_song(song **cur_songlist,wchar_t *target){
     cur = *cur_songlist;
     while(cur!=NULL){
         par = cur;
-        if(wcscmp(((*cur_songlist)->song_name), (target)) > 0){
+        if(wcscmp(((*cur_songlist)->song_name), (target)) < 0){
             cur = cur->right_child;
         }else{
             cur = cur->left_child;
@@ -64,7 +64,7 @@ void build_song(song **cur_songlist,wchar_t *target){
     build_node->parent = par;
     if(par==NULL){
         *cur_songlist = build_node;
-    }else if(wcscmp(((*cur_songlist)->song_name), (target)) > 0){
+    }else if(wcscmp(((*cur_songlist)->song_name), (target)) < 0){
         par->right_child = build_node;
     }else{
         par->left_child = build_node;
@@ -115,7 +115,7 @@ void build_songlist(node **songlist_tree,wchar_t *target){
     cur = *songlist_tree;
     while(cur!=NULL){
         par = cur;
-        if(wcscmp(((*songlist_tree)->songlist_name), (target)) > 0){
+        if(wcscmp(((*songlist_tree)->songlist_name), (target)) < 0){
             cur = cur->right_child;
         }else{
             cur = cur->left_child;
@@ -125,7 +125,7 @@ void build_songlist(node **songlist_tree,wchar_t *target){
     build_node->parent = par;
     if(par==NULL){
         *songlist_tree = build_node;
-    }else if(wcscmp(((*songlist_tree)->songlist_name), (target)) > 0){
+    }else if(wcscmp(((*songlist_tree)->songlist_name), (target)) < 0){
         par->right_child = build_node;
     }else{
         par->left_child = build_node;
@@ -179,7 +179,7 @@ void build_song_data(song **song_data,song *songs){
     cur = *song_data;
     while(cur!=NULL){
         par = cur;
-        if(wcscmp(((*song_data)->song_name), (songs->song_name)) > 0){
+        if(wcscmp(((*song_data)->song_name), (songs->song_name)) << 0){
             cur = cur->right_child;
         }else{
             cur = cur->left_child;
@@ -189,7 +189,7 @@ void build_song_data(song **song_data,song *songs){
     songs->parent = par;
     if(par==NULL){
         *song_data = songs;
-    }else if(wcscmp(((*song_data)->song_name), (songs->song_name)) > 0){
+    }else if(wcscmp(((*song_data)->song_name), (songs->song_name)) < 0){
         par->right_child = songs;
     }else{
         par->left_child = songs;
