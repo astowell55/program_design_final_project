@@ -52,7 +52,7 @@ node *search_songlist(node *songlist_tree, char songlist_name[])
     node *curr = songlist_tree;
     while (curr != NULL && strcmp(songlist_name, curr->songlist_name) != 0)
     {
-        //printf("while: _%p_\n",curr);
+        // printf("while: _%p_\n",curr);
         if (strcmp(songlist_name, curr->songlist_name) > 0)
         {
             curr = curr->right_child;
@@ -72,10 +72,12 @@ song *search_song(song *cur_songlist, char song_name[])
         if not, return NULL.
     */
     song *curr = cur_songlist;
-    while (curr != NULL && strcmp(song_name, curr->song_name) != 0){
-        //printf("while: _%p_\n",curr);
-        //printf("s_%ls\n",curr->song_name);
-        if (strcmp(song_name, curr->song_name) > 0){
+    while (curr != NULL && strcmp(song_name, curr->song_name) != 0)
+    {
+        // printf("while: _%p_\n",curr);
+        // printf("s_%ls\n",curr->song_name);
+        if (strcmp(song_name, curr->song_name) > 0)
+        {
             curr = curr->right_child;
         }
         else

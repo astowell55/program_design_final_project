@@ -28,8 +28,7 @@ void Choose_a_songlist(song **cur_songlist)
         case 0:
             // Add song.
             //Inorder_traverse_song((*cur_songlist));
-            //song_name = read_wstring();
-            
+            //song_name = read_wstring()
             fgets(song_name,300,stdin);
             printf("-.%s\n",song_name);
             //printf("read: _%ls_\n", song_name);
@@ -61,7 +60,7 @@ void Choose_a_songlist(song **cur_songlist)
             if (target_song != NULL)
             {
                 delete_song(cur_songlist, song_name);
-                printf("Delete song : %ls\n", song_name);
+                printf("Delete song : %s\n", song_name);
             }
             else
             {
@@ -75,7 +74,7 @@ void Choose_a_songlist(song **cur_songlist)
             break;
         case 3:
             // Export this songlist as .csv
-            Export_songlist(*cur_songlist);
+            //Export_songlist(*cur_songlist);
             break;
         // case 's':
         //     //Sort and output all song(?)
@@ -123,14 +122,14 @@ int main(){
             // Build or Add songlist into tree.
             // scanf("%ls",songlist_name);
             songlist_name = read_wstring();
-            printf("name:_%ls_\n", songlist_name);
+            printf("name:_%s_\n", songlist_name);
             // find
             target_songlist = search_songlist(songlist_tree, songlist_name);
             printf("point:_%p_\n", target_songlist);
             if (target_songlist == (node *)NULL)
             {
                 build_songlist(&songlist_tree, songlist_name);
-                printf("Add songlist : %ls\n", songlist_name); 
+                printf("Add songlist : %s\n", songlist_name); 
             }
             else
             {
@@ -147,7 +146,7 @@ int main(){
             if (target_songlist != NULL)
             {
                 delete_songlist(&target_songlist, songlist_name);
-                printf("Delete songlist : %ls\n", songlist_name);
+                printf("Delete songlist : %s\n", songlist_name);
             }
             else
             {
@@ -159,13 +158,13 @@ int main(){
             // Enter the target songlist, going to another UI.
             // printf("read\n");
             songlist_name = read_wstring();
-            printf("name:_%ls_\n", songlist_name);
+            printf("name:_%s_\n", songlist_name);
             // find
             target_songlist = search_songlist(songlist_tree, songlist_name);
             printf("point:_%p_\n", target_songlist);
             if (target_songlist != NULL)
             {
-                printf("Choose songlist : %ls\n", songlist_name);
+                printf("Choose songlist : %s\n", songlist_name);
                 Choose_a_songlist(&(target_songlist->data));
             }
             else
