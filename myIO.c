@@ -181,7 +181,12 @@ void write_SongFile(node *root)
 void output_song(song *cur_songlist)
 {
     // output all song name,artist,time in cur_songlist
-    if (root == NULL)
+    /*
+        Maybe :
+        Inorder_traverse(cur_songlist,2);
+        I guess...
+    */
+    if (cur_songlist == NULL)
     {
         return;
     }
@@ -189,9 +194,9 @@ void output_song(song *cur_songlist)
     {
         output_song(cur_songlist->left_child);
         printf("%ls", cur_songlist->song_name);
+        printf("\n");
     }
     output_song(cur_songlist->right_child);
-
 }
 
 void output_songlist(node *songlist_tree)
@@ -202,7 +207,7 @@ void output_songlist(node *songlist_tree)
         return;
     }
     output_songlist(songlist_tree->left_child);
-    printf("%ls", songlist_tree->songlist_name);
+    printf("%ls\n", songlist_tree->songlist_name);
     output_songlist(songlist_tree->right_child);
 }
 void Export_songlist(song *cur_songlist, wchar_t *songlist_name)

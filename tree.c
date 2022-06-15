@@ -86,7 +86,7 @@ void Choose_a_songlist(song **cur_songlist, wchar_t *songlist_name)
 
 int main()
 {
-    int data_num, input_Choose, output_Choose, search_Choose;
+    //int data_num, input_Choose, output_Choose, search_Choose;
 
     int error = 0;
     // setlocale(LC_ALL,"");
