@@ -31,11 +31,9 @@ void Choose_a_songlist(song **cur_songlist)
             //song_name = read_wstring();
             
             fgets(song_name,300,stdin);
-            //printf("%s",song_name);
-            //printf("read: _%ls_\n", song_name);
-            //target_song = search_song(*cur_songlist, song_name);
-            // if (target_song != NULL) 
-            //  printf("point:_%p_\n", target_song);
+            printf("-.%s\n",song_name);
+            //printf("read: _%s_\n", song_name);
+            target_song = search_song(*cur_songlist, song_name);
 
             if (target_song == NULL)
             {   
@@ -58,7 +56,7 @@ void Choose_a_songlist(song **cur_songlist)
             if (target_song != NULL)
             {
                 delete_song(cur_songlist, song_name);
-                printf("Delete song : %ls\n", song_name);
+                printf("Delete song : %s\n", song_name);
             }
             else
             {
@@ -96,10 +94,11 @@ int main(){
 
     int error = 0;
     // setlocale(LC_ALL,"");
-    printf("Welcome to use this project!\n");
     //- Preload songdata
-    //read_SongFile();    
-    //output_song(song_data);
+    song *song_data=NULL;
+    read_SongFile(&song_data);
+    printf("song_data:%p\n",song_data);    
+    output_song(song_data);
     //- Preload songdata end
 
     node *songlist_tree = NULL;   // the root of songlist tree.
@@ -109,7 +108,7 @@ int main(){
            //"[c]Choose a songlist\n[o]Output all songlists\n[i]import a .csv songlist\n[e]Exit\nEnter your operater:\n");
     char *songlist_options[6] ={"[a]Add a songlist","[d]Delete a songlist","[c]Choose a songlist","[o]Output all songlists","[i]import a .csv songlist","[e]Exit"}; 
     int operater = 0;
-    char *songlist_name;
+    char songlist_name[300];
     while ( operater != 5){
         
         operater = button(6,songlist_options);
@@ -118,20 +117,22 @@ int main(){
         {
         case 0:
             // Build or Add songlist into tree.
-            // scanf("%ls",songlist_name);
-            songlist_name = read_wstring();
-            printf("name:_%ls_\n", songlist_name);
+            printf("Enter the new playlist name: ");
+            // scanf("%s",songlist_name);
+            //songlist_name = read_wstring();
+            fgets(songlist_name,300,stdin);
+            printf("name:_%s_\n", songlist_name);
             // find
             target_songlist = search_songlist(songlist_tree, songlist_name);
             printf("point:_%p_\n", target_songlist);
             if (target_songlist == (node *)NULL)
             {
                 build_songlist(&songlist_tree, songlist_name);
-                printf("Add songlist : %ls\n", songlist_name); 
+                printf("Add songlist : %s\n", songlist_name); 
             }
             else
             {
-                printf("Invalid operation: EXIST SONGLIST\n");
+                printf("Invalid operation: THE NAME HAS BEEN USED\n");
             }
             free(songlist_name);
             break;
@@ -140,15 +141,31 @@ int main(){
             songlist_name = read_wstring();
             // find
             target_songlist = search_songlist(songlist_tree, songlist_name);
-
-            if (target_songlist != NULL)
+            if(target_songlist == NULL)
             {
-                delete_songlist(&target_songlist, songlist_name);
-                printf("Delete songlist : %ls\n", songlist_name);
+                printf("There is not any playlist\n");
+                break;
             }
             else
             {
-                printf("Invalid operation: NULL SONGLIST\n");
+                output_songlist(songlist_tree);
+                printf("Enter the playlist you want to delete: ");
+                //  Delete target songlist.
+                songlist_name = read_wstring();
+                // find
+                target_songlist = search_songlist(songlist_tree, songlist_name);
+
+                if (target_songlist != NULL)
+                {
+                    delete_songlist(&target_songlist, songlist_name);
+                    printf("Delete playlist: %s\n", songlist_name);
+                }
+                else
+                {
+                    printf("Invalid operation: THE PLAYLIST DOES NOT EXIST\n");
+                }
+                free(songlist_name);
+                break;
             }
             free(songlist_name);
             break;
@@ -156,18 +173,37 @@ int main(){
             // Enter the target songlist, going to another UI.
             // printf("read\n");
             songlist_name = read_wstring();
-            printf("name:_%ls_\n", songlist_name);
+            printf("name:_%s_\n", songlist_name);
             // find
             target_songlist = search_songlist(songlist_tree, songlist_name);
             printf("point:_%p_\n", target_songlist);
             if (target_songlist != NULL)
             {
-                printf("Choose songlist : %ls\n", songlist_name);
-                Choose_a_songlist(&(target_songlist->data));
+                printf("There is not any playlist\n");
+                break;
+
             }
             else
             {
-                printf("Invalid operation: NULL SONGLIST\n");
+                printf("Enter the playlist name : ");
+                //  Enter the target songlist, going to another UI.
+                //  printf("read\n");
+                songlist_name = read_wstring();
+                printf("name:_%s_\n", songlist_name);
+                // find
+                target_songlist = search_songlist(songlist_tree, songlist_name);
+                printf("point:_%p_\n", target_songlist);
+                if (target_songlist != NULL)
+                {
+                    printf("Choose playlist: %s\n", songlist_name);
+                    Choose_a_songlist(&(target_songlist->data));
+                }
+                else
+                {
+                    printf("Invalid operation: THE PLAYLIST DOES NOT EXIST\n");
+                }
+                free(songlist_name);
+                break;
             }
             free(songlist_name);
             break;
@@ -262,7 +298,7 @@ int main(){
 
             if (result != NULL)
             {
-                printf("%ls %ls\n", result->data->song_name, result->data->artist);
+                printf("%s %s\n", result->data->song_name, result->data->artist);
             }
             else
             {
@@ -286,7 +322,7 @@ int main(){
 
             if (result != NULL)
             {
-                printf("%ls %ls\n", result->data->song_name, result->data->artist);
+                printf("%s %s\n", result->data->song_name, result->data->artist);
             }
             else
             {
@@ -301,7 +337,7 @@ int main(){
         //printf("[1] Delete by artist [2] Delete by title :");
         //scanf("%d", &search_Choose);
         wchar_t s[MAX_SONG_NAME + 1];
-        wscanf(L"%ls", s);
+        wscanf(L"%s", s);
         song *target = (song *)malloc(sizeof(target));
         target->song_name = s;
         delete_name(&root, target, search_Choose);

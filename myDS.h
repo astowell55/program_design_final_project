@@ -21,7 +21,7 @@ struct song
     struct song *parent;
     struct song *left_child;
     struct song *right_child;
-}*song_data;
+};
 
 typedef struct song song;
 
