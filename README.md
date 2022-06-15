@@ -98,6 +98,8 @@ abcd already exist
     * Change: FIX build_song_data.
 * 1.0.1
     * Change: FIX build function.
+* 1.0.2
+    * Change: FIX delete function.
 ## target 每周目標
 
 ### 第二周

@@ -29,7 +29,7 @@ void build_tree(node **root, song *data, node *cur, int *error)
         }
         else
         {
-            printf("%ls already exist\n", data->song_name);
+            printf("%s already exist\n", data->song_name);
             *error = 1;
             return;
         }
@@ -387,7 +387,7 @@ void delete_songlist(node **songlist_tree,char songlist_name[]){
     node *target = search_songlist(*songlist_tree,songlist_name);
     if (target == NULL)
     {
-        printf("'%ls' not found.\n", songlist_name);
+        printf("'%s' not found.\n", songlist_name);
         return;
     }
     node *y;
