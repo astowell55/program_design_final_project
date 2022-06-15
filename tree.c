@@ -8,7 +8,10 @@
 #include "myAlgo.h"
 #include "myUI.h"
 #include "myUI.h"
-void Choose_a_songlist(song **cur_songlist, char *songlist_name)
+#include "tree.h"
+song *song_data=NULL;
+
+void Choose_a_songlist(song **cur_songlist,char *songlist_name)
 {
     /*
         In a songlist,it is the UI.
@@ -16,16 +19,15 @@ void Choose_a_songlist(song **cur_songlist, char *songlist_name)
     // Operate
     // wchar_t *song_name;
     song *target_song = NULL;
-
-    char *song_options[7] = {"[a]Add a song", "[d]Delete a song", "[o]Output all songlists", "[e]Export as .csv", "[<]Back to main page"};
+   
+    char *song_options[5] = {"[a]Add a song","[d]Delete a song","[o]Output all songlists","[e]Export as .csv","[<]Back to main page"};
     int operater = 0;
     char song_name[300];
-    while (operater != 6)
+    while (operater != 4)
     {
-        operater = button(7, song_options);
-        getchar();
-        switch (operater)
-        {
+        operater = button(5,song_options);
+       
+        switch (operater){
         case 0:
             // Add song.
             printf("Enter the title of the song you want to add: ");
@@ -42,9 +44,9 @@ void Choose_a_songlist(song **cur_songlist, char *songlist_name)
             {
                 printf("Add song : %s\n", song_name);
                 build_song(cur_songlist, song_name);
-
-                // printf("build finish\n");
-                output_song(*cur_songlist);
+                
+                //printf("build finish\n");
+                //output_song(*cur_songlist);
             }
             else
             {
@@ -89,7 +91,7 @@ void Choose_a_songlist(song **cur_songlist, char *songlist_name)
             Export_songlist(*cur_songlist, songlist_name);
             printf("The file is created\n");
             break;
-        case 6:
+        case 4:
             return; // Back
             break;
         default:
@@ -107,7 +109,7 @@ int main()
 
     // setlocale(LC_ALL,"");
     //- Preload songdata
-    song *song_data = NULL;
+    
     read_SongFile(&song_data);
     printf("song_data:%p\n", song_data);
     // output_song(song_data);
@@ -206,7 +208,7 @@ int main()
             // Import a songlist.
             printf("Enter a playlist file ypu want to import: ");
             songlist_name = read_wstring();
-            Import_songlist(songlist_tree, songlist_name);
+            Import_songlist(&songlist_tree, songlist_name);
             free(songlist_name);
             break;
         case 5:
