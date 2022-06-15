@@ -90,6 +90,8 @@ abcd already exist
     * Change: Update File I/O
 * 0.2.3
     * Change: Add Inorder_traverse_song in myIO
+* 0.2.4
+    * Change: Add guide in tree.c
 ## target 每周目標
 
 ### 第二周
