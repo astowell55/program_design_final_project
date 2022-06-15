@@ -31,7 +31,7 @@ int button(int num,char *options[num]){
         for(int i =0;i< num;i++){
             if(i == cur_choose){
                 printf(YELLOW);
-                printf(" ");
+                printf("->");
             }
             printf("%s",options[i]);
             if(i == cur_choose){

@@ -49,7 +49,9 @@ node *search_songlist(node *songlist_tree, char songlist_name[])
         if found, return the pointer of songlist_name.
         if not, return NULL.
     */
+    
     node *curr = songlist_tree;
+    printf("while: _%p_\n",curr);
     while (curr != NULL && strcmp(songlist_name, curr->songlist_name) != 0)
     {
         //printf("while: _%p_\n",curr);
@@ -73,8 +75,9 @@ song *search_song(song *cur_songlist, char song_name[])
     */
     song *curr = cur_songlist;
     while (curr != NULL && strcmp(song_name, curr->song_name) != 0){
-        //printf("while: _%p_\n",curr);
-        //printf("s_%ls\n",curr->song_name);
+        if(strcmp(song_name, curr->song_name) == 0){
+            return curr;
+        }
         if (strcmp(song_name, curr->song_name) > 0){
             curr = curr->right_child;
         }

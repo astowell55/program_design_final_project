@@ -31,25 +31,22 @@ void Choose_a_songlist(song **cur_songlist)
             //song_name = read_wstring();
             
             fgets(song_name,300,stdin);
-            printf("-.%s\n",song_name);
+            //printf("%s",song_name);
             //printf("read: _%ls_\n", song_name);
-            target_song = search_song(*cur_songlist, song_name);
-            if (target_song == NULL) 
-            //printf("search finish\n");
-            printf("point:_%p_\n", target_song);
+            //target_song = search_song(*cur_songlist, song_name);
+            // if (target_song != NULL) 
+            //  printf("point:_%p_\n", target_song);
 
             if (target_song == NULL)
             {   
                 printf("Add song : %s\n", song_name);
                 build_song(cur_songlist, song_name);
-                
                 printf("build finish\n");
             }
             else
             {
                 printf("Invalid operation\n");
             }
-            //free(song_name);
             printf("_%s_\n", (*cur_songlist)->song_name);
             //output_song((*cur_songlist));
             break;
@@ -75,7 +72,7 @@ void Choose_a_songlist(song **cur_songlist)
             break;
         case 3:
             // Export this songlist as .csv
-            Export_songlist(*cur_songlist);
+            //Export_songlist(*cur_songlist);
             break;
         // case 's':
         //     //Sort and output all song(?)
