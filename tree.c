@@ -20,7 +20,7 @@ void Choose_a_songlist(song **cur_songlist,char *songlist_name)
     // wchar_t *song_name;
     song *target_song = NULL;
    
-    char *song_options[5] = {"[a]Add a song","[d]Delete a song","[o]Output all songlists","[e]Export as .csv","[<]Back to main page"};
+    char *song_options[5] = {"[a]Add a song","[d]Delete a song","[o]Output all songs","[e]Export as .csv","[<]Back to main page"};
     int operater = 0;
     char song_name[300];
     while (operater != 4)
@@ -42,21 +42,20 @@ void Choose_a_songlist(song **cur_songlist,char *songlist_name)
 
             if (target_song == NULL)
             {
-                printf("Add song : %s\n", song_name);
                 build_song(cur_songlist, song_name);
-                
                 //printf("build finish\n");
                 //output_song(*cur_songlist);
             }
             else
             {
-                printf("Invalid operation\n");
+                printf("Invalid operation : SONG EXIST\n");
             }
             // free(song_name);
             // printf("_%s_\n", (*cur_songlist)->song_name);
             // output_song((*cur_songlist));
             break;
         case 1:
+            output_song((*cur_songlist));
             // Delete song.
             printf("Enter the title of the song you want to delete: ");
             // song_name = read_wstring();
@@ -70,7 +69,7 @@ void Choose_a_songlist(song **cur_songlist,char *songlist_name)
             }
             else
             {
-                printf("Invalid operation\n");
+                printf("Invalid operation : SONG DOESN'T EXIST\n");
             }
 
             break;
@@ -84,18 +83,19 @@ void Choose_a_songlist(song **cur_songlist,char *songlist_name)
             }
             else
             {
+                printf("There's no song!\n");
                 break;
             }
         case 3:
             // Export this songlist as .csv
             Export_songlist(*cur_songlist, songlist_name);
-            printf("The file is created\n");
+            printf("The file created as '%s.csv'\n",songlist_name);
             break;
         case 4:
             return; // Back
             break;
         default:
-            printf("Invalid operation\n");
+            printf("Invalid operater\n");
             break;
         }
     }
@@ -111,7 +111,7 @@ int main()
     //- Preload songdata
     
     read_SongFile(&song_data);
-    printf("song_data:%p\n", song_data);
+    //printf("song_data:%p\n", song_data);
     // output_song(song_data);
     //- Preload songdata end
 
@@ -151,7 +151,7 @@ int main()
             free(songlist_name);
             break;
         case 1:
-        output_songlist(songlist_tree);
+            output_songlist(songlist_tree);
             // Delete target songlist.
             printf("Enter the playlist name you want to delete: ");
             songlist_name = read_wstring();
@@ -171,15 +171,15 @@ int main()
             free(songlist_name);
             break;
         case 2:
-        output_songlist(songlist_tree);
+            output_songlist(songlist_tree);
             // Enter the target songlist, going to another UI.
             printf("Enter a playlist name : ");
             // printf("read\n");
             songlist_name = read_wstring();
-            printf("name:_%s_\n", songlist_name);
+            //printf("name:_%s_\n", songlist_name);
             // find
             target_songlist = search_songlist(songlist_tree, songlist_name);
-            printf("point:_%p_\n", target_songlist);
+            //printf("point:_%p_\n", target_songlist);
             if (target_songlist != NULL)
             {
                 Choose_a_songlist(&(target_songlist->data), (target_songlist->songlist_name));
@@ -206,9 +206,16 @@ int main()
             break;
         case 4:
             // Import a songlist.
-            printf("Enter a playlist file ypu want to import: ");
+            printf("Enter a playlist file you want to import: ");
             songlist_name = read_wstring();
-            Import_songlist(&songlist_tree, songlist_name);
+            target_songlist = search_songlist(songlist_tree, songlist_name);
+            if(target_songlist==NULL){
+                Import_songlist(&songlist_tree, songlist_name);
+            }else{
+                printf("Invalid operation: THE NAME HAS BEEN USED\n");
+            }
+            
+            
             free(songlist_name);
             break;
         case 5:

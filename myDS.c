@@ -28,7 +28,7 @@ void build_song(song **cur_songlist,char *target){
     build_node->length = target_data->length;
     upload_time(&(build_node->times));
 
-    printf("node:%s\n",build_node->song_name);
+    //printf("node:%s\n",build_node->song_name);
     //char_t *name = malloc(sizeof(target)*sizeof(wchar_t));
     //wcscpy(name,target);
     //build_node->song_name = name;
@@ -64,6 +64,7 @@ void build_song(song **cur_songlist,char *target){
         //par->left_child = build_node;
         par->right_child = build_node;
     }
+    printf("Add song : %s\n",target);
 }
 void build_songlist(node **songlist_tree,char *target){
     /*

@@ -25,9 +25,6 @@ char *read_wstring()
     }
     buffer[length] = '\0';
 
-    // if(printf("read_wstring: -%ls-\n", buffer)<0){
-    //     perror("printf");
-    // }
     if (strlen(buffer) == MAX_SONG_NAME)
     {
 
@@ -36,7 +33,7 @@ char *read_wstring()
         buffer[length - 3] = '.';
     }
     char *result = malloc(length * sizeof(char));
-    printf("%p\n", result);
+    //printf("%p\n", result);
     strcpy(result, buffer);
     return result;
 }
@@ -219,9 +216,10 @@ void Import_songlist(node **songlist_tree, char songlist_name[])
         if there's not , print "Missing File : {songlist_name}\n".
     */
     FILE *songFile;
-    char *filename = songlist_name;
+    char filename[MAX_SONG_NAME+1];
+    strcpy(filename,songlist_name);
     strcat(filename, ".csv");
-    printf("%s\n",filename);
+    //printf("%s\n",filename);
     /* if the space could not be allocated, return an error */
     if ((songFile = fopen(filename, "r")) == NULL) // Reading a file
     {
@@ -230,28 +228,28 @@ void Import_songlist(node **songlist_tree, char songlist_name[])
     }
     char buf[300];
     build_songlist(songlist_tree, songlist_name);
-    printf("haha\n");
+    //printf("haha\n");
     while (fgets(buf, 255, songFile) != NULL)
     {
-         printf("buf:'%s'\n",buf);
+        //printf("buf:'%s'\n",buf);
         if ((strlen(buf) > 0) && (buf[strlen(buf) - 1] == '\n'))
             buf[strlen(buf) - 1] = '\0';
         song *songs = malloc(sizeof(song));
         // Define the delimeter of the string
         char delim[] = ",";
-        printf("buf2:'%s'\n",buf);
-        printf("songs:'%p'\n",songs);
+        //printf("buf2:'%s'\n",buf);
+        //printf("songs:'%p'\n",songs);
         // Call the wcstok() method
         char *tmp = strtok(buf, delim);
         //song name
         songs->song_name = (char *)malloc(sizeof(char) * (strlen(tmp) + 1));
         strcpy(songs->song_name, tmp);
-        printf("tmp1:'%s'\n",tmp);
+        //printf("tmp1:'%s'\n",tmp);
         //artist
         tmp = strtok(NULL, delim);
         songs->artist = (char *)malloc(sizeof(char) * (strlen(tmp) + 1));
         strcpy(songs->artist, tmp);
-        printf("tmp2:'%s'\n",tmp);
+        //printf("tmp2:'%s'\n",tmp);
         //length
         tmp = strtok(NULL, delim);
         for (int i = 0; i < strlen(tmp); i++)
@@ -271,11 +269,12 @@ void Import_songlist(node **songlist_tree, char songlist_name[])
         songs->left_child = NULL;
         songs->right_child = NULL;
         songs->parent = NULL;
-        printf("hehe\n");
+        //printf("hehe\n");
         build_song_data((&(*songlist_tree)->data),songs);
-        printf("howow\n");
+        //printf("howow\n");
     }
     fclose(songFile);
+    printf("'%s.csv' has successfully imported.\n",songlist_name);
     return;
 
 }
