@@ -21,7 +21,7 @@ struct song
     struct song *parent;
     struct song *left_child;
     struct song *right_child;
-}*song_data;
+};
 
 typedef struct song song;
 
@@ -39,7 +39,7 @@ typedef struct node node;
 void build_tree(node **root, song *data, node *cur, int *error);
 void build_song(song **cur_songlist,wchar_t song_name[]);
 void build_songlist(node **songlist_tree,wchar_t *target);
-void build_song_data(song **song_data,song *songs);
+void build_song_data(song *song_data,song *songs);
 void delete_name(node **root, song *data, int search_Choose);
 void delete_song(song **cur_songlist,wchar_t song_name[]);
 void delete_songlist(node **songlist_tree,wchar_t songlist_name[]);

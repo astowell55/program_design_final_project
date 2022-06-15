@@ -124,30 +124,33 @@ void Inorder_traverse_song(song *root)
     Inorder_traverse_song(root->right_child);
 }
 
-void read_SongFile()
+void read_SongFile(song *song_data)
 {
     FILE *songFile;
 
     /* allocation of the buffer for every line in the File */
 
     wchar_t buf[300];
-
+    printf("p:%p\n",buf);
     /* if the space could not be allocated, return an error */
-
+    printf("rr\n");
     if ((songFile = fopen("songFile.csv", "r")) == NULL) // Reading a file
     {
         printf("File could not be opened.\n");
     }
-
-    while (fgetws(buf, 255, songFile) != NULL)
+    printf("file_p:%p\n",songFile);
+    printf("kk\n");
+    printf("ap:%p\n",fgetws(buf, 300, songFile));
+    while (fgetws(buf, 300, songFile) != NULL)
     {
+        printf("ww\n");
         if ((wcslen(buf) > 0) && (buf[wcslen(buf) - 1] == '\n'))
             buf[wcslen(buf) - 1] = '\0';
         song *songs = malloc(sizeof(song));
         wchar_t *ptr;
         // Define the delimeter of the string
         wchar_t delim[] = L",";
-
+        
         // Call the wcstok() method
         wchar_t *tmp = wcstok(buf, delim, &ptr);
         songs->song_name = (wchar_t *)malloc(sizeof(wchar_t)*(wcslen(tmp) + 1));
@@ -168,8 +171,9 @@ void read_SongFile()
         wchar_t *stop;
         float time = wcstof(tmp, &stop);
         songs->length = time;
-        build_song_data(&song_data, songs);
+        build_song_data(song_data, songs);
     }
+    printf("cc\n");
     fclose(songFile);
     return;
 }

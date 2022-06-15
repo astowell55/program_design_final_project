@@ -15,7 +15,7 @@ void Choose_a_songlist(song **cur_songlist)
     wchar_t *song_name;
     song *target_song = NULL;
     printf("[a]Add a song\n[d]Delete a song\n"
-           "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \ 
+           "[o]Output all songlists\n[e]Export as .csv\n" \ 
     "[<]Back to main page\nEnter your operater:\n");
     char operater;
     while (scanf(" %c\n", &operater) != EOF)
@@ -78,7 +78,7 @@ void Choose_a_songlist(song **cur_songlist)
             break;
         }
         printf("[a]Add a song\n[d]Delete a song\n"
-               "[o]Output all songlists\n[e]Export as .csv\n[s]Sort\n[r]Random\n" \ 
+               "[o]Output all songlists\n[e]Export as .csv\n" \ 
     "[<]Back to main page\nEnter your operater:\n");
     }
 }
@@ -90,10 +90,11 @@ int main()
     int error = 0;
     // setlocale(LC_ALL,"");
     printf("Welcome to use this project!\n");
+    song *song_data;
     //- Preload songdata
-    read_SongFile();
+    read_SongFile(song_data);
     //- Preload songdata end
-
+    
     node *songlist_tree = NULL;   // the root of songlist tree.
     node *target_songlist = NULL; // point to the songlist.
     // select oprerater
