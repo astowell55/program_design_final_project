@@ -139,8 +139,8 @@ void read_SongFile(song **song_data)
         }
         char *stop;
         float time = atof(stop);
-        songs->length = time;
-        //printf("ya\n");
+        songs->length = time;//Problem.
+        //printf("%f\n",time);
 
         songs->left_child = NULL;
         songs->right_child = NULL;
@@ -185,15 +185,15 @@ void output_song(song *cur_songlist)
 void output_songlist(node *songlist_tree)
 {
     // output all songlist name in songlist_tree
-    char *filename;
+    //char *filename;
     //wcstombs(filename, songlist_tree->songlist_name, 101);
-    outputSongFile = fopen(filename, "w");
-    if (root == NULL)
+    //outputSongFile = fopen(filename, "w");
+    if (songlist_tree == NULL)
     {
         return;
     }
     output_songlist(songlist_tree->left_child);
-    printf("%ls\n", songlist_tree->songlist_name);
+    printf("%s\n", songlist_tree->songlist_name);
     output_songlist(songlist_tree->right_child);
 }
 void Export_songlist(song *cur_songlist)
