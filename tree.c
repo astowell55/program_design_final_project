@@ -160,6 +160,7 @@ int main(){
             break;
         case 2:
             // Enter the target songlist, going to another UI.
+            printf("Enter a playlist name : ");
             // printf("read\n");
             songlist_name = read_wstring();
             printf("name:_%s_\n", songlist_name);
