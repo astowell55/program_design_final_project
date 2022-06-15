@@ -150,11 +150,11 @@ void read_SongFile()
 
         // Call the wcstok() method
         wchar_t *tmp = wcstok(buf, delim, &ptr);
-        songs->song_name = (wchar_t *)malloc(sizeof(wchar_t)*(wcslen(tmp) + 1));
+        songs->song_name = (wchar_t *)malloc(sizeof(wchar_t) * (wcslen(tmp) + 1));
         wcscpy(songs->song_name, tmp);
 
         tmp = wcstok(NULL, delim, &ptr);
-        songs->artist = (wchar_t *)malloc(sizeof(wchar_t)*(wcslen(tmp) + 1));
+        songs->artist = (wchar_t *)malloc(sizeof(wchar_t) * (wcslen(tmp) + 1));
         wcscpy(songs->artist, tmp);
         tmp = wcstok(NULL, delim, &ptr);
         for (int i = 0; i < wcslen(tmp); i++)
@@ -194,7 +194,19 @@ void output_song(song *cur_songlist)
         Inorder_traverse(cur_songlist,2);
         I guess...
     */
+    if (cur_songlist == NULL)
+    {
+        return;
+    }
+    else
+    {
+        output_song(cur_songlist->left_child);
+        printf("%ls", cur_songlist->song_name);
+        printf("\n");
+    }
+    output_song(cur_songlist->right_child);
 }
+
 void output_songlist(node *songlist_tree)
 {
     // output all songlist name in songlist_tree
