@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <wchar.h>
+#include <time.h>
 #include "myDS.h"
 #include "myIO.h"
 
@@ -89,4 +90,29 @@ song *search_song(song *cur_songlist, char song_name[])
         }
     }
     return curr;
+}
+void upload_time(systime *upload_times){
+    
+    int hours, minutes, seconds, day, month, year;
+ 
+    time_t now;
+    time(&now);
+    struct tm *local = localtime(&now);
+    upload_times->hour = local->tm_hour;         
+    upload_times->minute = local->tm_min; 
+    upload_times->second = local->tm_sec;       
+    upload_times->day = local->tm_mday;            
+    upload_times->month = local->tm_mon + 1;      
+    upload_times->year = local->tm_year + 1900;   
+    upload_times->day = local->tm_mday;
+    // // 打印當地時間
+    // if (hours < 12) {    // 中午之前
+    //     printf("Time is %02d:%02d am\n", hours, minutes);
+    // }
+    // else {    // 中午之後
+    //     printf("Time is %02d:%02d pm\n", hours - 12, minutes);
+    // }
+ 
+    // //打印當前日期
+    // printf("Date is: %02d/%02d/%d\n", day, month, year);
 }

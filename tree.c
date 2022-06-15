@@ -35,12 +35,13 @@ void Choose_a_songlist(song **cur_songlist)
             printf("-.%s.-\n",song_name);
             //printf("read: _%s_\n", song_name);
             target_song = search_song(*cur_songlist, song_name);
-            
+
             if (target_song == NULL)
             {   
                 printf("Add song : %s\n", song_name);
                 build_song(cur_songlist, song_name);
                 printf("build finish\n");
+                output_song(*cur_songlist);
             }
             else
             {
@@ -94,12 +95,14 @@ int main(){
     int data_num, input_Choose, output_Choose, search_Choose;
 
     int error = 0;
+    
     // setlocale(LC_ALL,"");
     //- Preload songdata
     song *song_data=NULL;
     read_SongFile(&song_data);
     printf("song_data:%p\n",song_data);    
     output_song(song_data);
+    //upload_time();
     //- Preload songdata end
 
     node *songlist_tree = NULL;   // the root of songlist tree.
@@ -208,128 +211,4 @@ int main(){
         }
     }
     return 0;
-    /* -----OLD DATA------
-    scanf("%d", &input_Choose);
-    if (input_Choose == 1)
-    {
-        // read_SongFile();
-    }
-    else if (input_Choose == 2)
-    {
-        scanf(" %d", &data_num);
-        while (data_num--)
-        {
-
-            song *temp = (song *)malloc(sizeof(temp));
-            read_line(temp);
-            build_tree(&root, temp, root, &error);
-            if (error)
-                data_num++;
-            error = 0;
-        }
-    }
-    else
-    {
-        return 0;
-    }
-
-    printf("[1] Output the data in csv file. [2] Output the data on terminal. [3] Search by song name. [4] Delete a node by name:");
-    scanf("%d", &output_Choose);
-    if (output_Choose == 1)
-    {
-        // write_SongFile(root);
-    }
-    else if (output_Choose == 2)
-    {
-        printf("[1] Preorder traverse [2] Inorder traverse [3] Preorder_traverse :");
-        int choose;
-        scanf("%d", &choose);
-        switch (choose)
-        {
-        case 1:
-            printf("Preorder traverse :\n");
-            Preorder_traverse(root, output_Choose);
-            break;
-
-        case 2:
-            printf("Inorder traverse :\n");
-            Inorder_traverse(root, output_Choose);
-            break;
-
-        case 3:
-            printf("Postorder traverse :\n");
-            Postorder_traverse(root, output_Choose);
-            break;
-        }
-    }
-    else if (output_Choose == 3)
-    {
-        printf("[1] Search by artist [2] Search by title :");
-        scanf("%d", &search_Choose);
-        if (search_Choose == 1)
-        {
-            getchar();
-            printf("Enter the artist:");
-            wchar_t buf[MAX_SONG_NAME + 1];
-            read_song_name(buf);
-            song *target = (song *)malloc(sizeof(target));
-            target->artist = (wchar_t *)malloc(sizeof(buf));
-            wcsncpy(target->artist, buf, MAX_SONG_NAME);
-
-            node *result = (node *)malloc(sizeof(result));
-            result = search(root, target, 1);
-
-            if (result != NULL)
-            {
-                printf("%s %s\n", result->data->song_name, result->data->artist);
-            }
-            else
-            {
-                printf("No result\n");
-            }
-            free(target);
-            free(result);
-        }
-        else if (search_Choose == 2)
-        {
-            getchar();
-            printf("Enter the title:");
-            wchar_t buf[MAX_SONG_NAME + 1];
-            read_song_name(buf);
-            song *target = (song *)malloc(sizeof(target));
-            target->song_name = (wchar_t *)malloc(sizeof(buf));
-            wcsncpy(target->song_name, buf, MAX_SONG_NAME);
-
-            node *result = (node *)malloc(sizeof(result));
-            result = search(root, target, 2);
-
-            if (result != NULL)
-            {
-                printf("%s %s\n", result->data->song_name, result->data->artist);
-            }
-            else
-            {
-                printf("No result\n");
-            }
-            free(target);
-            free(result);
-        }
-    }
-    else if (output_Choose == 4)
-    {
-        //printf("[1] Delete by artist [2] Delete by title :");
-        //scanf("%d", &search_Choose);
-        wchar_t s[MAX_SONG_NAME + 1];
-        wscanf(L"%s", s);
-        song *target = (song *)malloc(sizeof(target));
-        target->song_name = s;
-        delete_name(&root, target, search_Choose);
-        Inorder_traverse(root, 2);
-        free(target);
-    }
-    else
-    {
-        return 0;
-    }
-    */
 }
