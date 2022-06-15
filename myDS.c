@@ -144,68 +144,7 @@ void build_song_data(song **song_data,song *songs){
     }
     return;
 }
-// void delete_name(node **root, song *data, int search_Choose)
-// {
-//     node *target = search(*root, data, search_Choose);
-//     if (target == NULL)
-//     {
-//         printf("'%ls' not found.\n", data->song_name);
-//     }
-//     node *y;
-//     node *x;
-//
-//     if (target->left_child == NULL && target->right_child == NULL)
-//     {
-//         y = target;
-//     }
-//     else
-//     {
-//         if (target->right_child != NULL)
-//         {
-//             y = target->right_child;
-//         }
-//         else
-//         {
-//             y = target->left_child;
-//         }
-//     }
-//
-//     if (y->left_child != NULL)
-//     {
-//         x = y->left_child;
-//     }
-//     else
-//     {
-//         x = y->right_child;
-//     }
-//
-//     if (x != NULL)
-//     {
-//         x->parent = y->parent;
-//     }
-//
-//     if (y->parent == NULL)
-//     {
-//         *root = x;
-//     }
-//     else if (y == y->parent->left_child)
-//     {
-//         y->parent->left_child = x;
-//     }
-//     else
-//     {
-//         y->parent->right_child = x;
-//     }
-//
-//     if (y != target)
-//     {
-//         target->data->index = y->data->index;
-//         target->data->song_name = y->data->song_name;
-//     }
-//
-//     free(y);
-//     return;
-// }
+
 static void delete_all_song(song *songlist_root){
     /*
         using recursive to free all song of a songlist.
