@@ -102,6 +102,10 @@ abcd already exist
     * Change: add system time
     * Change: FIX delete function.
     * Change: remove useless comments.
+* 1.0.3
+    * Change: modify export function.
+    * Change: modify build_song, now it can only accept the song name which existed in song_data.
+    * Change: song_data now is a Global variable.
 ## target 每周目標
 
 ### 第二周
