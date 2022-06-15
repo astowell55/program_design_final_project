@@ -66,9 +66,9 @@ void Inorder_traverse(song *root)
         return;
     }
     Inorder_traverse(root->left_child);
-    //fprintf(outputSongFile, "%s", root->artist);
-    fprintf(outputSongFile, "%s", root->song_name);
-    //fprintf(outputSongFile, "%.2f", root->length);
+    fprintf(outputSongFile, "%s,", root->artist);
+    fprintf(outputSongFile, "%s,", root->song_name);
+    fprintf(outputSongFile, "%.2f", root->length);
     fprintf(outputSongFile, "\n");
     Inorder_traverse(root->right_child);
 }
@@ -131,19 +131,16 @@ void read_SongFile(song **song_data)
                 break;
             }
         }
-        char *stop;
-        float time = atof(stop);
-        songs->length = time;//Problem.
-        //printf("%f\n",time);
+
+        float time = atof(tmp);
+        songs->length = time;
 
         songs->left_child = NULL;
         songs->right_child = NULL;
         songs->parent = NULL;
-        // printf("%p\n",song_data);
+
         build_song_data(song_data, songs);
-        // printf("build:%s\n",songs->song_name);
     }
-    printf("cc\n");
     fclose(songFile);
     return;
 }
@@ -178,9 +175,9 @@ void output_song(song *cur_songlist)
 void output_songlist(node *songlist_tree)
 {
     // output all songlist name in songlist_tree
-    //char *filename;
-    //wcstombs(filename, songlist_tree->songlist_name, 101);
-    //outputSongFile = fopen(filename, "w");
+    // char *filename;
+    // wcstombs(filename, songlist_tree->songlist_name, 101);
+    // outputSongFile = fopen(filename, "w");
     if (songlist_tree == NULL)
     {
         return;
@@ -193,8 +190,8 @@ void output_songlist(node *songlist_tree)
 void Export_songlist(song *cur_songlist, char *Filename)
 {
     // Export cur_songlist's song as .csv file.
-    char *filename=Filename;
-    strcat(filename,".csv");
+    char *filename = Filename;
+    strcat(filename, ".csv");
     outputSongFile = fopen(filename, "w");
     if (cur_songlist == NULL)
     {
@@ -212,11 +209,51 @@ void Import_songlist(node *songlist_tree, char songlist_name[])
         if there's not , print "Missing File : {songlist_name}\n".
     */
     FILE *songFile;
-    wchar_t buf[300];
-    char *filename;
+    char *filename = songlist_name;
+    strcat(filename, ".csv");
     /* if the space could not be allocated, return an error */
     if ((songFile = fopen(filename, "r")) == NULL) // Reading a file
     {
         printf("Missing File : {%s}\n", songlist_name);
+        return;
     }
+    char buf[300];
+    build_songlist(&songlist_tree, songlist_name);
+    while (fgets(buf, 255, songFile) != NULL)
+    {
+        // printf("buf:%s",buf);
+        if ((strlen(buf) > 0) && (buf[strlen(buf) - 1] == '\n'))
+            buf[strlen(buf) - 1] = '\0';
+        song *songs = malloc(sizeof(song));
+        // Define the delimeter of the string
+        char delim[] = ",";
+
+        // Call the wcstok() method
+        char *tmp = strtok(buf, delim);
+        songs->song_name = (char *)malloc(sizeof(char) * (strlen(tmp) + 1));
+        strcpy(songs->song_name, tmp);
+        tmp = strtok(NULL, delim);
+        songs->artist = (char *)malloc(sizeof(char) * (strlen(tmp) + 1));
+        strcpy(songs->artist, tmp);
+        tmp = strtok(NULL, delim);
+        for (int i = 0; i < strlen(tmp); i++)
+        {
+            if (tmp[i] == ':')
+            {
+                tmp[i] = '.';
+                break;
+            }
+        }
+
+        float time = atof(tmp);
+        songs->length = time;
+
+        songs->left_child = NULL;
+        songs->right_child = NULL;
+        songs->parent = NULL;
+
+        
+    }
+    fclose(songFile);
+    return;
 }
