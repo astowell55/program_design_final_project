@@ -4,10 +4,12 @@
 #include <wchar.h>
 #include <time.h>
 struct systime{
+    int year;
     int month;
     int day;
     int hour;
     int minute;
+    int second;
 };
 typedef struct systime systime;
 // the struct store all the information of song.

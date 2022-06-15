@@ -99,7 +99,9 @@ abcd already exist
 * 1.0.1
     * Change: FIX build function.
 * 1.0.2
+    * Change: add system time
     * Change: FIX delete function.
+    * Change: remove useless comments.
 ## target 每周目標
 
 ### 第二周

@@ -10,7 +10,7 @@
 #define LIGHT_BLUE "\033[36m"
 #define RESET "\033[0m"
 #define W_BACK "\033[47;"
-
+#define HEART "❤"
 int getch(void)
 {
     struct termios oldattr, newattr;
@@ -30,12 +30,13 @@ int button(int num,char *options[num]){
         printf("PRESS E TO CONFIRM\n");
         for(int i =0;i< num;i++){
             if(i == cur_choose){
-                printf(YELLOW);
+                printf(RED);
+                printf(HEART);
                 printf(" ");
             }
             printf("%s",options[i]);
             if(i == cur_choose){
-                printf(" ");
+                printf("");
             }
             printf("\n");
             printf(RESET);
