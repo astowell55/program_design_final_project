@@ -205,7 +205,7 @@ void output_songlist(node *songlist_tree)
         return;
     }
     output_songlist(songlist_tree->left_child);
-    printf("%ls", songlist_tree->songlist_name);
+    printf("%ls\n", songlist_tree->songlist_name);
     output_songlist(songlist_tree->right_child);
 }
 void Export_songlist(song *cur_songlist, wchar_t *songlist_name)
