@@ -198,7 +198,6 @@ void Export_songlist(song *cur_songlist, char *Filename)
     // Export cur_songlist's song as .csv file.
     char filename[MAX_SONG_NAME+1];
     strcpy(filename,Filename);
-    //printf("filename:'%s'\n",filename);
     strcat(filename, ".csv");
     //printf("filenames:'%s'\n",filename);
     
