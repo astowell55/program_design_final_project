@@ -148,16 +148,16 @@ void read_SongFile(song **song_data)
     fclose(songFile);
     return;
 }
-void write_SongFile(node *root)
-{
-    outputSongFile = fopen("output.csv", "w");
-    if (root == NULL)
-    {
-        return;
-    }
-    fclose(outputSongFile);
-    return;
-}
+// void write_SongFile(node *root)
+// {
+//     outputSongFile = fopen("output.csv", "w");
+//     if (root == NULL)
+//     {
+//         return;
+//     }
+//     fclose(outputSongFile);
+//     return;
+// }
 
 void output_song(song *cur_songlist)
 {

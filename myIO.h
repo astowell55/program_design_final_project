@@ -16,7 +16,7 @@ void read_SongFile(song **song_data);
 void output_song(song *cur_songlist);
 void output_songlist(node *songlist_tree);
 
-void write_SongFile(node *root);
+//void write_SongFile(node *root);
 void Export_songlist(song *cur_songlist, char *Filename);
 void Import_songlist(node **songlist_tree, char songlist_name[]);
 void read_song_name(char *buffer);
