@@ -20,7 +20,7 @@ void Choose_a_songlist(song **cur_songlist,char *songlist_name)
     // wchar_t *song_name;
     song *target_song = NULL;
    
-    char *song_options[6] = {"[a]Add a song","[d]Delete a song","[o]Output all songlists","[e]Export as .csv","[s]Search a song","[<]Back to main page"};
+    char *song_options[6] = {"[a]Add a song","[d]Delete a song","[o]Output all the songs in the list","[e]Export as .csv","[s]Search a song","[<]Back to main page"};
     int operater = 0;
     char song_name[300];
     while (operater != 5)
@@ -130,8 +130,9 @@ int main()
 
     // setlocale(LC_ALL,"");
     //- Preload songdata
-    
+    printf("Preloading song data...\n");
     read_SongFile(&song_data);
+    printf("Preload done.\n");
     //printf("song_data:%p\n", song_data);
     // output_song(song_data);
     //- Preload songdata end
@@ -187,7 +188,7 @@ int main()
             }
             else
             {
-                printf("There is not any playlist\n");
+                printf("Invalid operation: PLAYLIST DOESN'T EXIST\n");
             }
             free(songlist_name);
             break;
@@ -208,7 +209,7 @@ int main()
             }
             else
             {
-                printf("There is not any playlist\n");
+                printf("Invalid operation: PLAYLIST DOESN'T EXIST\n");
             }
             free(songlist_name);
             break;
