@@ -12,23 +12,21 @@ make
 make clean
 ```
 ## Usage example 使用示範
-首先輸入有n首歌，再輸入歌曲的index跟歌曲的name，如果取名有重複則輸出"歌曲名稱 already exist"接著輸出中序走訪的結果(歌曲依照strcmp排序)，範例如下:
-### 輸入:
+You can use w and s to choose the option and use e to enter your option.
+### Option 選項:
 ```
-4
-1 helloasddddddddddddddddddddddddddddddddddddjoiajidjiajsddddddddddddddddddddddddddddddddddddoiajsdijasijdajdsi
-5 ddd
-6 abcd
-6 abcd
-6 yyds
-```
-### 輸出:
-```
-abcd already exist
-6 abcd
-5 ddd
-1 helloasddddddddddddddddddddddddddddddddddddjoiajidjiajsddddddddddddddddddddddddddddddddddddoiajsd...
-6 yyds
+Add a playlist: Create a playlist. 
+Delete a playlist: Delete a playlist that you had created.
+Choose a playlist: After choose this option, you can choose the following options in current playlist
+    Add a song: Add a song from audio library.  
+    Delete a song: Delete a song in current playlist.
+    Output all the songs in the list: Output all the songs in the current playlist.
+    Export as .csv: Export current playlist as a csv file.
+    Search a song: You can search a song in current playlist and mark it as a favorite song. 
+    Back to main page: 
+Output all playlists: Out put all the playlist name on terminal.
+Import a .csv playlist: You can import the csv file that you have exported.
+Exit: Terminate the program.
 ```
 ## Release History 版本歷史
 
